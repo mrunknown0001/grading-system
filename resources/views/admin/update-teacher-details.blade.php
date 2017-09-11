@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Add Teacher - Student Grading System @endsection
+@section('title') Update Teacher Detail - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add Teacher
+        Update Teacher Details
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -29,39 +29,40 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
-          <form action="{{ route('post_add_teacher') }}" method="POST" autocomplete="off">
+          <form action="{{ route('post_update_teacher_details') }}" method="POST" autocomplete="off">
           <div class="form-group">
-          <input type="text" name="id_number" class="form-control" placeholder="ID Number (e.g.: 0000-0000)" autofocus="" />
+          <input type="text" name="id_number" class="form-control" value="{{ $user->user_id }}" placeholder="ID Number (e.g.: 0000-0000)" autofocus="" />
           </div>
           <div class="form-group">
-          <input type="text" name="firstname" class="form-control text-capitalize" placeholder="First Name" />
+          <input type="text" name="firstname" class="form-control text-capitalize" value="{{ $user->firstname }}" placeholder="First Name" />
           </div>
           <div class="form-group">
-          <input type="text" name="lastname" class="form-control text-capitalize" placeholder="Last Name" />
+          <input type="text" name="lastname" class="form-control text-capitalize" value="{{ $user->lastname }}" placeholder="Last Name" />
           </div>
           <div class="form-group">
-          <input type="text" name="birthday" class="form-control" placeholder="MM/DD/YYYY" />
+          <input type="text" name="birthday" class="form-control" value="{{ $user->birthday }}" placeholder="MM/DD/YYYY" />
           </div>
           <div class="form-group">
           <select name="gender" id="gender" class="form-control">
           <option value="">Select Gender...</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+          <option @if($user->gender == "Male") selected @endif value="Male">Male</option>
+          <option @if($user->gender == "Female") selected @endif value="Female">Female</option>
           </select>
           </div>
           <div class="form-group">
-          <input type="text" name="address" class="form-control text-capitalize" placeholder="Address" />
+          <input type="text" name="address" class="form-control text-capitalize" value="{{ $user->address }}" placeholder="Address" />
           </div>
           <div class="form-group">
-          <input type="email" name="email" class="form-control" placeholder="Email Address" />
+          <input type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Email Address" />
           </div>
           <div class="form-group">
-          <input type="text" name="mobile" class="form-control" placeholder="11 Digit Mobile Number" />
+          <input type="text" name="mobile" class="form-control" value="{{ $user->mobile }}" placeholder="11 Digit Mobile Number" />
           </div>
           <div class="form-group">
           {{ csrf_field() }}
-          <button class="btn btn-primary">Add Teacher</button>
-          <a href="#" class="btn btn-danger">Cancel</a>
+          <input type="hidden" name="id" value="{{ $user->id }}" />
+          <button class="btn btn-primary">Update</button>
+          <a href="{{ route('get_all_teachers') }}" class="btn btn-danger">Cancel</a>
           </div>
           </form>
         </div>

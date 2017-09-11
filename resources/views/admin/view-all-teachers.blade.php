@@ -25,6 +25,10 @@
       <!-- Your Page Content Here -->
       <div class="row">
         <div class="col-lg-12 col-md-12">
+          @include('includes.errors')
+          @include('includes.error')
+          @include('includes.success')
+          @include('includes.notice')
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           <table class="table table-hover">
@@ -44,14 +48,16 @@
                 <td>{{ $t->email }}</td>
                 <td>
                   <div class="btn-group btn-group-xs">
-                  <button class="btn btn-success" data-toggle="modal" data-target="#"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <button class="btn btn-info" data-toggle="modal" data-target="#{{ $t->user_id }}-view"><i class="fa fa-eye" aria-hidden="true"></i></button>
 
-                  <a href="#" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <a href="{{ route('update_teacher_details', $t->user_id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-                  <button class="btn btn-danger" data-toggle="modal" data-target="#"><i class="fa fa-times" aria-hidden="true"></i></button>
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#{{ $t->user_id }}-delete"><i class="fa fa-times" aria-hidden="true"></i></button>
                   </div>
                 </td>
             </tr>
+            @include('admin.includes.modal-teacher-view-details')
+            @include('admin.includes.modal-teacher-remove-confirm')
             @endforeach
             </tbody>
           </table>
@@ -68,15 +74,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-    <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      <!-- Footer Message -->
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy;  {{ date('Y') }}.</strong>
-  </footer>
+  @include('includes.footer')
 </div>
 <!-- ./wrapper -->
 

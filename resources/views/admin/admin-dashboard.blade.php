@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
+        Dashboard
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -29,15 +29,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-    <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      <!-- Footer Message -->
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy;  {{ date('Y') }}.</strong>
-  </footer>
+  @include('includes.footer')
 </div>
 <!-- ./wrapper -->
 

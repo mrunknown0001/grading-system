@@ -92,7 +92,28 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 		]);
 
 
+	/*
+	 * This route is use to remove/delete teachers
+	 */
+	Route::get('get/remove/teacher/{id}', [
+		'uses' => 'AdminController@getRemoveTeacher',
+		'as' => 'get_remove_teacher'
+		]);
 
+
+    /*
+     * Route to update teacher details
+     */
+    Route::get('update-teacher-details/{id}', [
+    	'uses' => 'AdminController@showTeacherProfileEdit',
+    	'as' => 'update_teacher_details'
+    	]);
+
+
+    Route::post('update-teacher-details', [
+    	'uses' => 'AdminController@postUpdateTeacherDetails',
+    	'as' => 'post_update_teacher_details'
+    	]);
 
 
 
