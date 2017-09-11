@@ -39,5 +39,38 @@ class DatabaseSeeder extends Seeder
             'gender' => 'Male',
             'address' => 'Tarlac'
             ]);
+
+
+
+        // Add Grade Levels
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 7',
+            'description' => 'Grade 7...'
+            ]);
+        
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 8',
+            'description' => 'Grade 8...'
+            ]);
+        
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 9',
+            'description' => 'Grade 9...'
+            ]);
+        
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 10',
+            'description' => 'Grade 10...'
+            ]);
+        
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 11',
+            'description' => 'Junior High School'
+            ]);
+        
+        DB::table('grade_levels')->insert([
+            'name' => 'Grade 12',
+            'description' => 'Senior High School'
+            ]);
     }
 }

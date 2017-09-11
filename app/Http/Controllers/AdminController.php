@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\User;
 use App\UserLog;
+use App\GradeLevel;
+use App\Subject;
 
 class AdminController extends Controller
 {
@@ -23,8 +25,8 @@ class AdminController extends Controller
      * postAddTeacher
      *
      */
-     public function postAddTeacher(Request $request) 
-     {
+    public function postAddTeacher(Request $request) 
+    {
 
      	/*
      	 * Input Validation
@@ -96,14 +98,14 @@ class AdminController extends Controller
         // If something is wrong
         return redirect()->route('add_teacher')->with('error_msg', 'Something is Wrong! Please reload this page.');
 
-     }
+    }
 
 
      /*
       * getAllTeachers
       */
-     public function getAllTeachers()
-     {
+    public function getAllTeachers()
+    {
 
      	// SELECT ALL TEACHERS IN USERS TABLE
      	$teachers = User::where('privilege', 2)->orderBy('user_id', 'asc')->paginate(15);
@@ -111,7 +113,7 @@ class AdminController extends Controller
      	return view('admin.view-all-teachers', [
      		'teachers' => $teachers
      		]);
-     }
+    }
 
 
      /*
@@ -281,9 +283,28 @@ class AdminController extends Controller
 
 
 
+    /*
+     * method use to add subject
+     */
+    public function getAddSubject()
+    {
+
+        // Get all grade levels
+        $levels = GradeLevel::all();
+        // $levels = GradeLevel::orderBy('name', 'DESC')->get();
+
+        return view('admin.add-subject', ['levels' => $levels]);
+
+    }
 
 
-
+    /*
+     * getViewAllSubjects
+     */
+    public function getViewAllSubjects()
+    {
+        return view('admin.view-all-subjects');
+    }
 
 
 

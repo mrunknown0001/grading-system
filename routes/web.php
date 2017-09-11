@@ -117,6 +117,23 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
 
 
+    /*
+     * route to add new subjects
+     */
+    Route::get('add-subject', [
+    	'uses' => 'AdminController@getAddSubject',
+    	'as' => 'get_add_subject'
+    	]);
+
+
+
+
+    Route::get('view-all-subjects', [
+    	'uses' => 'AdminController@getViewAllSubjects',
+    	'as' => 'get_view_all_subjects'
+    	]);
+
+
 	// Get all logs route
 	Route::get('users-logs', [
 		'uses' => 'AdminController@getAllLogs',

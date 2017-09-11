@@ -202,8 +202,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"> Add Subject</a></li>
-            <li><a href="#"> View All Subjects</a></li>
+            <li><a href="{{ route('get_add_subject') }}"> Add Subject</a></li>
+            <li><a href="{{ route('get_view_all_subjects') }}"> View All Subjects</a></li>
           </ul>
         </li>
         <li class="treeview">
