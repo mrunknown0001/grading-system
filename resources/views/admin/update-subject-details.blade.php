@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Add Subject - Student Grading System @endsection
+@section('title') Update Subject Details - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add Subject
+        Update Subject Details
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,7 +23,7 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
-      <form action="{{ route('post_add_subject') }}" method="POST" autocomplete="off">
+      <form action="{{ route('post_update_subject_details') }}" method="POST" autocomplete="off">
         <div class="row">
           <div class="col-md-6">
             
@@ -35,19 +35,20 @@
               <select name="grade_level" class="form-control">
               <option value="">Subject For...</option>
               @foreach($levels as $l)
-              <option value="{{ $l->id }}">{{ $l->name }}</option>
+              <option @if($subject->level == $l->id) selected @endif value="{{ $l->id }}">{{ $l->name }}</option>
               @endforeach
               </select>
             </div>
             <div class="form-group">
-              <input type="text" name="title" class="form-control text-capitalize" placeholder="Subject Title" />
+              <input type="text" name="title" class="form-control text-capitalize" value="{{ $subject->title }}" placeholder="Subject Title" />
             </div>
             <div class="form-group">
-              <textarea name="description" id="description" cols="30" rows="10" class="form-control text-capitalize" placeholder="Description of the Subject..."></textarea>
+              <textarea name="description" id="description" cols="30" rows="10" class="form-control text-capitalize" placeholder="Description of the Subject...">{{ $subject->description }}</textarea>
             </div>
             <div class="form-group">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-              <button class="btn btn-primary">Add Subject</button>
+              <input type="hidden" name="id" value="{{ $subject->id }}" />
+              <button class="btn btn-primary">Update Subject</button>
               <a href="{{ route('get_view_all_subjects') }}" class="btn btn-danger">Cancel</a>
             </div>
 

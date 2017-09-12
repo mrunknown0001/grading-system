@@ -39,26 +39,30 @@
                 </tr>
               </thead>
               <tbody>
-<!-- // starto of foreach -->
+                @foreach($subs as $s)
                 <tr>
-                            <td class="text-capitalize">Grade 7</td>
-                  <td class="text-capitalize">Math</td>
+                  <td class="text-capitalize">{{ $s->grade_level->name }}</td>
+                  <td class="text-capitalize">{{ ucwords($s->title) }}</td>
                   <td>
                 <div class="btn-group btn-group-xs">
-                  <button class="btn btn-success" data-toggle="modal" data-target="#-view"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  <a href="#" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                  <button class="btn btn-danger" data-toggle="modal" data-target="#-remove"><i class="fa fa-times" aria-hidden="true"></i></button>
+                  <button class="btn btn-info" data-toggle="modal" data-target="#{{ $s->id }}-view"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  <a href="{{ route('show_subject_details_update', $s->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#{{ $s->id }}-remove"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                   </td>
                 </tr>
-<!-- end of foreach -->
+                
+                @include('admin.includes.modal-subject-view-details')
+                @include('admin.includes.modal-subject-remove-confirm')
+
+                @endforeach
               </tbody>
             </table>
-            <!-- Count and Total count() of total() -->
-                <p class="text-center"><strong></strong></p>
+          <!-- Count and Total count() of total() -->
+          <p class="text-center"><strong>{{ $subs->count() + $subs->perPage() * ($subs->currentPage() - 1) }} of {{ $subs->total() }}</strong></p>
 
-                <!-- Page Number render() -->
-                <div class="text-center"></div>
+          <!-- Page Number render() -->
+          <div class="text-center"> {{ $subs->links() }}</div>
           </div>
         </div>
 

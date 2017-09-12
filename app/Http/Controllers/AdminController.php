@@ -299,27 +299,162 @@ class AdminController extends Controller
 
 
     /*
+     * postAddSubject()
+     */
+    public function postAddSubject(Request $request)
+    {
+        // Validation
+        $this->validate($request, [
+            'grade_level' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+            ]);
+
+        // Assigning variables
+        $level = $request['grade_level'];
+        $title = $request['title'];
+        $description = $request['description'];
+
+        $add = new Subject();
+
+        $add->level = $level;
+        $add->title = $title;
+        $add->description = $description;
+
+
+        if($add->save()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Added New Subject: ' . ucwords($title);
+
+            $log->save();
+
+            return redirect()->route('get_add_subject')->with('success', ucwords($title) . ' Subject Successfully Added!');
+
+        }
+    }
+
+    /*
      * getViewAllSubjects
      */
     public function getViewAllSubjects()
     {
-        return view('admin.view-all-subjects');
+
+        $subjects = Subject::orderBy('title', 'asc')->paginate(15);
+
+
+        return view('admin.view-all-subjects', ['subs' => $subjects]);
     }
 
+
+    /* 
+     * update subject details
+     */
+    public function showSubjectDetailsUpdate($id = null)
+    {
+        $subject = Subject::findorfail($id);
+        $levels = GradeLevel::all();
+
+        return view('admin.update-subject-details', ['subject' => $subject, 'levels' => $levels]);
+    }
+
+
+    public function postUpdateSubjectDetails(Request $request)
+    {
+ /*
+         * Validate User Input
+         */
+        $this->validate($request, [
+            'grade_level' => 'required',
+            'title' => 'required',
+            'description' => 'required'
+            ]);
+
+        $id = $request['id'];
+        $level = $request['grade_level'];
+        $title = $request['title'];
+        $description = $request['description'];
+
+        // If id is empty
+        if(empty($id)) {
+            return 'System encountered error. Please reload this page.';
+        }
+
+        $subject = Subject::findorfail($id);
+
+        if(empty($subject)) {
+            // If id is not on database
+            return abort(404);
+        }
+
+        $subject->level = $level;
+        $subject->title = $title;
+        $subject->description = $description;
+
+        if($subject->save()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Updated Subject: ' . ucwords($title);
+
+            $log->save();
+
+            return redirect()->route('show_subject_details_update', $id)->with('success', 'Subject Successfully Updated');
+
+
+            return 'Error in Saving Update';
+
+        }
+    }
+
+
+    /*
+     * remove subject
+     */
+    public function getRemoveSubject($id = null)
+    {
+
+        $subject = Subject::findorfail($id);
+
+        // Check if subject code belongs to a specific subject
+        // If not, redirect to 404
+        if(empty($subject)) {
+            return abort(404);
+        }
+
+        if($subject->delete()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Remove Subject';
+
+            $log->save();
+
+            return redirect()->route('get_view_all_subjects')->with('success', 'Subject Removed Successfully.');
+
+        }
+
+        return redirect()->back()->with('notice', 'Some Error Occured, Please Reload this page.');
+
+    }
 
 
      /*
       * Get All Logs in User_logs table
       * only the admin can only view this logs
       */
-     public function getAllLogs()
-     {
+    public function getAllLogs()
+    {
      	// Get all logs query
      	$logs = UserLog::paginate(15);
 
      	return $logs;
 
-     }
+    }
 
 
 

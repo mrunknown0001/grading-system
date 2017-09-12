@@ -3,8 +3,24 @@
  * Landing Page of the App
  */
 Route::get('/', function () {
+
+	/*
+	 * Checking if there are authenticated user and redirecting
+	 * to the corrent path
+	 */
+	if(Auth::check()) {
+		if(Auth::user()->privilege == 1) {
+			return redirect()->route('admin_dashboard');
+		}
+		else {
+			return view('landing_page');
+		}
+	}
+
     return view('landing-page');
+
 })->name('landing_page');
+
 
 Route::get('login', function () {
 	return redirect()->route('landing_page');
@@ -125,12 +141,42 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'as' => 'get_add_subject'
     	]);
 
+    Route::post('add-subject', [
+    	'uses' => 'AdminController@postAddSubject',
+    	'as' => 'post_add_subject'
+		]);
 
 
 
+    /*
+     * View all subjects
+     */
     Route::get('view-all-subjects', [
     	'uses' => 'AdminController@getViewAllSubjects',
     	'as' => 'get_view_all_subjects'
+    	]);
+
+
+    /*
+     * show subject details to edit
+     */
+    Route::get('update-subject-details/{id}', [
+    	'uses' => 'AdminController@showSubjectDetailsUpdate',
+    	'as' => 'show_subject_details_update'
+    	]);
+
+    Route::post('update-subject-details', [
+    	'uses' => 'AdminController@postUpdateSubjectDetails',
+    	'as' => 'post_update_subject_details'
+    	]);
+
+
+    /*
+     * Remove Subject
+     */
+    Route::get('get/remove/subject/{id}', [
+    	'uses' => 'AdminController@getRemoveSubject',
+    	'as' => 'get_remove_subject'
     	]);
 
 

@@ -178,7 +178,21 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('add_teacher') }}"> Add Teacher</a></li>
             <li><a href="{{ route('get_all_teachers') }}"> View Teachers</a></li>
-            <li><a href="#"> Assign Subjects</a></li>
+            <li class="treeview">
+              <a href="#"> <span>Assign Subjects</span>
+              <span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">Grade 7</a></li>
+                <li><a href="#">Grade 8</a></li>
+                <li><a href="#">Grade 9</a></li>
+                <li><a href="#">Grade 10</a></li>
+                <li><a href="#">Grade 11</a></li>
+                <li><a href="#">Grade 12</a></li>
+              </ul>
+            </li>
             <li><a href="#"> View Subject Assignments</a></li>
           </ul>
         </li>
