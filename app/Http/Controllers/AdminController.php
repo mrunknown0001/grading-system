@@ -9,6 +9,7 @@ use App\User;
 use App\UserLog;
 use App\GradeLevel;
 use App\Subject;
+use App\Section;
 
 class AdminController extends Controller
 {
@@ -363,7 +364,7 @@ class AdminController extends Controller
 
     public function postUpdateSubjectDetails(Request $request)
     {
- /*
+        /*
          * Validate User Input
          */
         $this->validate($request, [
@@ -442,6 +443,165 @@ class AdminController extends Controller
 
     }
 
+
+
+
+    /*
+     * getAddSection
+     */
+    public function getAddSection()
+    {
+        $levels = GradeLevel::all();
+
+        return view('admin.add-section', ['levels' => $levels]);
+    }
+
+
+    /*
+     * postAddSection
+     */
+    public function postAddSection(Request $request)
+    {
+        /*
+         * Input validation
+         */
+        $this->validate($request, [
+            'grade_level' => 'required',
+            'name' => 'required'
+            ]);
+
+        $level = $request['grade_level'];
+        $name = $request['name'];
+
+        $add = new Section();
+
+        $add->level = $level;
+        $add->name = $name;
+
+        if($add->save()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Added Section: ' . ucwords($name);
+            // Saving Log for this activity
+            $log->save();
+
+            return redirect()->route('add_section')->with('success', 'Section Successfully Added');
+        }
+
+        return 'Error Occured! Please reload this page.';
+
+    }
+
+
+    /*
+     * getAllSections
+     */
+    public function getAllSections()
+    {
+
+        $sections = Section::paginate(15);
+
+        return view('admin.view-all-sections', ['sections' => $sections]);
+    }
+
+
+    /*
+     * getRemoveSection use to remove section
+     */
+    public function getRemoveSection($id = null)
+    {
+        $section = Section::findorfail($id);
+
+        // Check if subject code belongs to a specific subject
+        // If not, redirect to 404
+        if(empty($section)) {
+            return abort(404);
+        }
+
+        if($section->delete()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Remove Section';
+
+            $log->save();
+
+            return redirect()->route('get_all_sections')->with('success', 'Section Removed Successfully.');
+
+        }
+
+        return redirect()->back()->with('notice', 'Some Error Occured, Please Reload this page.');
+    }
+
+
+    /*
+     * showSectionUpdateDetails
+     */
+    public function showSectionUpdateDetails($id = null)
+    {
+
+        $section = Section::findorfail($id);
+        $levels = GradeLevel::all();
+
+        return view('admin.update-section-details', ['section' => $section, 'levels' => $levels]);
+
+    }
+
+
+    /*
+     * postUpdateSectionDetails use to update section
+     */
+    public function postUpdateSectionDetails(Request $request)
+    {
+        /*
+         * Inut validation in update section
+         */
+        $this->validate($request, [
+            'grade_level' => 'required',
+            'name' => 'required'
+            ]);
+
+        // assigning values to variables
+        $level = $request['grade_level'];
+        $name = $request['name'];
+        $id = $request['id'];
+
+
+                // If id is empty
+        if(empty($id)) {
+            return 'System encountered error. Please reload this page.';
+        }
+
+        $section = Section::findorfail($id);
+
+        if(empty($section)) {
+            // If id is not on database
+            return abort(404);
+        }
+
+        $section->level = $level;
+        $section->name = $name;
+
+        if($section->save()) {
+
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Updated section: ' . ucwords($name);
+
+            $log->save();
+
+            return redirect()->route('get_update_section_details', $id)->with('success', 'Section Successfully Updated');
+
+
+            return 'Error in Saving Update';
+
+        }
+
+    }
 
      /*
       * Get All Logs in User_logs table

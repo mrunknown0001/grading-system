@@ -180,6 +180,56 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	]);
 
 
+    /*
+     * add section
+     */
+    Route::get('add-section', [
+    	'uses' => 'AdminController@getAddSection',
+    	'as' => 'add_section'
+    	]);
+
+    Route::post('add-section', [
+    	'uses' => 'AdminController@postAddSection',
+    	'as' => 'post_add_section'
+    	]);
+
+
+    /*
+     * get all section / view all sections
+     */
+    Route::get('all-sections', [
+    	'uses' => 'AdminController@getAllSections',
+    	'as' => 'get_all_sections'
+    	]);
+
+
+    /*
+     * update section details
+     */
+    Route::get('update-section-details/{id}', [
+    	'uses' => 'AdminController@showSectionUpdateDetails',
+    	'as' => 'get_update_section_details'
+    	]);
+
+
+    Route::post('update-section-details', [
+    	'uses' => 'AdminController@postUpdateSectionDetails',
+    	'as' => 'post_update_section_details'
+    	]);
+
+
+    /*
+     * route to remvoe all sections
+     */
+    Route::get('get/remove/section/{id}', [
+    	'uses' => 'AdminController@getRemoveSection',
+    	'as' => 'get_remove_section'
+    	]);
+
+
+
+
+
 	// Get all logs route
 	Route::get('users-logs', [
 		'uses' => 'AdminController@getAllLogs',

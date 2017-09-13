@@ -112,6 +112,11 @@
           <!-- Menu Body -->
           <li class="text-center">
             <div>
+              <a href="#">Change Avatar</a>
+            </div>
+          </li>
+          <li class="text-center">
+            <div>
                 <a href="#" class=""><span>View Profile</span></a>
             </div>
           </li>
@@ -221,18 +226,18 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-book"></i> <span>Sections</span>
+          <a href="#"><i class="fa fa-list"></i> <span>Sections</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"> Add Section</a></li>
-            <li><a href="#"> View All Sections</a></li>
+            <li><a href="{{ route('add_section') }}"> Add Section</a></li>
+            <li><a href="{{ route('get_all_sections') }}"> View All Sections</a></li>
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-book"></i> <span>School Year</span>
+          <a href="#"><i class="fa fa-calendar"></i> <span>School Year</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
