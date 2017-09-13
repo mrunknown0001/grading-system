@@ -56,7 +56,11 @@
               @endforeach
               </tbody>
             </table>
+          <!-- Count and Total count() of total() -->
+          <p class="text-center"><strong>{{ $sections->count() + $sections->perPage() * ($sections->currentPage() - 1) }} of {{ $sections->total() }}</strong></p>
 
+          <!-- Page Number render() -->
+          <div class="text-center"> {{ $sections->links() }}</div>
           </div>
         </div>
 

@@ -612,7 +612,7 @@ class AdminController extends Controller
      	// Get all logs query
      	$logs = UserLog::paginate(15);
 
-     	return $logs;
+     	return view('admin.view-all-activity-logs', ['logs' => $logs]);
 
     }
 
