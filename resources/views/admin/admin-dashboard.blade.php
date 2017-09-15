@@ -11,7 +11,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Dashboard
+        <!-- Dashboard -  -->
+        @if(count($school_year) != 0)
+        School Year: {{ $school_year->from }}-{{ $school_year->to }}
+        @else
+        Please Add School Year
+        @endif
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>

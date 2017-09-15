@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id', 10)->unique(); // admin for admin, ID number for teachers, Student Number for students
+            $table->string('user_id', 15)->unique(); // admin for admin, ID number for teachers, Student Number for students
             $table->string('firstname', 100)->nullable();
             $table->string('lastname', 100)->nullable();
             $table->string('address')->nullable();
@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('mobile', 12)->nullable();
             $table->string('password');
             $table->tinyInteger('privilege');
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(1); // for students: make is 0 if the school year is finished
+            $table->integer('school_year')->unsigned()->nullable(); // for students: what school year was added
             $table->rememberToken();
             $table->timestamps();
         });

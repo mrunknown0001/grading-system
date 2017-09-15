@@ -2,7 +2,7 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="javascript:;" class="logo">
+    <a href="{{ route('admin_dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>CCS</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -112,7 +112,7 @@
           <!-- Menu Body -->
           <li class="text-center">
             <div>
-              <a href="#">Change Avatar</a>
+              <a href="#">Change Profile Picture</a>
             </div>
           </li>
           <li class="text-center">
@@ -210,7 +210,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="#"> Batch Import Students</a></li>
-            <li><a href="#"> Add Student</a></li>
+            <li><a href="{{ route('get_add_student') }}"> Add Student</a></li>
             <li><a href="#"> View All Students</a></li>
           </ul>
         </li>
@@ -243,7 +243,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"> Add &amp; Select School Year</a></li>
+            <li><a href="{{ route('add_school_year') }}"> Add &amp; Select School Year</a></li>
             <li><a href="#"> Select Quarter</a></li>
             <li><a href="#"> Select Semester</a></li>
           </ul>

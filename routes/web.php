@@ -228,6 +228,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
 
 
+    /*
+     * route to go to add student page
+     */
+    Route::get('add-student', [
+    	'uses' => 'AdminController@getAddStudent',
+    	'as' => 'get_add_student'
+    	]);
+
+    Route::post('add-student', [
+    	'uses' => 'AdminController@postAddStudent',
+    	'as' => 'post_add_student'
+    	]);
+
+
+    /*
+     * add school year
+     */
+    Route::get('add-school-year', function () {
+    	return view('admin.add-school-year');
+    })->name('add_school_year');
+
+    Route::post('add-school-year', [
+    	'uses' => 'AdminController@postAddSchoolYear',
+    	'as' => 'post_add_school_year'
+    	]);
 
 
 	// Get all logs route

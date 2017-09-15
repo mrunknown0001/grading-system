@@ -10,6 +10,9 @@ use App\UserLog;
 use App\GradeLevel;
 use App\Subject;
 use App\Section;
+use App\SchoolYear;
+use App\Quarter;
+use App\Semester;
 
 class AdminController extends Controller
 {
@@ -18,7 +21,9 @@ class AdminController extends Controller
      */
     public function getAdminDashboard()
     {
-    	return view('admin.admin-dashboard');
+        $school_year = SchoolYear::where('status', 1)->first();
+
+    	return view('admin.admin-dashboard', ['school_year' => $school_year]);
     }
 
 
@@ -33,7 +38,7 @@ class AdminController extends Controller
      	 * Input Validation
      	 */
      	$this->validate($request, [
-     		'id_number' => 'required',
+     		'id_number' => 'required|unique:users',
      		'firstname' => 'required',
      		'lastname' => 'required',
      		'birthday' => 'required',
@@ -78,7 +83,7 @@ class AdminController extends Controller
         $add->address = $address;
         $add->email = $email;
         $add->mobile = $mobile;
-        $add->password = bcrypt('0000'); 
+        $add->password = bcrypt('concsfaculty2017'); 
         $add->privilege = 2;
         $add->status = 1;
 
@@ -109,7 +114,7 @@ class AdminController extends Controller
     {
 
      	// SELECT ALL TEACHERS IN USERS TABLE
-     	$teachers = User::where('privilege', 2)->orderBy('user_id', 'asc')->paginate(15);
+     	$teachers = User::where('privilege', 2)->orderBy('user_id', 'asc')->paginate(10);
 
      	return view('admin.view-all-teachers', [
      		'teachers' => $teachers
@@ -343,7 +348,7 @@ class AdminController extends Controller
     public function getViewAllSubjects()
     {
 
-        $subjects = Subject::orderBy('title', 'asc')->paginate(15);
+        $subjects = Subject::orderBy('level', 'asc')->orderBy('title', 'asc')->paginate(10);
 
 
         return view('admin.view-all-subjects', ['subs' => $subjects]);
@@ -501,7 +506,9 @@ class AdminController extends Controller
     public function getAllSections()
     {
 
-        $sections = Section::paginate(15);
+        $sections = Section::orderBy('level', 'desc')
+                            ->orderBy('name', 'desc')
+                            ->paginate(10);
 
         return view('admin.view-all-sections', ['sections' => $sections]);
     }
@@ -603,6 +610,169 @@ class AdminController extends Controller
 
     }
 
+
+
+    /*
+     * getAddStudent use to add students
+     */
+    public function getAddStudent()
+    {
+
+        /*
+         * Check if the there is school year added/selected
+         */
+
+
+        $sections = Section::orderBy('level', 'desc')
+                            ->orderBy('name', 'desc')
+                            ->get();
+
+        return view('admin.add-student', ['sections' => $sections]);
+    }
+
+
+    /*
+     * postAddStudent used to add students
+     */
+    public function postAddStudent(Request $request)
+    {
+        // VAlidation
+        $this->validate($request, [
+            'section' => 'required',
+            'student_number' => 'required|unique:users',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'email' => 'required|email|unique:users',
+            'mobile' => 'required'
+            ]);
+
+        $section = $request['section'];
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $birthday = date('Y-m-d', strtotime($request['birthday']));
+        $gender = $request['gender'];
+        $address = $request['address'];
+        $email = $request['email'];
+        $mobile = $request['mobile'];
+
+        // Check User ID Availability
+        $user_id_check = User::where('user_id', $user_id)->first();
+
+        if(!empty($user_id_check)) {
+            return redirect()->route('add_teacher')->with('error_msg', 'This ID Number: ' . $user_id . ' is already assigned to a Teacher.');
+        }
+
+        // Check email availability
+        $email_check = User::where('email', $email)->first();
+
+        if(!empty($email_check)) {
+            return redirect()->route('add_teacher')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
+        }
+
+        // query to add new teacher
+        $add = new User();
+
+        $add->user_id = $user_id;
+        $add->firstname = $firstname;
+        $add->lastname = $lastname;
+        $add->birthday = $birthday;
+        $add->gender = $gender;
+        $add->address = $address;
+        $add->email = $email;
+        $add->mobile = $mobile;
+        $add->password = bcrypt('concs2017'); 
+        $add->privilege = 3;
+        $add->status = 1;
+
+        if($add->save()) {
+
+            // Add log to admin
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Added Teacher with User ID Number: ' . $user_id;
+
+            $log->save();
+
+            return redirect()->route('get_add_student')->with('success', 'Student Added: ' . ucwords($firstname) . ' ' . ucwords($lastname));
+
+        }
+
+        // If something is wrong
+        return redirect()->route('get_add_student')->with('error_msg', 'Something is Wrong! Please reload this page.');
+
+    }
+
+
+
+    /*
+     * add school year
+     */
+    public function postAddSchoolYear(Request $request)
+    {
+        /*
+         * Input validation
+         */
+        $this->validate($request, [
+            'school_year' => 'required'
+            ]);
+
+        // Assign Values to Variables
+        $from = $request['school_year'];
+        $to = $from + 1;
+
+        $check_year = SchoolYear::where('from', $from)
+                            ->where('to', $to)
+                            ->where('status', 1)
+                            ->first();
+
+        if(!empty($check_year)) {
+            return redirect()->route('add_school_year')->with('error_msg', 'There is an Active School Year. You Can\'t Add a new one! You can only add another school year if the current school year is finished');
+        }
+
+        $check_active = SchoolYear::where('status', 1)->first();
+        if(!empty($check_active)) {
+            return redirect()->route('add_school_year')->with('error_msg', 'There is an Active School Year. You Can\'t Add a new one! You can only add another school year if the current school year is finished');
+        }
+
+        $check_exists = SchoolYear::where('from', $from)->where('to', $to)->first();
+
+        if(!empty($check_exists)) {
+            return redirect()->route('add_school_year')->with('error_msg', 'This School year has in our database, please select different school year.');
+        }
+
+        $school_year = new SchoolYear();
+
+        $school_year->from = $from;
+        $school_year->to = $to;
+        $school_year->status = 1;
+
+        if($school_year->save()) {
+
+            Quarter::where('finish', 1)
+                        ->update(['status' => 0, 'finish' => 0]);
+            Semester::where('finish', 1)
+                        ->update(['status' => 0, 'finish' => 0]);
+
+
+
+            // Save log for adding school Year
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Created new school year ' . $from . ' - ' . $to;
+
+            $log->save();
+
+            return redirect()->route('add_school_year')->with('success', 'School Year Successfully Added! You can now select a First Quarter and First Semester');
+        }
+    }
+
+
+
      /*
       * Get All Logs in User_logs table
       * only the admin can only view this logs
@@ -610,7 +780,7 @@ class AdminController extends Controller
     public function getAllLogs()
     {
      	// Get all logs query
-     	$logs = UserLog::paginate(15);
+     	$logs = UserLog::orderBy('created_at','desc')->paginate(10);
 
      	return view('admin.view-all-activity-logs', ['logs' => $logs]);
 

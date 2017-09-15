@@ -46,8 +46,10 @@
                   <td>
                 <div class="btn-group btn-group-xs">
                   <button class="btn btn-info" data-toggle="modal" data-target="#{{ $s->id }}-view"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                  @if($s->type == 0)
                   <a href="{{ route('show_subject_details_update', $s->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                   <button class="btn btn-danger" data-toggle="modal" data-target="#{{ $s->id }}-remove"><i class="fa fa-times" aria-hidden="true"></i></button>
+                  @endif
                 </div>
                   </td>
                 </tr>
