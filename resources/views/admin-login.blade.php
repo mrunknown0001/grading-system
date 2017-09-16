@@ -39,6 +39,11 @@
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="login text-center">
+			
+	          @include('includes.errors')
+	          @include('includes.error')
+	          @include('includes.success')
+	          @include('includes.notice')
 				<form action="{{ route('post_login') }}" role="form" method="POST" autocomplete="off">
 					<h3>Admin Login</h3>
 					<div class="form-group">

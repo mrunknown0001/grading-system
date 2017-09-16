@@ -19,7 +19,7 @@ class CreateStudentInfosTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('student_number');
             $table->integer('section')->unsigned();
-            $table->integer('schoo_year'); // active school year
+            $table->integer('school_year'); // active school year
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });

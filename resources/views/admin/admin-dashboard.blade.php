@@ -15,7 +15,7 @@
         @if(count($school_year) != 0)
         School Year: {{ $school_year->from }}-{{ $school_year->to }}
         @else
-        Please Add School Year
+        Please Add School Year. Click <a href="{{ route('add_school_year') }}">here</a>.
         @endif
       </h1>
 <!--       <ol class="breadcrumb">
@@ -28,6 +28,15 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
+      <div class="row">
+        <div class="col-md-8">
+          {{-- Includes errors and session flash message display container --}}
+          @include('includes.errors')
+          @include('includes.error')
+          @include('includes.success')
+          @include('includes.notice')
+        </div>
+      </div>
 
     </section>
     <!-- /.content -->

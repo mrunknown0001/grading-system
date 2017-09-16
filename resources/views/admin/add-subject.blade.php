@@ -23,10 +23,10 @@
     <section class="content">
 
       <!-- Your Page Content Here -->
-      <form action="{{ route('post_add_subject') }}" method="POST" autocomplete="off">
         <div class="row">
           <div class="col-md-6">
             
+            <form action="{{ route('post_add_subject') }}" method="POST" autocomplete="off">
             @include('includes.errors')
             @include('includes.error')
             @include('includes.success')
@@ -51,11 +51,10 @@
               <a href="{{ route('get_view_all_subjects') }}" class="btn btn-danger">Cancel</a>
             </div>
 
+          </form>
           </div>
 
-          </div>
         </div>
-      </form>
 
     </section>
     <!-- /.content -->

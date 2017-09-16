@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Add Student - Student Grading System @endsection
+@section('title') Update Student Details - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Add Student
+        Update Student Details
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -29,12 +29,12 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
-          <form action="{{ route('post_add_student') }}" method="POST" autocomplete="off">
+          <form action="{{ route('post_update_student_details') }}" method="POST" autocomplete="off">
           <div class="form-group">
             <select name="section" id="" class="form-control">
               <option value="">Select Grade Level &amp; Section</option>
               @foreach($sections as $s)
-              <option value="{{ $s->id }}">{{ ucwords($s->grade_level->name) }} - {{ ucwords($s->name) }}</option>
+              <option @if($s->id == $student->info->section) selected @endif value="{{ $s->id }}">{{ ucwords($s->grade_level->name) }} - {{ ucwords($s->name) }}</option>
               @endforeach
               @if(count($sections) == 0)
               <option value="">No Section Added</option>
@@ -42,36 +42,37 @@
             </select>
           </div>
           <div class="form-group">
-            <input type="text" name="student_number" class="form-control" placeholder="Student Number" autofocus="" />
+            <input type="text" name="student_number" class="form-control" value="{{ $student->user_id }}" placeholder="Student Number" autofocus="" />
           </div>
           <div class="form-group">
-            <input type="text" name="firstname" class="form-control text-capitalize" placeholder="First Name" />
+            <input type="text" name="firstname" class="form-control text-capitalize" value="{{ $student->firstname }}" placeholder="First Name" />
           </div>
           <div class="form-group">
-            <input type="text" name="lastname" class="form-control text-capitalize" placeholder="Last Name" />
+            <input type="text" name="lastname" class="form-control text-capitalize" value="{{ $student->lastname }}" placeholder="Last Name" />
           </div>
           <div class="form-group">
-            <input type="text" name="birthday" class="form-control" placeholder="MM/DD/YYYY" />
+            <input type="text" name="birthday" class="form-control" value="{{ $student->birthday }}" placeholder="MM/DD/YYYY" />
           </div>
           <div class="form-group">
             <select name="gender" id="gender" class="form-control">
               <option value="">Select Gender...</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
+              <option @if($student->gender == 'Male') selected @endif value="Male">Male</option>
+              <option @if($student->gender == 'Female') selected @endif value="Female">Female</option>
             </select>
           </div>
           <div class="form-group">
-            <input type="text" name="address" class="form-control text-capitalize" placeholder="Address" />
+            <input type="text" name="address" class="form-control text-capitalize" value="{{ $student->address }}" placeholder="Address" />
           </div>
           <div class="form-group">
-            <input type="email" name="email" class="form-control" placeholder="Email Address" />
+            <input type="email" name="email" class="form-control" value="{{ $student->email }}" placeholder="Email Address" />
           </div>
           <div class="form-group">
-            <input type="text" name="mobile" class="form-control" placeholder="11 Digit Mobile Number" />
+            <input type="text" name="mobile" class="form-control" value="{{ $student->mobile }}" placeholder="11 Digit Mobile Number" />
           </div>
           <div class="form-group">
             {{ csrf_field() }}
-            <button class="btn btn-primary">Add Student</button>
+            <input type="hidden" name="id" value="{{ $student->id }}" />
+            <button class="btn btn-primary">Update Student Details</button>
             <a href="#" class="btn btn-danger">Cancel</a>
           </div>
           </form>

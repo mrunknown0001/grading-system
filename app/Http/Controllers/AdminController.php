@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
+use Excel;
+use Illuminate\Support\Facades\Input;
 
 use App\User;
 use App\UserLog;
@@ -13,6 +16,7 @@ use App\Section;
 use App\SchoolYear;
 use App\Quarter;
 use App\Semester;
+use App\StudentInfo;
 
 class AdminController extends Controller
 {
@@ -163,7 +167,12 @@ class AdminController extends Controller
      */
     public function showTeacherProfileEdit($user_id = null)
     {
-        $user = User::where('user_id', $user_id)->first();
+        $user = User::where('user_id', $user_id)->where('status', 1)->first();
+
+        // if user has no
+        if(empty($user)) {
+            abort(404);
+        }
 
         /*
          * If user trying to modify is admin, this is not allowed
@@ -621,6 +630,11 @@ class AdminController extends Controller
         /*
          * Check if the there is school year added/selected
          */
+        $school_year = SchoolYear::where('status', 1)->first();
+
+        if(count($school_year) == 0) {
+            return redirect()->route('admin_dashboard')->with('notice', 'Please Add and Seclect School Year before you can start adding students.');
+        }
 
 
         $sections = Section::orderBy('level', 'desc')
@@ -639,7 +653,7 @@ class AdminController extends Controller
         // VAlidation
         $this->validate($request, [
             'section' => 'required',
-            'student_number' => 'required|unique:users',
+            'student_number' => 'required',
             'firstname' => 'required',
             'lastname' => 'required',
             'birthday' => 'required',
@@ -650,6 +664,7 @@ class AdminController extends Controller
             ]);
 
         $section = $request['section'];
+        $student_number = $request['student_number'];
         $firstname = $request['firstname'];
         $lastname = $request['lastname'];
         $birthday = date('Y-m-d', strtotime($request['birthday']));
@@ -658,15 +673,17 @@ class AdminController extends Controller
         $email = $request['email'];
         $mobile = $request['mobile'];
 
+        $school_year = SchoolYear::where('status', 1)->first();
+
         // Check User ID Availability
-        $user_id_check = User::where('user_id', $user_id)->first();
+        $user_id_check = User::where('user_id', $student_number)->where('status', 1)->first();
 
         if(!empty($user_id_check)) {
-            return redirect()->route('add_teacher')->with('error_msg', 'This ID Number: ' . $user_id . ' is already assigned to a Teacher.');
+            return redirect()->route('add_teacher')->with('error_msg', 'This ID Number: ' . $student_number . ' is already assigned to a Student.');
         }
 
         // Check email availability
-        $email_check = User::where('email', $email)->first();
+        $email_check = User::where('email', $email)->where('status', 1)->first();
 
         if(!empty($email_check)) {
             return redirect()->route('add_teacher')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
@@ -675,7 +692,7 @@ class AdminController extends Controller
         // query to add new teacher
         $add = new User();
 
-        $add->user_id = $user_id;
+        $add->user_id = $student_number;
         $add->firstname = $firstname;
         $add->lastname = $lastname;
         $add->birthday = $birthday;
@@ -686,14 +703,27 @@ class AdminController extends Controller
         $add->password = bcrypt('concs2017'); 
         $add->privilege = 3;
         $add->status = 1;
+        $add->school_year = $school_year;
+
 
         if($add->save()) {
+
+            $new =  $add->id;
+
+            $info = new StudentInfo();
+
+            $info->user_id = $new;
+            $info->student_number = $student_number;
+            $info->section = $section;
+            $info->school_year = $school_year->id;
+
+            $info->save();
 
             // Add log to admin
             $log = new UserLog();
 
             $log->user_id = Auth::user()->id;
-            $log->action = 'Added Teacher with User ID Number: ' . $user_id;
+            $log->action = 'Added Student with User ID Number: ' . $student_number;
 
             $log->save();
 
@@ -706,6 +736,118 @@ class AdminController extends Controller
 
     }
 
+
+
+    /*
+     * getViewAllStudents view students
+     */
+    public function getViewAllStudents()
+    {
+
+        $students = User::where('privilege', 3)
+                        ->where('status', 1)
+                        ->orderBy('lastname', 'asc')
+                        ->paginate(15);
+
+        return view('admin.view-all-students', ['students' => $students]);
+    }
+
+
+    /*
+     * postUpdateStudentDetails update student details
+     */
+    public function postUpdateStudentDetails(Request $request)
+    {
+        // VAlidation
+        $this->validate($request, [
+            'section' => 'required',
+            'student_number' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'birthday' => 'required',
+            'gender' => 'required',
+            'address' => 'required',
+            'email' => 'required',
+            'mobile' => 'required'
+            ]);
+
+        $section = $request['section'];
+        $student_number = $request['student_number'];
+        $firstname = $request['firstname'];
+        $lastname = $request['lastname'];
+        $birthday = date('Y-m-d', strtotime($request['birthday']));
+        $gender = $request['gender'];
+        $address = $request['address'];
+        $email = $request['email'];
+        $mobile = $request['mobile'];
+
+        $id = $request['id'];
+
+        $student = User::findorfail($id);
+
+        // check if the the student number is already belong to others, if inputed new student number
+        if($student->user_id != $student_number) {
+            $check_student_number = User::where('user_id', $student_number)
+                                        ->where('status', 1)
+                                        ->first();
+            if(!empty($check_student_number)) {
+                return redirect()->route('get_update_student_details', $student->id)->with('error_msg', 'Student Number: ' . $student_number .' is already belongs to others!');
+
+            }
+        }
+
+
+        // Check if the email is new or just the same
+        // If new, this will check the email is available or not
+        if($student->email != $email) {
+            // Email check availability if new
+            $check_email = User::where('email', $email)->first();
+
+            if(!empty($check_email)) {
+                return redirect()->route('get_update_student_details', $student->id)->with('error_msg', 'Email ' . $email .' is already used!');
+            }
+
+        }
+
+        $student->user_id = $student_number;
+        $student->firstname = $firstname;
+        $student->lastname = $lastname;
+        $student->email = $email;
+        $student->mobile = $mobile;
+        $student->birthday = date('Y-m-d', strtotime($birthday));
+        $student->address = $address;
+        $student->gender = $gender;
+
+
+        // save the update on students
+        if($student->save()) {
+            // User/admin log in updating student
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Updated Student Details';
+            $log->save();
+
+            return redirect()->route('get_update_student_details', $student->id)->with('success', 'Student Detail Updated Successfully');
+        }
+
+        return "Error in Saving Updates. Please reload this page";
+
+
+    }
+
+
+    /* 
+     * update student details
+     */
+    public function getUpdateStudentDetails($id = null)
+    {
+        // get all grade levels and section
+        $sections = Section::all();
+
+        $student = User::findorfail($id);
+
+        return view('admin.update-student-details', ['sections' => $sections, 'student' => $student]);
+    }
 
 
     /*

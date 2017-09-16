@@ -115,6 +115,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 		'uses' => 'AdminController@getRemoveTeacher',
 		'as' => 'get_remove_teacher'
 		]);
+	//This route redirected to 404 if url is no id
+	Route::get('get/remove/teacher', function () {
+		abort(404);
+	});
 
 
     /*
@@ -124,7 +128,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'uses' => 'AdminController@showTeacherProfileEdit',
     	'as' => 'update_teacher_details'
     	]);
-
+	//This route redirected to 404 if url is no id
+	Route::get('update-teacher-details', function () {
+		abort(404);
+	});
 
     Route::post('update-teacher-details', [
     	'uses' => 'AdminController@postUpdateTeacherDetails',
@@ -164,6 +171,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'uses' => 'AdminController@showSubjectDetailsUpdate',
     	'as' => 'show_subject_details_update'
     	]);
+	//This route redirected to 404 if url is no id
+	Route::get('update-subject-details', function () {
+		abort(404);
+	});
 
     Route::post('update-subject-details', [
     	'uses' => 'AdminController@postUpdateSubjectDetails',
@@ -178,6 +189,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'uses' => 'AdminController@getRemoveSubject',
     	'as' => 'get_remove_subject'
     	]);
+	//This route redirected to 404 if url is no id
+	Route::get('get/remove/subject', function () {
+		abort(404);
+	});
 
 
     /*
@@ -210,6 +225,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'uses' => 'AdminController@showSectionUpdateDetails',
     	'as' => 'get_update_section_details'
     	]);
+	//This route redirected to 404 if url is no id
+	Route::get('update-section-details', function () {
+		abort(404);
+	});
 
 
     Route::post('update-section-details', [
@@ -225,6 +244,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     	'uses' => 'AdminController@getRemoveSection',
     	'as' => 'get_remove_section'
     	]);
+	//This route redirected to 404 if url is no id
+	Route::get('get/remove/section', function () {
+		abort(404);
+	});
 
 
 
@@ -239,6 +262,33 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     Route::post('add-student', [
     	'uses' => 'AdminController@postAddStudent',
     	'as' => 'post_add_student'
+    	]);
+
+
+    /*
+     * route use to view all students
+     */
+    Route::get('view-all-students', [
+    	'uses' => 'AdminController@getViewAllStudents',
+    	'as' => 'get_view_all_students'
+    	]);
+
+
+    /*
+     * update student details
+     */
+    Route::get('update-student-details/{id}', [
+    	'uses' => 'AdminController@getUpdateStudentDetails',
+    	'as' => 'get_update_student_details'
+    	]);
+ 	//This route redirected to 404 if url is no id
+	Route::get('update-student-details', function () {
+		abort(404);
+	});
+
+    Route::post('update-student-details', [
+    	'uses' => 'AdminController@postUpdateStudentDetails',
+    	'as' => 'post_update_student_details'
     	]);
 
 
