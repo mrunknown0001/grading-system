@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchoolYearsTable extends Migration
+class CreateAvatarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSchoolYearsTable extends Migration
      */
     public function up()
     {
-        Schema::create('school_years', function (Blueprint $table) {
+        Schema::create('avatars', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('from')->unsigned();
-            $table->integer('to')->unsigned();
-            $table->tinyInteger('status')->default(1); // 1: active , 0: inactive
-            $table->tinyInteger('finish')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateSchoolYearsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('school_years');
+        Schema::dropIfExists('avatars');
     }
 }

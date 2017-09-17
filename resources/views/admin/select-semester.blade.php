@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Admin Dashboard - Student Grading System @endsection
+@section('title') Select Semester - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,16 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-        @if(count($school_year) != 0)
-        School Year: {{ $school_year->from }}-{{ $school_year->to }}
-        @else
-        Please Add School Year. Click <a href="{{ route('add_school_year') }}">here</a>.
-        @endif
-        |
-        @if(count($quarter) != 0) {{ ucwords($quarter->name) }} Quarter
-        @else
-        No Selected Quarter. Click Here <a href="{{ route('select_quarter') }}">here</a>.
-        @endif
+        Select Semester
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -34,12 +25,15 @@
 
       <!-- Your Page Content Here -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+
+
+
         </div>
       </div>
 

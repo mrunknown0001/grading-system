@@ -26,8 +26,9 @@ class AdminController extends Controller
     public function getAdminDashboard()
     {
         $school_year = SchoolYear::where('status', 1)->first();
+        $quarter = Quarter::where('status', 1)->first();
 
-    	return view('admin.admin-dashboard', ['school_year' => $school_year]);
+    	return view('admin.admin-dashboard', ['school_year' => $school_year, 'quarter' => $quarter]);
     }
 
 
@@ -868,13 +869,25 @@ class AdminController extends Controller
 
 
         // grade level and sections
-   $sections = Section::orderBy('level', 'desc')
+        $sections = Section::orderBy('level', 'desc')
                     ->orderBy('name', 'desc')
                     ->get();
         
 
         return view('admin.add-student-import', ['sections' => $sections]);
 
+    }
+
+
+
+    /*
+     * viewProfile
+     */
+    public function viewProfile()
+    {
+        $admin = Auth::user();
+
+        return view('admin.admin-profile', ['admin' => $admin]);
     }
 
 
@@ -955,6 +968,108 @@ class AdminController extends Controller
 
      	return view('admin.view-all-activity-logs', ['logs' => $logs]);
 
+    }
+
+
+
+
+    /*
+     * select quarter selectQuarter
+     */
+    public function selectQuarter()
+    {
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('notice', 'No active school year. Please add and select school year.');
+        }
+        $quarter = Quarter::all();
+
+        return view('admin.select-quarter', ['quarter' => $quarter]);
+    }
+
+
+
+    /*
+     * selectActiveQuarter() use to select active quarter in school year
+     */
+    public function selectActiveQuarter($id = null)
+    {
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('notice', 'No active school year. Please add and select school year.');
+        }
+
+        $quarter = Quarter::findorfail($id);
+
+        $quarter->status = 1;
+
+        if($quarter->save()) {
+            // Add user log for activating quarter
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Activated ' . $quarter->code . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->save();
+
+            return redirect()->route('select_quarter');
+        }
+    }
+
+
+
+
+    /*
+     * finishSelectedQuarter() use to finsiehd selected quarter
+     */
+    public function finishSelectedQuarter($id = null)
+    {
+
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('error_msg', 'No active school year.');
+        }
+
+        if($id == 4) {
+            $end_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+            $end_school_year->status = 0;
+            $end_school_year->finish = 1;
+
+            $end_school_year->save();
+        }
+
+        $quarter = Quarter::findorfail($id);
+
+        $quarter->status = 0;
+        $quarter->finish = 1;
+
+        if($quarter->save()) {
+            // Add user log for activating quarter
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Finished ' . $quarter->code . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->save();
+
+            return redirect()->route('select_quarter');
+        }
+    }
+
+
+    /*
+     * selectSemester method use to select semester
+     */
+    public function selectSemester()
+    {
+
+        return view('admin.select-semester');
     }
 
 

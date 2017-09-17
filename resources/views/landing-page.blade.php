@@ -35,6 +35,7 @@
 <body>
 	<header class="main-header">
 		<h3 class="text-center">Welcome to Concepcion Catholic School - Student Grading System</h3>
+		
 	</header>
 	<hr>
 	<div class="row">

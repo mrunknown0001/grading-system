@@ -4,10 +4,9 @@
     <!-- Logo -->
     <a href="{{ route('admin_dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>CCS</b></span>
+        <span class="logo-mini"><img src="{{ URL::asset('uploads/logo/logo.png') }}" alt="Concepcion Catholic School" class="img-circle" height="50px" width="50px"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-md"><b>CCS-SGS</b></span>
-        <!-- <span class="logo-lg"><b>Concepcion Catholic School Student Grading System</b></span> -->
+        <span class="logo-md"><img src="{{ URL::asset('uploads/logo/logo.png') }}" alt="Concepcion Catholic School" class="img-circle" height="50px" width="50px"> <b>CCS-SGS</b></span>
     </a>
 
     <!-- Header Navbar -->
@@ -39,7 +38,7 @@
           </li>
           <li class="text-center">
             <div>
-                <a href="#" class=""><span>View Profile</span></a>
+                <a href="{{ route('admin_profile') }}" class=""><span>View Profile</span></a>
             </div>
           </li>
           <li class="text-center">
@@ -151,8 +150,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ route('add_school_year') }}"> Add &amp; Select School Year</a></li>
-            <li><a href="#"> Select Quarter</a></li>
-            <li><a href="#"> Select Semester</a></li>
+            <li><a href="{{ route('select_quarter') }}"> Select Quarter</a></li>
+            <li><a href="{{ route('select_semester') }}"> Select Semester</a></li>
           </ul>
         </li>
         <li>

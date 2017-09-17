@@ -17,7 +17,7 @@ class CreateSemestersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->tinyInteger('finish')->default(0);
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

@@ -369,5 +369,21 @@ class DatabaseSeeder extends Seeder
             ]);
 
 
+         DB::table('quarters')->insert([
+                [
+                    'name' => 'first'
+                ],
+                [
+                    'name' => 'second'
+                ],
+                [
+                    'name' => 'third'
+                ],
+                [
+                    'name' => 'forth'
+                ]
+            ]);
+
+
     }
 }
