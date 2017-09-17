@@ -305,7 +305,7 @@ class AdminController extends Controller
     {
 
         // Get all grade levels
-        $levels = GradeLevel::all();
+        $levels = GradeLevel::get();
         // $levels = GradeLevel::orderBy('name', 'DESC')->get();
 
         return view('admin.add-subject', ['levels' => $levels]);
@@ -370,7 +370,7 @@ class AdminController extends Controller
     public function showSubjectDetailsUpdate($id = null)
     {
         $subject = Subject::findorfail($id);
-        $levels = GradeLevel::all();
+        $levels = GradeLevel::get();
 
         return view('admin.update-subject-details', ['subject' => $subject, 'levels' => $levels]);
     }
@@ -465,7 +465,7 @@ class AdminController extends Controller
      */
     public function getAddSection()
     {
-        $levels = GradeLevel::all();
+        $levels = GradeLevel::get();
 
         return view('admin.add-section', ['levels' => $levels]);
     }
@@ -560,7 +560,7 @@ class AdminController extends Controller
     {
 
         $section = Section::findorfail($id);
-        $levels = GradeLevel::all();
+        $levels = GradeLevel::get();
 
         return view('admin.update-section-details', ['section' => $section, 'levels' => $levels]);
 
@@ -842,12 +842,41 @@ class AdminController extends Controller
     public function getUpdateStudentDetails($id = null)
     {
         // get all grade levels and section
-        $sections = Section::all();
+        $sections = Section::get();
 
         $student = User::findorfail($id);
 
         return view('admin.update-student-details', ['sections' => $sections, 'student' => $student]);
     }
+
+
+
+    /*
+     * Batch import Students
+     */
+    public function importStudents()
+    {
+
+        /*
+         * Check if the there is school year added/selected
+         */
+        $school_year = SchoolYear::where('status', 1)->first();
+
+        if(count($school_year) == 0) {
+            return redirect()->route('admin_dashboard')->with('notice', 'Please Add and Seclect School Year before you can start adding students.');
+        }
+
+
+        // grade level and sections
+   $sections = Section::orderBy('level', 'desc')
+                    ->orderBy('name', 'desc')
+                    ->get();
+        
+
+        return view('admin.add-student-import', ['sections' => $sections]);
+
+    }
+
 
 
     /*

@@ -266,6 +266,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
 
     /*
+     * Batch import students 
+     */
+    Route::get('import-students', [
+        'uses' => 'AdminController@importStudents',
+        'as' => 'import_students'
+    ]);
+    //POST IMPORT STUDENTS
+    //HERE
+    //HERE
+    //HERE
+
+
+    /*
      * route use to view all students
      */
     Route::get('view-all-students', [
@@ -310,6 +323,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 		'uses' => 'AdminController@getAllLogs',
 		'as' => 'get_all_users_logs'
 		]);
+
+
+    // ADMIN CHANGE PASSWORD
+    Route::get('change-password', function () {
+        return view('admin.admin-change-password');
+    })->name('admin_change_password');
+
+    Route::post('change-password', [
+        'uses' => 'UserController@postChangePassword',
+        'as' => 'post_admin_change_password'
+    ]);
 
 
 });

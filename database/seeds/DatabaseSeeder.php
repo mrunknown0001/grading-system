@@ -151,12 +151,12 @@ class DatabaseSeeder extends Seeder
             'description' => 'Grade 7 - Information Communication Technology'
             ]);
 
-        DB::table('subjects')->insert([
-            'level' => '1',
-            'title' => 'HELE',
-            'type' => '1',
-            'description' => 'Grade 7 - Home Economics and Livelihood Education'
-            ]);
+        // DB::table('subjects')->insert([
+        //     'level' => '1',
+        //     'title' => 'HELE',
+        //     'type' => '1',
+        //     'description' => 'Grade 7 - Home Economics and Livelihood Education'
+        //     ]);
 
 
         // fix subjects for grade 8
@@ -230,12 +230,12 @@ class DatabaseSeeder extends Seeder
             'description' => 'Grade 8 - Information Communication Technology'
             ]);
 
-        DB::table('subjects')->insert([
-            'level' => '2',
-            'title' => 'HELE',
-            'type' => '1',
-            'description' => 'Grade 8 - Home Economics and Livelihood Education'
-            ]);
+        // DB::table('subjects')->insert([
+        //     'level' => '2',
+        //     'title' => 'HELE',
+        //     'type' => '1',
+        //     'description' => 'Grade 8 - Home Economics and Livelihood Education'
+        //     ]);
 
 
 
@@ -300,12 +300,6 @@ class DatabaseSeeder extends Seeder
                 'title' => 'ICT',
                 'type' => '1',
                 'description' => 'Grade 9 - Information Communication Technology'
-            ],
-            [
-                'level' => '3',
-                'title' => 'HELE',
-                'type' => '1',
-                'description' => 'Grade 9 - Home Economics and Livelihood Education'
             ]
             ]);
 
@@ -371,12 +365,6 @@ class DatabaseSeeder extends Seeder
                 'title' => 'ICT',
                 'type' => '1',
                 'description' => 'Grade 10 - Information Communication Technology'
-            ],
-            [
-                'level' => '4',
-                'title' => 'HELE',
-                'type' => '1',
-                'description' => 'Grade 10 - Home Economics and Livelihood Education'
             ]
             ]);
 
