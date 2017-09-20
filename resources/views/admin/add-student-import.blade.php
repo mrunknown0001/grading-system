@@ -32,7 +32,7 @@
               @include('includes.success')
               @include('includes.notice')
               <hr>
-              <form action="#" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('post_import_students') }}" method="POST" enctype="multipart/form-data">
                 
                 <div class="form-group">
                     <select name="grade_section" class="form-control text-capitalize" title="Grade Level & Section">
@@ -53,7 +53,7 @@
                 <div class="form-group">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <button class="btn btn-primary">Import Students</button>
-                  <a href="#" class="btn btn-danger">Cancel</a>
+                  <a href="{{ route('get_view_all_students') }}" class="btn btn-danger">Cancel</a>
                 </div>
               </form>
           </div>

@@ -272,10 +272,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'uses' => 'AdminController@importStudents',
         'as' => 'import_students'
     ]);
-    //POST IMPORT STUDENTS
-    //HERE
-    //HERE
-    //HERE
+    
+    Route::post('import-students', [
+        'uses' => 'AdminController@postImportStudents',
+        'as' => 'post_import_students'
+    ]);
 
 
     /*

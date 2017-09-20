@@ -46,7 +46,7 @@
               <div class="form-group">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <button class="btn btn-primary">Add Section</button>
-                <a href="#" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('get_all_sections') }}" class="btn btn-danger">Cancel</a>
               </div>
             </form>
             

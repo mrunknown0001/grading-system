@@ -47,7 +47,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <input type="hidden" name="id" value="{{ $section->id }}" />
                 <button class="btn btn-primary">Update Section</button>
-                <a href="#" class="btn btn-danger">Cancel</a>
+                <a href="{{ route('get_all_sections') }}" class="btn btn-danger">Cancel</a>
               </div>
             </form>
             

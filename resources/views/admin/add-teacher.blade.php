@@ -61,7 +61,7 @@
           <div class="form-group">
           {{ csrf_field() }}
           <button class="btn btn-primary">Add Teacher</button>
-          <a href="#" class="btn btn-danger">Cancel</a>
+          <a href="{{ route('get_all_teachers') }}" class="btn btn-danger">Cancel</a>
           </div>
           </form>
         </div>

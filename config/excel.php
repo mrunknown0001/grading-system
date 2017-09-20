@@ -383,6 +383,8 @@ return array(
         |
         */
 
+        // 'startRow' => 1, // this is the original attribute
+
         'startRow'                => 1,
 
         /*

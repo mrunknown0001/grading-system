@@ -881,6 +881,42 @@ class AdminController extends Controller
     }
 
 
+    /*
+     * batch import students
+     * 
+     */
+    public function postImportStudents(Request $request)
+    {
+
+        if(Input::hasFile('students')){
+            $path = Input::file('students')->getRealPath();
+            $data = Excel::selectSheets('Students')->load($path, function($reader) {
+                /*
+                 * More Condition to make specific Operations
+                 */
+                
+
+            })->get();
+
+            if(!empty($data) && $data->count()){
+                foreach ($data as $value) {
+                    if($value->student_number != null) {
+                        // This will use on users table
+                        $insert[] = ['user_id' => $value->student_number, 'firstname' => $value->firstname, 'lastname' => $value->lastname];
+
+                    }
+                    
+                }
+
+            }
+
+        }
+
+        return $data;
+        // return $insert;
+    }
+
+
 
     /*
      * viewProfile
