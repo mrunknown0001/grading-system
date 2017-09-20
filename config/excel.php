@@ -385,7 +385,7 @@ return array(
 
         // 'startRow' => 1, // this is the original attribute
 
-        'startRow'                => 1,
+        'startRow'                => 5,
 
         /*
         |--------------------------------------------------------------------------
@@ -478,7 +478,7 @@ return array(
         | When set to true, it will return a sheet collection instead.
         |
         */
-        'force_sheets_collection' => false,
+        'force_sheets_collection' => true,
 
         /*
         |--------------------------------------------------------------------------
