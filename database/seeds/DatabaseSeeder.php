@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         // Teacher
         DB::table('users')->insert([
-            'user_id' => '0001-1111',
+            'user_id' => '2017-0001',
             'firstname' => 'Teacher',
             'lastname' => 'Adviser',
             'email' => 'teacher@admin.com',

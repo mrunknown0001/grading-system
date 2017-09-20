@@ -43,7 +43,7 @@ class AdminController extends Controller
      	 * Input Validation
      	 */
      	$this->validate($request, [
-     		'id_number' => 'required|unique:users',
+     		'id_number' => 'required',
      		'firstname' => 'required',
      		'lastname' => 'required',
      		'birthday' => 'required',
@@ -62,6 +62,7 @@ class AdminController extends Controller
         $address = $request['address'];
         $email = $request['email'];
         $mobile = $request['mobile'];
+
 
         // Check User ID Availability
         $user_id_check = User::where('user_id', $user_id)->first();
@@ -674,7 +675,7 @@ class AdminController extends Controller
         $email = $request['email'];
         $mobile = $request['mobile'];
 
-        $school_year = SchoolYear::where('status', 1)->first();
+        $active_school_year = SchoolYear::where('status', 1)->first();
 
         // Check User ID Availability
         $user_id_check = User::where('user_id', $student_number)->where('status', 1)->first();
@@ -690,7 +691,7 @@ class AdminController extends Controller
             return redirect()->route('add_teacher')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
         }
 
-        // query to add new teacher
+        // query to add new student
         $add = new User();
 
         $add->user_id = $student_number;
@@ -704,10 +705,11 @@ class AdminController extends Controller
         $add->password = bcrypt('concs2017'); 
         $add->privilege = 3;
         $add->status = 1;
-        $add->school_year = $school_year;
+        $add->school_year = $active_school_year->id;
 
 
         if($add->save()) {
+
 
             $new =  $add->id;
 
@@ -716,7 +718,7 @@ class AdminController extends Controller
             $info->user_id = $new;
             $info->student_number = $student_number;
             $info->section = $section;
-            $info->school_year = $school_year->id;
+            $info->school_year = $active_school_year->id;
 
             $info->save();
 
