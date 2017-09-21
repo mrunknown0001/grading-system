@@ -890,37 +890,36 @@ class AdminController extends Controller
 
         if(Input::hasFile('students')){
             $path = Input::file('students')->getRealPath();
-            $data[] = Excel::selectSheets('Students')->load($path, function($reader) {
-                /*
-                 * More Condition to make specific Operations
-                 */
-                $reader->skipColumns(1);
-
-                // $reader->get();
-
-            })->get();
-
-            if(!empty($data)) {
-
-                $x = 0;
-
-                foreach ($data[0] as $value) {
-                    
-                    $insert[] = [
-                            'user_id' => $value[$x]['student_number'],
-                            'firstname' => $value[$x]['firstname'],
-                            'lastname' => $value[$x]['lastname']
-                         ];
-
-                    $x++;
-
-
-                }
-            }
-            return $x;
-            // return $insert;
+            $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
+                    // $reader->get();
+                })->get();
 
         }
+
+        if(!empty($data)){
+            foreach ($data as $value) {
+                
+                foreach ($value as $row) {
+                    if($row->student_number != null) {
+                        $insert[] = [
+                                'user_id' => $row->student_number,
+                                'lastname' => $row->lastname,
+                                'firstname' => $row->firstname,
+                                'privilege' => 3,
+                                'password' => '1234'
+                            ];
+
+                    }    
+                }
+
+            }
+        }
+
+
+        // DB::table('users')->insert($insert);
+        // return $data;
+        return $insert;
+
 
     }
 
