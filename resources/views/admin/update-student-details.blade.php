@@ -72,8 +72,9 @@
           <div class="form-group">
             {{ csrf_field() }}
             <input type="hidden" name="id" value="{{ $student->id }}" />
+            <input type="hidden" name="original_user_id" value="{{ $student->user_id }}" />
             <button class="btn btn-primary">Update Student Details</button>
-            <a href="#" class="btn btn-danger">Cancel</a>
+            <a href="{{ route('get_view_all_students') }}" class="btn btn-danger">Cancel</a>
           </div>
           </form>
         </div>

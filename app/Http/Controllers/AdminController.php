@@ -17,6 +17,7 @@ use App\SchoolYear;
 use App\Quarter;
 use App\Semester;
 use App\StudentInfo;
+use App\StudentImport;
 
 class AdminController extends Controller
 {
@@ -715,8 +716,7 @@ class AdminController extends Controller
 
             $info = new StudentInfo();
 
-            $info->user_id = $new;
-            $info->student_number = $student_number;
+            $info->user_id = $student_number;
             $info->section = $section;
             $info->school_year = $active_school_year->id;
 
@@ -785,8 +785,11 @@ class AdminController extends Controller
         $mobile = $request['mobile'];
 
         $id = $request['id'];
+        $original_user_id = $request['original_user_id'];
 
         $student = User::findorfail($id);
+        $student_info = StudentInfo::where('user_id', $original_user_id)->first();
+
 
         // check if the the student number is already belong to others, if inputed new student number
         if($student->user_id != $student_number) {
@@ -824,6 +827,12 @@ class AdminController extends Controller
 
         // save the update on students
         if($student->save()) {
+            // update user_id in studentinfo if nessesary
+            $info = StudentInfo::findorfail($student_info->id);
+            $info->user_id = $student_number;
+            $info->save();
+
+
             // User/admin log in updating student
             $log = new UserLog();
             $log->user_id = Auth::user()->id;
@@ -888,10 +897,32 @@ class AdminController extends Controller
     public function postImportStudents(Request $request)
     {
 
+        // validations
+        $this->validate($request, [
+            'grade_section' => 'required',
+            'students' => 'required'
+        ]);
+
+
+        $section = $request['grade_section'];
+        $section_details = Section::findorfail($section);
+
+        $active_school_year = SchoolYear::where('status', 1)->first();
+
+        $check_student_import = StudentImport::where('section_id', $section)
+                                    ->where('school_year_id', $active_school_year->id)
+                                    ->first();
+
+        if(!empty($check_student_import)) {
+            // message and redirection if the section is already imported
+            return redirect()->route('import_students')->with('notice', 'Section Already Imported!');
+        }
+
         if(Input::hasFile('students')){
             $path = Input::file('students')->getRealPath();
             $data[] = Excel::selectSheetsByIndex(0)->load($path, function($reader) {
                     // $reader->get();
+                    $reader->skipColumns(1);
                 })->get();
 
         }
@@ -901,24 +932,79 @@ class AdminController extends Controller
                 
                 foreach ($value as $row) {
                     if($row->student_number != null) {
+
+                        // check each student number if it is already in database
+                        $check_student_number = User::where('user_id', $row->student_number)->first();
+                        if(!empty($check_student_number)) {
+                            return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in record. Please double check your sheet before uploading. Remove any recorded students in sheet.');
+                        }
+
+
+                        // check email
+                        $check_email = User::where('email', $row->email)->first();
+                        if(!empty($check_email)) {
+                            return redirect()->route('import_students')->with('notice', 'Duplicate email found: ' . $row->email .' Emails can be used only once. Please Check your sheet for any duplicate record.');
+                        }
+
+
+                        // for users table
                         $insert[] = [
                                 'user_id' => $row->student_number,
                                 'lastname' => $row->lastname,
-                                'firstname' => $row->firstname,
+                                'firstname' => $row->lastname,
+                                'gender' => $row->sex,
+                                'birthday' => date('Y-m-d', strtotime($row->birthday)),
+                                'address' => $row->address,
+                                'email' => $row->email,
+                                'mobile' => $row->number,
                                 'privilege' => 3,
-                                'password' => '1234'
+                                'password' => bcrypt('concs2017'), // this is the default password for students
+                                'school_year' => $active_school_year->id
                             ];
 
-                    }    
+
+                        // for student info table
+                        $info[] = [
+                                'user_id' => $row->student_number,
+                                'section' => $section,
+                                'school_year' => $active_school_year->id
+
+                            ];
+
+
+                    }
                 }
 
             }
         }
 
+        // insert data to users
+        DB::table('users')->insert($insert);
 
-        // DB::table('users')->insert($insert);
-        // return $data;
-        return $insert;
+
+        // insert import data to studentimport
+        DB::table('student_infos')->insert($info);
+
+
+        // student import log
+        $import = new StudentImport();
+        $import->section_id = $section;
+        $import->school_year_id = $active_school_year->id;
+
+
+        if($import->save()) {
+            $log = new UserLog();
+
+            $log->user_id = Auth::user()->id;
+            $log->action = "Imported Section: " . ucwords($section_details->grade_level->name) . ' - ' . ucwords($section_details->name);
+
+            $log->save();
+
+            return redirect()->route('import_students')->with('success', 'Successfully Imported Students in ' . ucwords($section_details->grade_level->name) . ' - ' . ucwords($section_details->name));
+        }
+
+
+        return "Error Occurred";
 
 
     }
@@ -996,7 +1082,7 @@ class AdminController extends Controller
 
             $log->save();
 
-            return redirect()->route('add_school_year')->with('success', 'School Year Successfully Added! You can now select a First Quarter and First Semester');
+            return redirect()->route('admin_dashboard')->with('success', 'School Year Successfully Added! You can now select a First Quarter and First Semester');
         }
     }
 
