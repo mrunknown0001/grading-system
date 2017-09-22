@@ -1199,8 +1199,17 @@ class AdminController extends Controller
      */
     public function selectSemester()
     {
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
 
-        return view('admin.select-semester');
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('notice', 'No active school year. Please add and select school year.');
+        }
+
+        $semester = Semester::all();
+
+        return view('admin.select-semester', ['semester' => $semester]);
     }
 
 

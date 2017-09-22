@@ -31,6 +31,47 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+          <div class="row">
+              @foreach($semester as $sem)
+                <div class="col-md-3">
+                  @if($sem->status == 1)
+                  <div class="panel panel-success">
+                  @else
+                    @if($sem->finish == 1)
+                    <div class="panel panel-primary">
+                    @else
+                    <div class="panel panel-warning">
+                    @endif
+                  @endif
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div>
+                                    @if($sem->name == 'first')
+                                        First Semester
+                                    @elseif($sem->name == 'second')
+                                        Second Semester
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                      @if($sem->status == 1)
+                        Selected
+                      @else
+                        @if($sem->finish == 1)
+                          Finished
+                        @else
+                          Unselected
+                        @endif
+                      @endif
+                    </div>
+
+                </div>
+              </div>
+              @endforeach
+          </div>
 
 
 

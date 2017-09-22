@@ -379,6 +379,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'select_semester'
         ]);
 
+
+    
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP ADMIN **********
