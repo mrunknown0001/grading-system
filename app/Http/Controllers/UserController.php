@@ -76,11 +76,11 @@ class UserController extends Controller
             	$user_log = new UserLog();
 
             	$user_log->user_id = Auth::user()->id;
-            	$user_log->action = 'Teacher\'s Login';
+            	$user_log->action = 'Teacher\'s Login: ' . Auth::user()->user_id;
 
             	$user_log->save();
 
-				return "Redirect to Teacher Dashboard";
+				return redirect()->route('teacher_dashboard');;
 			}
 
 			/*
@@ -124,8 +124,15 @@ class UserController extends Controller
 		$user_log = new UserLog();
 
 		$user_log->user_id = Auth::user()->id;
-		$user_log->action = 'Admin Logout';
-
+		if(Auth::user()->privilege == 1) {
+			$user_log->action = 'Admin Logout';
+		}
+		elseif(Auth::user()->privilege == 2) {
+			$user_log->action = 'Teacher Logout: ' . Auth::user()->user_id;
+		}
+		else {
+			$user_log->action = 'Student Logout: ' . Auth::user()->user_id;
+		}
 		$user_log->save();
 
 
@@ -206,31 +213,12 @@ class UserController extends Controller
 				$user_log->save();
 			}
 
-			// $password_change = PasswordChange::where('user_id', Auth::user()->id)->first();
 
-			// if(empty($password_change)) {
-				
-			// 	$change = new PasswordChange();
-
-			// 	$change->user_id = Auth::user()->id;
-			// 	$change->status = 1;
-
-			// 	$change->save();
-
-			// }
-
-    		// Successfully Change Password
-    		// if(Auth::user()->privilege == 3) {
-	    	// 	return redirect()->route('student_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
-	    	// }
-	    	// // for co-admin
-	    	// else if(Auth::user()->privilege == 2) {
-	    	// 	return redirect()->route('teacher_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
-	    	// }
-	    	// // for admin
-	    	// else 
 	    	if(Auth::user()->privilege == 1) {
 	    		return redirect()->route('admin_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
+	    	}
+	    	elseif(Auth::user()->privilege == 2) {
+	    		return redirect()->route('teacher_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
 	    	}
 	    	// if error occured
 	    	else {

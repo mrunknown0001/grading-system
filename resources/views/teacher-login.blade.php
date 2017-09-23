@@ -38,8 +38,14 @@
 </header>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
+	          
 			<div class="login text-center">
-				<form action="#" role="form" method="POST" autocomplete="off">
+				{{-- Includes errors and session flash message display container --}}
+		          @include('includes.errors')
+		          @include('includes.error')
+		          @include('includes.success')
+		          @include('includes.notice')
+				<form action="{{ route('post_login') }}" role="form" method="POST" autocomplete="off">
 					<h3>Teacher Login</h3>
 					<div class="form-group">
 						<input type="text" name="id" class="form-control" placeholder="ID Number" />
@@ -48,6 +54,7 @@
 						<input type="password" name="password" class="form-control" placeholder="Password" />
 					</div>
 					<div class="form-group">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 						<button class="btn btn-primary">Login</button>
 						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
 					</div>
