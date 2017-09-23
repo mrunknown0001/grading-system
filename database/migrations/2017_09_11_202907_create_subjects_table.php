@@ -19,6 +19,11 @@ class CreateSubjectsTable extends Migration
             $table->string('title', 100);
             $table->tinyInteger('type')->default(0);
             $table->string('description', 255)->nullable();
+            $table->integer('number_of_teacher')->default(1);
+            $table->integer('written_work')->unsigned()->default(0);
+            $table->integer('performance_task')->unsigned()->default(0);
+            $table->integer('exam')->unsigned()->default(0);
+            $table->integer('others')->unsigned()->default(0);
             $table->timestamps();
         });
     }

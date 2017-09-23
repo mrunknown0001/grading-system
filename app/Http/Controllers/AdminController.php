@@ -28,8 +28,9 @@ class AdminController extends Controller
     {
         $school_year = SchoolYear::where('status', 1)->first();
         $quarter = Quarter::where('status', 1)->first();
+        $semester = Semester::where('status', 1)->first();
 
-    	return view('admin.admin-dashboard', ['school_year' => $school_year, 'quarter' => $quarter]);
+    	return view('admin.admin-dashboard', ['school_year' => $school_year, 'quarter' => $quarter, 'semester' => $semester]);
     }
 
 
@@ -490,6 +491,9 @@ class AdminController extends Controller
         $level = $request['grade_level'];
         $name = $request['name'];
 
+        // grade level
+        $grade_level = GradeLevel::findorfail($level);
+
         $add = new Section();
 
         $add->level = $level;
@@ -500,7 +504,7 @@ class AdminController extends Controller
             $log = new UserLog();
 
             $log->user_id = Auth::user()->id;
-            $log->action = 'Added Section: ' . ucwords($name);
+            $log->action = 'Added Section: ' . ucwords($grade_level->name) . ucwords($name);
             // Saving Log for this activity
             $log->save();
 
@@ -1144,7 +1148,7 @@ class AdminController extends Controller
             // Add user log for activating quarter
             $log = new UserLog();
             $log->user_id = Auth::user()->id;
-            $log->action = 'Activated ' . $quarter->code . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->action = 'Activated ' . ucwords($quarter->name) . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
             $log->save();
 
             return redirect()->route('select_quarter');
@@ -1168,14 +1172,14 @@ class AdminController extends Controller
             return redirect()->route('admin_dashboard')->with('error_msg', 'No active school year.');
         }
 
-        if($id == 4) {
-            $end_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+        // if($id == 4) {
+        //     $end_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
 
-            $end_school_year->status = 0;
-            $end_school_year->finish = 1;
+        //     $end_school_year->status = 0;
+        //     $end_school_year->finish = 1;
 
-            $end_school_year->save();
-        }
+        //     $end_school_year->save();
+        // }
 
         $quarter = Quarter::findorfail($id);
 
@@ -1186,7 +1190,7 @@ class AdminController extends Controller
             // Add user log for activating quarter
             $log = new UserLog();
             $log->user_id = Auth::user()->id;
-            $log->action = 'Finished ' . $quarter->code . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->action = 'Finished ' . ucwords($quarter->name) . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
             $log->save();
 
             return redirect()->route('select_quarter');
@@ -1210,6 +1214,65 @@ class AdminController extends Controller
         $semester = Semester::all();
 
         return view('admin.select-semester', ['semester' => $semester]);
+    }
+
+
+
+    // select active semester
+    public function selectActiveSemester($id = null)
+    {
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('notice', 'No active school year. Please add and select school year.');
+        }
+
+        $semester = Semester::findorfail($id);
+
+        $semester->status = 1;
+
+        if($semester->save()) {
+            // Add user log for activating quarter
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Activated ' . ucwords($semester->name) . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->save();
+
+            return redirect()->route('select_semester');
+        }
+
+    }
+
+
+    // finish selected semester
+    public function finishSelectedSemester($id = null)
+    {
+
+        // Check if there is an active school year 
+        $check_school_year = SchoolYear::where('status', 1)->where('finish', 0)->first();
+
+        if(empty($check_school_year)) {
+
+            return redirect()->route('admin_dashboard')->with('error_msg', 'No active school year.');
+        }
+
+        $semester = Semester::findorfail($id);
+
+        $semester->status = 0;
+        $semester->finish = 1;
+
+        if($semester->save()) {
+            // Add user log for activating quarter
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = 'Finished ' . ucwords($semester->name) . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->save();
+
+            return redirect()->route('select_semester');
+        }
+
     }
 
 

@@ -379,6 +379,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'select_semester'
         ]);
 
+    Route::get('select-active-semester/{id}', [
+        'uses' => 'AdminController@selectActiveSemester',
+        'as' => 'select_active_semester'
+        ]);
+
+    // route to finish selected semester
+    Route::get('finish-selected-semester/{id}', [
+        'uses' => 'AdminController@finishSelectedSemester',
+        'as' => 'finish_selected_semester'
+        ]);
 
     
 

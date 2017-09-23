@@ -18,7 +18,7 @@ class CreateStudentInfosTable extends Migration
             $table->string('user_id'); //student number 
             $table->integer('section')->unsigned();
             $table->integer('school_year'); // active school year
-            $table->tinyInteger('status')->default(1);
+            // $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

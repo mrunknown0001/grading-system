@@ -34,10 +34,10 @@
           <div class="row">
               @foreach($semester as $sem)
                 <div class="col-md-3">
-                  @if($sem->status == 1)
+                  @if($sem->finish == 1)
                   <div class="panel panel-success">
                   @else
-                    @if($sem->finish == 1)
+                    @if($sem->status == 1)
                     <div class="panel panel-primary">
                     @else
                     <div class="panel panel-warning">
@@ -71,6 +71,41 @@
                 </div>
               </div>
               @endforeach
+          </div>
+          <div class="row">
+
+            @foreach($semester as $sem)
+            <div class="col-lg-3">
+                <p class="text-center">
+                    @if($sem->finish == 1)
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#-select2">Select Again</button>
+                    @else
+                        @if($sem->id == 1 && $sem->finish == 0)
+                            @if($sem->status == 0)
+                                <a href="{{ route('select_active_semester', $sem->id) }}" class="btn btn-primary btn-xs">Select</a>
+                                @break
+                            @elseif($sem->status == 1)
+                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $sem->id }}-finish">Finish</button>
+                                @include('admin.includes.modal-finish-semester')
+                                @break
+                            @endif
+
+                        @elseif($sem->id == 2 && $sem->finish == 0)
+                            @if($sem->status == 0)
+                                <a href="{{ route('select_active_semester', $sem->id) }}" class="btn btn-primary btn-xs">Select</a>
+                                @break
+                            @elseif($sem->status == 1)
+                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $sem->id }}-finish">Finish</button>
+                                @include('admin.includes.modal-finish-semester')
+                                @break
+                            @endif
+
+                        @endif
+                    @endif
+                </p>
+            </div>
+
+            @endforeach
           </div>
 
 

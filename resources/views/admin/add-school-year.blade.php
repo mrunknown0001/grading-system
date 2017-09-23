@@ -25,7 +25,7 @@
       <!-- Your Page Content Here -->
       <hr>
       <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-md-4">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')
@@ -46,6 +46,10 @@
             </div>
           </form>
           <hr>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+          <button class="btn btn-primary">Close School Year</button>
         </div>
       </div>
       <p><i>Note: You can't Add a new School Year if there is an Active School Year.</i></p>

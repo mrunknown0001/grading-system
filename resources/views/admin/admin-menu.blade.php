@@ -89,7 +89,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('add_teacher') }}"> Add Teacher</a></li>
             <li><a href="{{ route('get_all_teachers') }}"> View Teachers</a></li>
-            <li class="treeview">
+            <li>
               <a href="#"> <span>Assign Subjects</span>
               <span>
                 <i class="fa fa-angle-left pull-right"></i>

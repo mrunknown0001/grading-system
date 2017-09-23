@@ -14,14 +14,24 @@
         <!-- Dashboard -  -->
         @if(count($school_year) != 0)
         School Year: {{ $school_year->from }}-{{ $school_year->to }}
+
+          @if(count($quarter) != 0)| {{ ucwords($quarter->name) }} Quarter
+          @else
+          <hr>
+          No Selected Quarter. Click <a href="{{ route('select_quarter') }}">here</a>.
+          @endif
+          
+          @if(count($semester) != 0)| {{ ucwords($semester->name) }} Semester
+          @else
+          <hr>
+          No Selected Semester. Click <a href="{{ route('select_semester') }}">here</a>.
+          @endif
+
         @else
         Please Add School Year. Click <a href="{{ route('add_school_year') }}">here</a>.
         @endif
-        |
-        @if(count($quarter) != 0) {{ ucwords($quarter->name) }} Quarter
-        @else
-        No Selected Quarter. Click Here <a href="{{ route('select_quarter') }}">here</a>.
-        @endif
+        
+       
       </h1>
 <!--       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
