@@ -1277,4 +1277,46 @@ class AdminController extends Controller
 
 
 
+    // assign subject per level page
+    public function assignSubjectLevel($id = null)
+    {
+        if($id == null) {
+            abort(404);
+        }
+
+        $subjects = Subject::where('level', $id)->get();
+        $teachers = User::where('privilege', 2)->where('status', 1)->get();
+        $level = GradeLevel::findorfail($id);
+
+        if(empty($subjects)) {
+            abort(404);
+        }
+
+
+        return view('admin.assign-subject', ['subjects' => $subjects, 'teachers' => $teachers, 'level' => $level]);
+    }
+
+    // assign subject per level 
+    public function postAssignSubjectLevel(Request $request)
+    {
+        // validate input
+        $this->validate($request, [
+            'teacher' => 'required',
+            'subject' => 'required'
+            ]);
+
+        return "Subect Assign Cont...";
+    }
+
+
+    /*
+     * method to view all subject assignments to teachers
+     */
+    public function viewsubjectAssignments()
+    {
+
+        return view('admin.view-all-subject-assignments');
+
+    }
+
 }

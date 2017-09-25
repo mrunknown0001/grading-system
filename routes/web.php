@@ -390,6 +390,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'finish_selected_semester'
         ]);
 
+
+    /*
+     * route to assign subject in teacher
+     */
+    Route::get('assign/subject/level/{id}', [
+        'uses' => 'AdminController@assignSubjectLevel',
+        'as' => 'assign_subject_level'
+    ]);
+    
+    Route::get('assign/subject/level', function () {
+        abort(404);
+    })
+    ;
+    Route::post('assign/subject/level', [
+        'uses' => 'AdminController@postAssignSubjectLevel',
+        'as' => 'post_assign_subject_level'
+    ]);
+
+
+    // route to view all assigned subjects to teachers
+    Route::get('view/subject/assignments', [
+        'uses' => 'AdminController@viewsubjectAssignments',
+        'as' => 'view_subject_assignments'
+        ]);
+
     
 
 });

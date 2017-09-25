@@ -11,6 +11,12 @@
                 <p>Grade Level: <span class="text-capitalize">{{ $s->grade_level->name }}</span></p>
                 <p>Subject Title: <span class="text-capitalize">{{ $s->title }}</span></p>
                 <p class="text-capitalize">Description: <i>{{ $s->description }}</i></p>
+            
+                <p><strong>Percentage:</strong></p>
+                <p>Writter Works: {{ $s->written_work }}%</p>
+                <p>Performance Tasks: {{ $s->performance_task }}%</p>
+                <p>Exams: {{ $s->exam }}%</p>
+                <p>Others: {{ $s->others }}%</p>
                 
             </div>
             <div class="modal-footer">

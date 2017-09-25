@@ -80,7 +80,7 @@
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview">
-          <a href="#">
+          <a href="javascript:void();">
             <i class="fa fa-users fa-fw"></i> <span>Teachers</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -90,26 +90,26 @@
             <li><a href="{{ route('add_teacher') }}"> Add Teacher</a></li>
             <li><a href="{{ route('get_all_teachers') }}"> View Teachers</a></li>
             <li>
-              <a href="#"> <span>Assign Subjects</span>
+              <a href="javascript:void();"> <span>Assign Subjects</span>
               <span>
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#">Grade 7</a></li>
-                <li><a href="#">Grade 8</a></li>
-                <li><a href="#">Grade 9</a></li>
-                <li><a href="#">Grade 10</a></li>
-                <li><a href="#">Grade 11</a></li>
-                <li><a href="#">Grade 12</a></li>
+                <li><a href="{{ route('assign_subject_level', 1) }}">Grade 7</a></li>
+                <li><a href="{{ route('assign_subject_level', 2) }}">Grade 8</a></li>
+                <li><a href="{{ route('assign_subject_level', 3) }}">Grade 9</a></li>
+                <li><a href="{{ route('assign_subject_level', 4) }}">Grade 10</a></li>
+                <li><a href="{{ route('assign_subject_level', 5) }}">Grade 11</a></li>
+                <li><a href="{{ route('assign_subject_level', 6) }}">Grade 12</a></li>
               </ul>
             </li>
-            <li><a href="#"> View Subject Assignments</a></li>
+            <li><a href="{{ route('view_subject_assignments') }}"> View Subject Assignments</a></li>
           </ul>
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-graduation-cap"></i> <span>Students</span>
+          <a href="javascript:void();"><i class="fa fa-graduation-cap"></i> <span>Students</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -121,7 +121,7 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-book"></i> <span>Subjects</span>
+          <a href="javascript:void();"><i class="fa fa-book"></i> <span>Subjects</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -132,7 +132,7 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-list"></i> <span>Sections</span>
+          <a href="javascript:void();"><i class="fa fa-list"></i> <span>Sections</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
