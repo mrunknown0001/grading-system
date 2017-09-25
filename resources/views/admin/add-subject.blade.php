@@ -46,6 +46,11 @@
               <textarea name="description" id="description" cols="30" rows="10" class="form-control text-capitalize" placeholder="Description of the Subject..."></textarea>
             </div>
             <div class="form-group">
+              Written Work: <input type="number" name="written_work" class="form-control" placeholder="%" />
+              Performance Task: <input type="number" name="performance_task" class="form-control" placeholder="%" />
+              Exam: <input type="number" name="exam" class="form-control" placeholder="%" />
+            </div>
+            <div class="form-group">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <button class="btn btn-primary">Add Subject</button>
               <a href="{{ route('get_view_all_subjects') }}" class="btn btn-danger">Cancel</a>

@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-6">
-          <button class="btn btn-primary">Close School Year</button>
+          <button class="btn btn-warning">Close School Year</button>
         </div>
       </div>
       <p><i>Note: You can't Add a new School Year if there is an Active School Year.</i></p>

@@ -15,6 +15,10 @@ class CreateSubjectAssignsTable extends Migration
     {
         Schema::create('subject_assigns', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('teacher_id')->unsigned(); // id of the teacher
+            $table->integer('subject_id')->unsigned(); // id of the subject
+            $table->integer('school_year_id')->unsigned(); // id of the active school year
+            $table->integer('section_id')->unsigned(); // id of the section
             $table->timestamps();
         });
     }

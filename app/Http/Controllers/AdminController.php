@@ -18,6 +18,7 @@ use App\Quarter;
 use App\Semester;
 use App\StudentInfo;
 use App\StudentImport;
+use App\SubjectAssign;
 
 class AdminController extends Controller
 {
@@ -326,19 +327,34 @@ class AdminController extends Controller
         $this->validate($request, [
             'grade_level' => 'required',
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'written_work' => 'required|numeric',
+            'performance_task' => 'required|numeric',
+            'exam' => 'required|numeric'
             ]);
 
         // Assigning variables
         $level = $request['grade_level'];
         $title = $request['title'];
         $description = $request['description'];
+        $written_work = $request['written_work'];
+        $performance_task = $request['performance_task'];
+        $exam = $request['exam'];
+
+        $total = $written_work + $performance_task + $exam;
+
+        if($total != 100) {
+            return redirect()->route('get_add_subject')->with('error_msg', 'Total Criterial Percentage Must be equal to 100');
+        }
 
         $add = new Subject();
 
         $add->level = $level;
         $add->title = $title;
         $add->description = $description;
+        $add->written_work = $written_work;
+        $add->performance_task = $performance_task;
+        $add->exam = $exam;
 
 
         if($add->save()) {
@@ -388,17 +404,29 @@ class AdminController extends Controller
         $this->validate($request, [
             'grade_level' => 'required',
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'written_work' => 'required|numeric',
+            'performance_task' => 'required|numeric',
+            'exam' => 'required|numeric'
             ]);
 
         $id = $request['id'];
         $level = $request['grade_level'];
         $title = $request['title'];
         $description = $request['description'];
+        $written_work = $request['written_work'];
+        $performance_task = $request['performance_task'];
+        $exam = $request['exam'];
 
         // If id is empty
         if(empty($id)) {
             return 'System encountered error. Please reload this page.';
+        }
+
+        $total = $written_work + $performance_task + $exam;
+
+        if($total != 100) {
+            return redirect()->route('show_subject_details_update', $id)->with('error_msg', 'Total Criterial Percentage Must be equal to 100');
         }
 
         $subject = Subject::findorfail($id);
@@ -411,6 +439,9 @@ class AdminController extends Controller
         $subject->level = $level;
         $subject->title = $title;
         $subject->description = $description;
+        $subject->written_work = $written_work;
+        $subject->performance_task = $performance_task;
+        $subject->exam = $exam;
 
         if($subject->save()) {
 
@@ -1280,12 +1311,21 @@ class AdminController extends Controller
     // assign subject per level page
     public function assignSubjectLevel($id = null)
     {
+
+        $active_school_year = SchoolYear::where('status', 1)->first();
+        if(count($active_school_year) == 0) {
+            return redirect()->route('admin_dashboard')->with('notice', 'No Active School Year. Please Add One');
+        }
+
         if($id == null) {
             abort(404);
         }
 
         $subjects = Subject::where('level', $id)->get();
         $teachers = User::where('privilege', 2)->where('status', 1)->get();
+        $sections = Section::where('level', $id)->get();
+
+
         $level = GradeLevel::findorfail($id);
 
         if(empty($subjects)) {
@@ -1293,7 +1333,7 @@ class AdminController extends Controller
         }
 
 
-        return view('admin.assign-subject', ['subjects' => $subjects, 'teachers' => $teachers, 'level' => $level]);
+        return view('admin.assign-subject', ['subjects' => $subjects, 'teachers' => $teachers, 'level' => $level, 'sections' => $sections]);
     }
 
     // assign subject per level 
@@ -1302,10 +1342,59 @@ class AdminController extends Controller
         // validate input
         $this->validate($request, [
             'teacher' => 'required',
-            'subject' => 'required'
+            'subject' => 'required',
+            'section' => 'required'
             ]);
 
-        return "Subect Assign Cont...";
+        
+        $level = $request['level'];
+        $teacher = $request['teacher'];
+        $subject = $request['subject'];
+        $section = $request['section'];
+
+        $active_school_year = SchoolYear::where('status', 1)->first();
+
+        $check_assigned_subject = SubjectAssign::where('teacher_id', $teacher)
+                                    ->where('subject_id', $subject)
+                                    ->where('section_id', $section)
+                                    ->where('school_year_id', $active_school_year->id)
+                                    ->first();
+
+
+        // check if the subject is assigned to same teacher
+        if(count($check_assigned_subject) != 0) {
+            return redirect()->route('assign_subject_level', $level)->with('notice', 'The subject is already assigned to the teacher.');
+        }
+
+
+        // if the subject is already assigned to another teacher
+        $check_assigned_subject2 = SubjectAssign::where('subject_id', $subject)
+                                    ->where('section_id', $section)
+                                    ->where('school_year_id', $active_school_year->id)
+                                    ->first();
+
+        if(!empty($check_assigned_subject2)) {
+            return redirect()->route('assign_subject_level', $level)->with('notice', 'The subject is already assigned to another teacher.');
+        }
+
+
+        $assign = new SubjectAssign();
+        $assign->teacher_id = $teacher;
+        $assign->subject_id = $subject;
+        $assign->section_id = $section;
+        $assign->school_year_id = $active_school_year->id;
+
+
+        if($assign->save()) {
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = "Assigned Subject to Teacher";
+            $log->save();
+
+            return redirect()->route('assign_subject_level', $level)->with('success', 'Subject Successfully Assigned to Teacher.');
+        }
+
+        return redirect()->back()->with('notice', 'Error Occurred. Please reload the page.');
     }
 
 
@@ -1315,7 +1404,10 @@ class AdminController extends Controller
     public function viewsubjectAssignments()
     {
 
-        return view('admin.view-all-subject-assignments');
+        $active_school_year = SchoolYear::where('status', 1)->first();
+        $assignments = SubjectAssign::where('school_year_id', $active_school_year->id)->get();
+
+        return view('admin.view-all-subject-assignments', ['assignments' => $assignments]);
 
     }
 

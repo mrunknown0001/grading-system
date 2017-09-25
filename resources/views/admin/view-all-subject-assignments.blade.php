@@ -26,12 +26,33 @@
 
       <!-- Your Page Content Here -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Grade Level &amp; Section</th>
+                <th>Subject</th>
+                <th>Teacher</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($assignments as $as)
+              <tr>
+                <td>{{ $as->subject->grade_level->name }} - {{ ucwords($as->section->name) }}</td>
+                <td>{{ $as->subject->title }}</td>
+                <td>{{ ucwords($as->teacher->firstname) }} {{ ucwords($as->teacher->lastname) }}</td>
+                <td><button class="btn btn-danger btn-xs">Remove</button></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
 

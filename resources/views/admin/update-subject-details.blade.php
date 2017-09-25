@@ -46,6 +46,11 @@
               <textarea name="description" id="description" cols="30" rows="10" class="form-control text-capitalize" placeholder="Description of the Subject...">{{ $subject->description }}</textarea>
             </div>
             <div class="form-group">
+              Written Work: <input type="number" name="written_work" class="form-control" value="{{ $subject->written_work }}" placeholder="%" />
+              Performance Task: <input type="number" name="performance_task" class="form-control" value="{{ $subject->performance_task }}" placeholder="%" />
+              Exam: <input type="number" name="exam" class="form-control" value="{{ $subject->exam }}" placeholder="%" />
+            </div>
+            <div class="form-group">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <input type="hidden" name="id" value="{{ $subject->id }}" />
               <button class="btn btn-primary">Update Subject</button>
