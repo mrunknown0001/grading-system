@@ -10,4 +10,9 @@ class Section extends Model
     {
     	return $this->belongsTo('App\GradeLevel', 'level', 'id');
     }
+
+    public function students()
+    {
+    	return $this->hasMany('App\User');
+    }
 }

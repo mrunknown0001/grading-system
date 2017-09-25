@@ -435,6 +435,12 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'uses' => 'TeacherController@teacherDasboard',
         'as' => 'teacher_dashboard'
     ]);
+
+
+    Route::get('students/subject/{id}/all', [
+        'uses' => 'TeacherController@getStudentClassSubject',
+        'as' => 'get_student_class_subject'
+    ]);
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

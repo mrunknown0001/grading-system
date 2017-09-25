@@ -81,18 +81,21 @@
         <!-- Optionally, you can add icons to the links -->
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-book fa-fw"></i> <span>My Subjects</span>
+            <i class="fa fa-book fa-fw"></i> <span>My Students</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"> Menu 1</a></li>
-            <li><a href="#"> Menu 2</a></li>
+            <!-- <li><a href="#"> Menu 1</a></li>
+            <li><a href="#"> Menu 2</a></li> -->
+            @foreach($students as $std)
+            <li><a href="{{ route('get_student_class_subject', $std->id) }}">{{ ucwords($std->section->grade_level->name) }} - {{ ucwords($std->section->name) }} - {{ ucwords($std->subject->title) }}</a></li>
+            @endforeach
           </ul>
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
-        <li class="treeview">
+<!--         <li class="treeview">
           <a href="#"><i class="fa fa-graduation-cap"></i> <span>My Students</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -102,7 +105,7 @@
             <li><a href="#"> Menu 1</a></li>
             <li><a href="#"> Menu 2</a></li>
           </ul>
-        </li>
+        </li> -->
 
       </ul>
       <!-- /.sidebar-menu -->
