@@ -36,13 +36,15 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
               </tr>
             </thead>
             <tbody>
               @foreach($all_students as $astd)
               <tr>
-                <td>{{ $astd->user->firstname }}</td>
+                <td>{{ ucwords($astd->user->firstname) }}</td>
+                <td>{{ ucwords($astd->user->lastname) }}</td>
               </tr>
               @endforeach
             </tbody>
