@@ -83,6 +83,23 @@ class UserController extends Controller
 				return redirect()->route('teacher_dashboard');;
 			}
 
+			if(Auth::user()->privilege == 3) {
+
+				/*
+            	 * User Log
+            	 */
+            	$user_log = new UserLog();
+
+            	$user_log->user_id = Auth::user()->id;
+            	$user_log->action = 'Student Login: ' . Auth::user()->user_id;
+
+            	$user_log->save();
+
+				return redirect()->route('get_student_dashboard');;
+			}
+
+
+
 			/*
 			 * redirect to home page and will login if stuents
 			 */

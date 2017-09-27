@@ -46,7 +46,7 @@ Route::get('teacher/login', function () {
  * Student Login
  */
 Route::get('student/login', function () {
-	return view('admin-login');
+	return view('student-login');
 })->name('student_login');
 
 
@@ -441,6 +441,27 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'uses' => 'TeacherController@getStudentClassSubject',
         'as' => 'get_student_class_subject'
     ]);
+});
+/*********************************************
+********** END OF ROUTE GROUP TEACHER ********
+**********************************************/
+
+
+
+
+/**********************************************
+***********************************************
+************ STUDENT ROUTE GROUP **************
+***********************************************
+***********************************************/
+Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], function () {
+
+    // route to student dashbaord
+    Route::get('/', [
+        'uses' => 'StudentController@getStudentDashboard',
+        'as' => 'get_student_dashboard'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********
