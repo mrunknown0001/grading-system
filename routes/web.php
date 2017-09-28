@@ -415,6 +415,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'view_subject_assignments'
         ]);
 
+
     
 
 });
@@ -441,6 +442,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'uses' => 'TeacherController@getStudentClassSubject',
         'as' => 'get_student_class_subject'
     ]);
+
+
+    // route to add written work in record of the students
+    Route::get('add/written-work/section/{section_id}/subject/{subject_id}/{assign_id}', [
+        'uses' => 'TeacherController@addWrittenWorkScore',
+        'as' => 'add_written_work_score'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

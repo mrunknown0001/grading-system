@@ -32,9 +32,10 @@ class TeacherController extends Controller
 		return $students;
 	}
 
+
     public function teacherDasboard()
     {
-
+        // for menu in teacher
     	$students = $this->getMyStudents();
 
 
@@ -45,7 +46,7 @@ class TeacherController extends Controller
     // use to get/view all students in a section
     public function getStudentClassSubject($id = null)
     {
-
+        // for menu in teacher
     	$students = $this->getMyStudents();
 
     	$assign = SubjectAssign::findorfail($id);
@@ -57,5 +58,33 @@ class TeacherController extends Controller
     	$all_students = StudentInfo::where('section', $assign->section_id)->get();
 
     	return view('teacher.students-on-subject', ['students' => $students, 'all_students' => $all_students, 'assign' => $assign]);
+    }
+
+
+    // method use to add written work score
+    public function addWrittenWorkScore($section_id = null, $subject_id = null, $assign_id = null)
+    {
+
+        // check if there is selected sem & quarter
+        $quarter = Quarter::whereStatus(1)->first();
+        $sem = Semester::whereStatus(1)->first();
+
+        // for menu in teacher
+        $students = $this->getMyStudents();
+
+        $section = Section::findorfail($section_id);
+        $subject = Subject::findorfail($subject_id);
+
+        // active school year
+        $active_school_year = SchoolYear::whereStatus(1)->first();
+
+        // select students
+        $students_on_subject = StudentInfo::whereSection($section->id)
+                                ->whereSchoolYear($active_school_year->id)
+                                ->get();
+
+        // return $students;
+        
+        return view('teacher.add-written-work', ['students' => $students, 'section' => $section, 'subject' => $subject]);
     }
 }

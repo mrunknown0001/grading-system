@@ -70,7 +70,7 @@
             <input type="text" name="mobile" class="form-control" value="{{ $student->mobile }}" placeholder="11 Digit Mobile Number" />
           </div>
           <div class="form-group">
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <input type="hidden" name="id" value="{{ $student->id }}" />
             <input type="hidden" name="original_user_id" value="{{ $student->user_id }}" />
             <button class="btn btn-primary">Update Student Details</button>

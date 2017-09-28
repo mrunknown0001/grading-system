@@ -70,7 +70,7 @@
             <input type="text" name="mobile" class="form-control" placeholder="11 Digit Mobile Number" />
           </div>
           <div class="form-group">
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
             <button class="btn btn-primary">Add Student</button>
             <a href="{{ route('get_view_all_students') }}" class="btn btn-danger">Cancel</a>
           </div>

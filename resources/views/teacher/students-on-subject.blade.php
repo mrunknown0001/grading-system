@@ -32,10 +32,16 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
-
-          <table class="table">
+          <div>
+            <!-- <button class="btn btn-primary btn-xs">Add Written Work</button> -->
+            <a href="{{ url('teacher/add/written-work/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Written Work</a>
+            <button class="btn btn-primary btn-xs">Add Performance Task</button>
+            <button class="btn btn-primary btn-xs">Add Exam</button>
+          </div>
+          <table class="table table-hover">
             <thead>
               <tr>
+                <th>Student Number</th>
                 <th>First Name</th>
                 <th>Last Name</th>
               </tr>
@@ -43,6 +49,7 @@
             <tbody>
               @foreach($all_students as $astd)
               <tr>
+                <td>{{ $astd->user->user_id }}</td>
                 <td>{{ ucwords($astd->user->firstname) }}</td>
                 <td>{{ ucwords($astd->user->lastname) }}</td>
               </tr>
