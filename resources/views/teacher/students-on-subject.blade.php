@@ -35,8 +35,8 @@
           <div>
             <!-- <button class="btn btn-primary btn-xs">Add Written Work</button> -->
             <a href="{{ url('teacher/add/written-work/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Written Work</a>
-            <button class="btn btn-primary btn-xs">Add Performance Task</button>
-            <button class="btn btn-primary btn-xs">Add Exam</button>
+            <a href="{{ url('teacher/add/performance-task/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Performance Task</a>
+            <a href="{{ url('teacher/add/exam/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Exam</a>
           </div>
           <table class="table table-hover">
             <thead>

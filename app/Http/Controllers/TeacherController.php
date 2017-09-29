@@ -74,6 +74,12 @@ class TeacherController extends Controller
 
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
+        $assign = SubjectAssign::findorfail($assign_id);
+
+        if(Auth::user()->id != $assign->teacher_id) {
+            abort(404);
+        }
+
 
         // active school year
         $active_school_year = SchoolYear::whereStatus(1)->first();
@@ -85,6 +91,74 @@ class TeacherController extends Controller
 
         // return $students;
         
-        return view('teacher.add-written-work', ['students' => $students, 'section' => $section, 'subject' => $subject]);
+        return view('teacher.add-written-work', ['students' => $students, 'section' => $section, 'subject' => $subject, 'assign' => $assign]);
+    }
+
+
+    // method use to add performance task score
+    public function addPerformanceTask($section_id = null, $subject_id = null, $assign_id = null)
+    {
+
+        // check if there is selected sem & quarter
+        $quarter = Quarter::whereStatus(1)->first();
+        $sem = Semester::whereStatus(1)->first();
+
+        // for menu in teacher
+        $students = $this->getMyStudents();
+
+        $section = Section::findorfail($section_id);
+        $subject = Subject::findorfail($subject_id);
+        $assign = SubjectAssign::findorfail($assign_id);
+
+        if(Auth::user()->id != $assign->teacher_id) {
+            abort(404);
+        }
+
+
+        // active school year
+        $active_school_year = SchoolYear::whereStatus(1)->first();
+
+        // select students
+        $students_on_subject = StudentInfo::whereSection($section->id)
+                                ->whereSchoolYear($active_school_year->id)
+                                ->get();
+
+        // return $students;
+        
+        return view('teacher.add-performance-task', ['students' => $students, 'section' => $section, 'subject' => $subject, 'assign' => $assign]); 
+    }
+
+
+    // method use to add exam score
+    public function addExam($section_id = null, $subject_id = null, $assign_id = null)
+    {
+
+        // check if there is selected sem & quarter
+        $quarter = Quarter::whereStatus(1)->first();
+        $sem = Semester::whereStatus(1)->first();
+
+        // for menu in teacher
+        $students = $this->getMyStudents();
+
+        $section = Section::findorfail($section_id);
+        $subject = Subject::findorfail($subject_id);
+        $assign = SubjectAssign::findorfail($assign_id);
+
+        if(Auth::user()->id != $assign->teacher_id) {
+            abort(404);
+        }
+
+
+        // active school year
+        $active_school_year = SchoolYear::whereStatus(1)->first();
+
+        // select students
+        $students_on_subject = StudentInfo::whereSection($section->id)
+                                ->whereSchoolYear($active_school_year->id)
+                                ->get();
+
+        // return $students;
+        
+        return view('teacher.add-exam', ['students' => $students, 'section' => $section, 'subject' => $subject, 'assign' => $assign]); 
     }
 }

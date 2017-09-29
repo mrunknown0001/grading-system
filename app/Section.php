@@ -13,6 +13,6 @@ class Section extends Model
 
     public function students()
     {
-    	return $this->hasMany('App\User');
+    	return $this->hasMany('App\StudentInfo', 'section', 'id');
     }
 }

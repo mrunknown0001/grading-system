@@ -445,9 +445,23 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
 
 
     // route to add written work in record of the students
-    Route::get('add/written-work/section/{section_id}/subject/{subject_id}/{assign_id}', [
+    Route::get('add/written-work/section/{section_id}/subject/{subject_id}/{assign_id}/get', [
         'uses' => 'TeacherController@addWrittenWorkScore',
         'as' => 'add_written_work_score'
+    ]);
+
+
+    // route to add performance task in record of the students
+    Route::get('add/performance-task/section/{section_id}/subject/{subject_id}/{assign_id}/get', [
+        'uses' => 'TeacherController@addPerformanceTask',
+        'as' => 'add_performance_task_score'
+    ]);
+
+
+    // route to add exam in record of the students
+    Route::get('add/exam/section/{section_id}/subject/{subject_id}/{assign_id}/get', [
+        'uses' => 'TeacherController@addExam',
+        'as' => 'add_exam_score'
     ]);
 
 });
