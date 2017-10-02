@@ -23,11 +23,21 @@ class TeacherController extends Controller
 	private function getMyStudents()
 	{
 		$user = Auth::user();
+
+
 		$asy = SchoolYear::where('status', 1)->first();
+
+        if(count($asy) != 1) {
+            return 'No Active School Year. Report to admin.';
+        }
 
 		$students = SubjectAssign::where('teacher_id', $user->id)
 								->where('school_year_id', $asy->id)
 								->get();
+
+        if(count($students) == 0) {
+            return 'Error. Let the admin finished the initialize setup.';
+        }
 
 		return $students;
 	}
@@ -92,6 +102,25 @@ class TeacherController extends Controller
         // return $students;
         
         return view('teacher.add-written-work', ['students' => $students, 'section' => $section, 'subject' => $subject, 'assign' => $assign]);
+    }
+
+
+    // method use to add written work post
+    public function postAddWrittenWork(Request $request)
+    {
+        $this->validate($request, [
+            'total' => 'required'
+        ]);
+
+        $assign_id = $request['assign_id'];
+
+        $assign = SubjectAssign::findorfail($assign_id);
+
+        $section = Section::findorfail($assign->section_id);
+        $subject = Subject::findorfail($assign->subject_id);
+
+        return $section->students;
+
     }
 
 

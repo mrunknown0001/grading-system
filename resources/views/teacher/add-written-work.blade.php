@@ -32,7 +32,7 @@
           @include('includes.success')
           @include('includes.notice')
 
-          <form action="#" method="POST" autocomplete="off">
+          <form action="{{ route('post_add_written_work_score') }}" method="POST" autocomplete="off">
             <div class="form-group">
               <input type="number" name="total" placeholder="Total" />
             </div>
@@ -41,12 +41,14 @@
             @foreach($section->students as $std)
               <tr>
               <td>{{ ucwords($std->user->firstname) }} {{ ucwords($std->user->lastname) }}</td>
-               <td><input type="text" name="std-score" placeholder="Score" /></td>
+               <td><input type="number" name="w-{{ $std->user->user_id }}" value="0" placeholder="Score" /></td>
               </tr>
             @endforeach
             </table>
             </div>
             <div class="form-group">
+              <input type="hidden" name="assign_id" value="{{ $assign->id }}" />
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
               <button class="btn btn-primary">Save</button>
               <a href="{{ route('get_student_class_subject', $assign->id) }}" class="btn btn-danger">Cancel</a>
             </div>

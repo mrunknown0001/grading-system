@@ -12,8 +12,11 @@ Route::get('/', function () {
 		if(Auth::user()->privilege == 1) {
 			return redirect()->route('admin_dashboard');
 		}
+        elseif(Auth::user()->privilege == 2) {
+            return redirect()->route('teacher_dashboard');
+        }
 		else {
-			return view('landing_page');
+			return view('landing-page');
 		}
 	}
 
@@ -449,6 +452,15 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'uses' => 'TeacherController@addWrittenWorkScore',
         'as' => 'add_written_work_score'
     ]);
+
+    // route to add writen work post
+    Route::post('add/written-work', [
+        'uses' => 'TeacherController@postAddWrittenWork',
+        'as' => 'post_add_written_work_score'
+    ]);
+    Route::get('add/written-work', function () {
+        abort(404);
+    });
 
 
     // route to add performance task in record of the students
