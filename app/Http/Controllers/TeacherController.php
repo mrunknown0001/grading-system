@@ -16,6 +16,10 @@ use App\Semester;
 use App\StudentInfo;
 use App\StudentImport;
 use App\SubjectAssign;
+use App\WrittenWorkScore;
+use App\PerformanceTaskScore;
+use App\ExamScore;
+use App\WrittenWorkNumber;
 
 class TeacherController extends Controller
 {
@@ -112,23 +116,90 @@ class TeacherController extends Controller
             'total' => 'required'
         ]);
 
+        // total number of score
         $total = $request['total'];
 
+        // subject assignment id
         $assign_id = $request['assign_id'];
 
+        // subject assign
         $assign = SubjectAssign::findorfail($assign_id);
 
+        // school year
+        $active_school_year = SchoolYear::whereStatus(1)->first();
+
+        // active quarter
+        $active_quarter = Quarter::whereStatus(1)->first();
+
+        // active semester
+        $active_sem = Semester::whereStatus(1)->first();
+
+        // section
         $section = Section::findorfail($assign->section_id);
+
+        // subject
         $subject = Subject::findorfail($assign->subject_id);
 
-        // set array for score
-        foreach($section->students as $std) {
 
-            $score[] = ['student_number' => $std->user_id, 'score' => $request[$std->student_]];
+        // get the last number of  the written work
+        // for grade 7 to 10
+        if($section->grade_level->id == 1 || $section->grade_level->id == 2 || $section->grade_level->id == 3 || $section->grade_level->id == 4) {
+         
+            $wwn = WrittenWorkNumber::where('school_year_id', $active_school_year->id)
+                                    ->where('quarter_id', $active_quarter->id)
+                                    ->where('section_id', $section->id)
+                                    ->where('subject_id', $subject->id)
+                                    ->first();
+
+        }
+        // for grade 11 and 12
+        else {
+            $wwn = WrittenWorkNumber::where('school_year_id', $active_school_year->id)
+                        ->where('semester_id', $active_sem->id)
+                        ->where('section_id', $section->id)
+                        ->where('subject_id', $subject->id)
+                        ->first();
+        }
+
+
+        
+        if(count($wwn) == 0) {
+            $wwn = new WrittenWorkNumber();
+            $wwn->school_year_id = $active_school_year->id;
+            if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
+                $wwn->semester_id = $active_sem->id;
+            }
+            else {
+                $wwn->quarter_id = $active_quarter->id;
+            }
+            $wwn->section_id = $section->id;
+            $wwn->subject_id = $subject->id;
+            $wwn->save();
             
         }
-        
+
+        // increase the number of the written work number
+        $wwn->number = $wwn->number + 1;
+        $wwn->save();
+
+        // set array for score together with student id of the student
+        foreach($section->students as $std) {
+
+            $score[] = [
+                'student_id' => $std->id,
+                'student_number' => $std->uid,
+                'written_work_number' => $wwn->number,
+                'score' => $request[$std->user_id],
+                'total' => $total
+
+            ];
+        }
+
+        // insert score in written work scores table
+
         return $score;
+        
+        
 
     }
 

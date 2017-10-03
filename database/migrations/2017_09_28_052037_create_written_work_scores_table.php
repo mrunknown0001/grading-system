@@ -15,11 +15,9 @@ class CreateWrittenWorkScoresTable extends Migration
     {
         Schema::create('written_work_scores', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('school_year_id');
-            $table->integer('section_id');
-            $table->integer('subject_id');
+            $table->integer('written_work_number');
             $table->integer('student_id');
-            $table->integer('ww_number');
+            $table->string('student_number');
             $table->integer('score');
             $table->integer('total');
             $table->timestamps();
