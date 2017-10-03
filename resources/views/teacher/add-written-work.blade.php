@@ -41,7 +41,7 @@
             @foreach($section->students as $std)
               <tr>
               <td>{{ ucwords($std->user->firstname) }} {{ ucwords($std->user->lastname) }}</td>
-               <td><input type="number" name="w-{{ $std->user->user_id }}" value="0" placeholder="Score" /></td>
+               <td><input type="number" name="{{ $std->user->user_id }}" value="0" placeholder="Score" /></td>
               </tr>
             @endforeach
             </table>

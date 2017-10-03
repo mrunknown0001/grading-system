@@ -112,6 +112,8 @@ class TeacherController extends Controller
             'total' => 'required'
         ]);
 
+        $total = $request['total'];
+
         $assign_id = $request['assign_id'];
 
         $assign = SubjectAssign::findorfail($assign_id);
@@ -119,7 +121,14 @@ class TeacherController extends Controller
         $section = Section::findorfail($assign->section_id);
         $subject = Subject::findorfail($assign->subject_id);
 
-        return $section->students;
+        // set array for score
+        foreach($section->students as $std) {
+
+            $score[] = ['student_number' => $std->user_id, 'score' => $request[$std->student_]];
+            
+        }
+        
+        return $score;
 
     }
 
