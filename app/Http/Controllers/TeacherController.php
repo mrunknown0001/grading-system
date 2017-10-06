@@ -187,7 +187,7 @@ class TeacherController extends Controller
 
             $score[] = [
                 'student_id' => $std->id,
-                'student_number' => $std->uid,
+                'student_number' => $std->user->user_id,
                 'written_work_number' => $wwn->number,
                 'score' => $request[$std->user_id],
                 'total' => $total
