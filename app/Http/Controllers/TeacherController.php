@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use DB;
+
 use App\User;
 use App\UserLog;
 use App\GradeLevel;
@@ -184,7 +186,7 @@ class TeacherController extends Controller
 
         // set array for score together with student id of the student
         foreach($section->students as $std) {
-
+            // 
             $score[] = [
                 'student_id' => $std->id,
                 'student_number' => $std->user->user_id,
@@ -196,9 +198,11 @@ class TeacherController extends Controller
         }
 
         // insert score in written work scores table
+        DB::table('written_work_scores')->insert($score);
 
-        return $score;
+        return redirect()->back()->with('success', 'Written Work #' . $wwn->number . ' Sucessfully Saved!');
         
+        return 'error in post add written work';
         
 
     }
