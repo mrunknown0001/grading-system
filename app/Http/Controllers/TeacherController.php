@@ -190,7 +190,8 @@ class TeacherController extends Controller
             $score[] = [
                 'student_id' => $std->id,
                 'student_number' => $std->user->user_id,
-                'written_work_number' => $wwn->id,
+                'written_work_number' => $wwn->number,
+                'written_work_id' => $wwn->id,
                 'score' => $request[$std->user_id],
                 'total' => $total
 
@@ -210,9 +211,38 @@ class TeacherController extends Controller
 
 
     // method to view written work on current
-    public function viewWrittenWorkScore()
+    public function viewWrittenWorkScore($sectionid = null, $subjectid = null)
     {
-        return 'view written work score';
+        $school_year = SchoolYear::whereStatus(1)->first();
+        $quarter = Quarter::whereStatus(1)->first();
+        $semester = Semester::whereStatus(1)->first();
+
+        $section = Section::findorfail($sectionid);
+        $subject = Subject::findorfail($subjectid);
+
+        // check how many written works has taken
+        // check also if junior or senior high
+        if($section->grade_level->id == 1 || $section->grade_level->id == 2 || $section->grade_level->id == 3 || $section->grade_level->id == 4) {
+
+            $ww_number = WrittenWorkNumber::where('school_year_id', $school_year->id)
+                                        ->where('quarter_id', $quarter->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+        else {
+            $ww_number = WrittenWorkNumber::where('school_year_id', $school_year->id)
+                                        ->where('semester_id', $semester->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+
+    
+        return $ww_number->number;
+
+
+
     }
 
 

@@ -479,7 +479,7 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
 
 
     // route to view written work scores
-    Route::get('view/written-work/score', [
+    Route::get('view/written-work/score/{sectionid}/{subjectid}/get', [
         'uses' => 'TeacherController@viewWrittenWorkScore',
         'as' => 'view_written_work_socre'
     ]);
