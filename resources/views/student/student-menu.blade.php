@@ -1,3 +1,9 @@
+{{-- subjects for stduent --}}
+<?php
+  $info = App\StudentInfo::where('user_id', Auth::user()->user_id)->first();
+?>
+
+
 <!-- Main Header -->
 <header class="main-header">
 
@@ -72,6 +78,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ ucwords(Auth::user()->firstname) }} {{ ucwords(Auth::user()->lastname) }}</p>
+          <p>{{ Auth::user()->user_id }}</p>
         </div>
       </div>
 
@@ -87,9 +94,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"> Subject 1</a></li>
-            <li><a href="#"> Subject 2</a></li>
-            
+            @foreach($info->section1->grade_level->subjects as $sub)
+            <li><a href="#"> {{ $sub->title }}</a></li>
+            @endforeach
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
 <!--         <li class="treeview">

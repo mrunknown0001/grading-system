@@ -10,4 +10,9 @@ class WrittenWorkScore extends Model
     {
     	return $this->belongsTo('App\WrittenWorkNumber', 'written_work_number', 'id');
     }
+
+    public function student()
+    {
+    	return $this->belongsTo('App\StudentInfo', 'student_id', 'id');
+    }
 }

@@ -986,7 +986,7 @@ class AdminController extends Controller
                         $insert[] = [
                                 'user_id' => $row->student_number,
                                 'lastname' => $row->lastname,
-                                'firstname' => $row->lastname,
+                                'firstname' => $row->firstname,
                                 'gender' => $row->sex,
                                 'birthday' => date('Y-m-d', strtotime($row->birthday)),
                                 'address' => $row->address,

@@ -176,12 +176,14 @@ class TeacherController extends Controller
             }
             $wwn->section_id = $section->id;
             $wwn->subject_id = $subject->id;
+            $wwn->total = $total;
             $wwn->save();
             
         }
 
         // increase the number of the written work number
         $wwn->number = $wwn->number + 1;
+        $wwn->total = $total;
         $wwn->save();
 
         // set array for score together with student id of the student
@@ -211,14 +213,18 @@ class TeacherController extends Controller
 
 
     // method to view written work on current
-    public function viewWrittenWorkScore($sectionid = null, $subjectid = null)
+    public function viewWrittenWorkScore($sectionid = null, $subjectid = null, $assignid = null)
     {
+
+        $students = $this->getMyStudents();
+
         $school_year = SchoolYear::whereStatus(1)->first();
         $quarter = Quarter::whereStatus(1)->first();
         $semester = Semester::whereStatus(1)->first();
 
         $section = Section::findorfail($sectionid);
         $subject = Subject::findorfail($subjectid);
+        $assign = SubjectAssign::findorfail($assignid);
 
         // check how many written works has taken
         // check also if junior or senior high
@@ -239,8 +245,10 @@ class TeacherController extends Controller
         }
 
     
-        return $ww_number->number;
+        // get all scores in the quarter/sem using the id of the written work
+        $scores = WrittenWorkScore::where('written_work_id', $ww_number->id)->get();
 
+        return view('teacher.view-written-work-scores', ['scores' => $scores, 'ww_number' => $ww_number, 'students' => $students, 'assign' => $assign]);
 
 
     }
