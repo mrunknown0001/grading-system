@@ -38,7 +38,7 @@
             <a href="{{ url('teacher/add/performance-task/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Performance Task</a>
             <a href="{{ url('teacher/add/exam/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Exam</a>
             |
-            <a href="#" class="btn btn-success btn-xs">View Written Works Scores</a>
+            <a href="{{ url('teacher/view/written-work/score') }}" class="btn btn-success btn-xs">View Written Works Scores</a>
             <a href="#" class="btn btn-success btn-xs">View Performance Task Scores</a>
             <a href="#" class="btn btn-success btn-xs">View Exam Scores</a>
           </div>
@@ -60,6 +60,7 @@
               @endforeach
             </tbody>
           </table>
+          <p class="text-center"><strong>{{ $all_students->count() }} students</strong></p>
 
         </div>
       </div>

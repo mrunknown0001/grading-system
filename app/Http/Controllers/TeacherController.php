@@ -190,7 +190,7 @@ class TeacherController extends Controller
             $score[] = [
                 'student_id' => $std->id,
                 'student_number' => $std->user->user_id,
-                'written_work_number' => $wwn->number,
+                'written_work_number' => $wwn->id,
                 'score' => $request[$std->user_id],
                 'total' => $total
 
@@ -205,6 +205,14 @@ class TeacherController extends Controller
         return 'error in post add written work';
         
 
+    }
+
+
+
+    // method to view written work on current
+    public function viewWrittenWorkScore()
+    {
+        return 'view written work score';
     }
 
 

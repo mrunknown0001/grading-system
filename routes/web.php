@@ -476,6 +476,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'add_exam_score'
     ]);
 
+
+
+    // route to view written work scores
+    Route::get('view/written-work/score', [
+        'uses' => 'TeacherController@viewWrittenWorkScore',
+        'as' => 'view_written_work_socre'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********
