@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Subject View - Student Grading System @endsection
+@section('title') View Performance Task Score - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Subject: {{ ucwords($subject->title) }}
+            Performance Task Score of {{ ucwords($subject->grade_level->name) . ' - ' . ucwords($section->name) . ' - ' . ucwords($subject->title) }}
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -32,10 +32,32 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
-          <hr>
-          <a href="{{ route('student_view_written_works', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $subject->id, 'student_number' => Auth::user()->user_id]) }}" class="btn btn-primary btn-lg">Written Works</a>
-          <a href="{{ route('student_view_performance_tasks', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $subject->id, 'student_number' => Auth::user()->user_id]) }}" class="btn btn-primary btn-lg">Performance Tasks</a>
-          <button class="btn btn-primary btn-lg">Exams</button>
+
+          
+          <table class="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Performance Task #</th>
+                      <th>Score</th>
+                  </tr>
+              </thead>
+              <tbody>
+                @for($x = 1; $x <= $ptn->number; $x++)
+        
+                  @foreach($scores as $score)
+                  <tr>
+                      @if($x == $score->performance_task_number)
+                      <td>{{ $x }}</td>
+                      <td>{{ $score->score }}/{{ $ptn->total }}</td>
+
+                      @endif
+                  </tr>
+                  @endforeach
+
+                @endfor
+              </tbody>
+          </table>
+
         </div>
       </div>
 

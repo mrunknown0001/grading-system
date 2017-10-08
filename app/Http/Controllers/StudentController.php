@@ -22,6 +22,7 @@ use App\WrittenWorkScore;
 use App\PerformanceTaskScore;
 use App\ExamScore;
 use App\WrittenWorkNumber;
+use App\PerformanceTaskNumber;
 
 class StudentController extends Controller
 {
@@ -88,5 +89,51 @@ class StudentController extends Controller
         }
 
         return view('student.student-view-written-work-score', ['subject' => $subject, 'section' => $section, 'ww_number' => $ww_number, 'scores' => $scores]);
+    }
+
+
+
+    // method use to view performance task of the student
+    public function viwePerformanceTask($year_id = null, $section = null, $subject = null, $student_number)
+    {
+        // return 'view';
+        $subject = Subject::findorfail($subject);
+        $section = Section::findorfail($section);
+
+        $school_year = SchoolYear::findorfail($year_id);
+        $quarter = Quarter::whereStatus(1)->first();
+        $semester = Semester::whereStatus(1)->first();
+
+        // check how many written works has taken
+        // check also if junior or senior high
+        if($section->grade_level->id == 1 || $section->grade_level->id == 2 || $section->grade_level->id == 3 || $section->grade_level->id == 4) {
+
+            $ptn = PerformanceTaskNumber::where('school_year_id', $school_year->id)
+                                        ->where('quarter_id', $quarter->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+        else {
+            $ptn = PerformanceTaskNumber::where('school_year_id', $school_year->id)
+                                        ->where('semester_id', $semester->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+
+
+        if(count($ptn) == 0) {
+            return view('student.includes.no-scores-for-the-subject');
+        }
+
+        // get all scores in the quarter/sem using the id of the written work
+        $scores = PerformanceTaskScore::where('performance_task_id', $ptn->id)->where('student_number', Auth::user()->user_id)->get();
+
+        if(count($scores) == 0) {
+            return 'No Scores Yet for this Subject';
+        }
+
+        return view('student.student-view-performance-task-score', ['subject' => $subject, 'section' => $section, 'ptn' => $ptn, 'scores' => $scores]);
     }
 }

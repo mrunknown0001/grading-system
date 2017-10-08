@@ -536,6 +536,12 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
         'as' => 'student_view_written_works'
     ]);
 
+
+    // route to show performance task scores of student
+    Route::get('score/performance-task/{year_id}/{section}/{subject}/{student_number}/view', [
+        'uses' => 'StudentController@viwePerformanceTask',
+        'as' => 'student_view_performance_tasks'
+    ]);
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********
