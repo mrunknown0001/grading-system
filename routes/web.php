@@ -505,6 +505,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
         'as' => 'get_student_dashboard'
     ]);
 
+
+    // route to show written scores of the student
+    Route::get('score/written-works/{year_id}/{section}/{subject}/{student_number}/view', [
+        'uses' => 'StudentController@viewWrittenWorkScores',
+        'as' => 'student_view_written_works'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

@@ -24,4 +24,11 @@ class StudentController extends Controller
     {
     	return view('student.student-dashboard');
     }
+
+
+    // method use to view written works of the students
+    public function viewWrittenWorkScores()
+    {
+    	return 'view';
+    }
 }

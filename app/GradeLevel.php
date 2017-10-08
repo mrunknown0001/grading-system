@@ -10,4 +10,6 @@ class GradeLevel extends Model
     {
     	return $this->hasMany('App\Subject', 'level', 'id');
     }
+
+
 }
