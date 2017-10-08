@@ -22,6 +22,7 @@ use App\WrittenWorkScore;
 use App\PerformanceTaskScore;
 use App\ExamScore;
 use App\WrittenWorkNumber;
+use App\PerformanceTaskNumber;
 
 class TeacherController extends Controller
 {
@@ -203,6 +204,13 @@ class TeacherController extends Controller
         // insert score in written work scores table
         DB::table('written_work_scores')->insert($score);
 
+
+        // user log 
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'Added Written Work # ' . $wwn->number . ' on ' . $section->grade_level->name . ' - ' . $section->name;
+        $log->save();
+
         return redirect()->back()->with('success', 'Written Work #' . $wwn->number . ' Sucessfully Saved!');
         
         return 'error in post add written work';
@@ -285,6 +293,156 @@ class TeacherController extends Controller
         // return $students;
         
         return view('teacher.add-performance-task', ['students' => $students, 'section' => $section, 'subject' => $subject, 'assign' => $assign]); 
+    }
+
+
+    // method use to add performance task
+    public function postAddPerformanceTask(Request $request)
+    {
+
+        $this->validate($request, [
+            'total' => 'required'
+        ]);
+
+        // total number of score
+        $total = $request['total'];
+
+        // subject assignment id
+        $assign_id = $request['assign_id'];
+
+        // subject assign
+        $assign = SubjectAssign::findorfail($assign_id);
+
+        // school year
+        $active_school_year = SchoolYear::whereStatus(1)->first();
+
+        // active quarter
+        $active_quarter = Quarter::whereStatus(1)->first();
+
+        // active semester
+        $active_sem = Semester::whereStatus(1)->first();
+
+        // section
+        $section = Section::findorfail($assign->section_id);
+
+        // subject
+        $subject = Subject::findorfail($assign->subject_id);
+
+
+        // get the last number of  the written work
+        // for grade 7 to 10
+        if($section->grade_level->id == 1 || $section->grade_level->id == 2 || $section->grade_level->id == 3 || $section->grade_level->id == 4) {
+         
+            $ptn = PerformanceTaskNumber::where('school_year_id', $active_school_year->id)
+                                    ->where('quarter_id', $active_quarter->id)
+                                    ->where('section_id', $section->id)
+                                    ->where('subject_id', $subject->id)
+                                    ->first();
+
+        }
+        // for grade 11 and 12
+        else {
+            $ptn = PerformanceTaskNumber::where('school_year_id', $active_school_year->id)
+                        ->where('semester_id', $active_sem->id)
+                        ->where('section_id', $section->id)
+                        ->where('subject_id', $subject->id)
+                        ->first();
+        }
+
+
+        
+        if(count($ptn) == 0) {
+            $ptn = new PerformanceTaskNumber();
+            $ptn->school_year_id = $active_school_year->id;
+            if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
+                $ptn->semester_id = $active_sem->id;
+            }
+            else {
+                $ptn->quarter_id = $active_quarter->id;
+            }
+            $ptn->section_id = $section->id;
+            $ptn->subject_id = $subject->id;
+            $ptn->total = $total;
+            $ptn->save();
+            
+        }
+
+        // increase the number of the written work number
+        $ptn->number = $ptn->number + 1;
+        $ptn->total = $total;
+        $ptn->save();
+
+        // set array for score together with student id of the student
+        foreach($section->students as $std) {
+            // 
+            $score[] = [
+                'student_id' => $std->id,
+                'student_number' => $std->user->user_id,
+                'performance_task_number' => $ptn->number,
+                'performance_task_id' => $ptn->id,
+                'score' => $request[$std->user_id],
+                'total' => $total
+
+            ];
+        }
+
+        // insert score in written work scores table
+        DB::table('performance_task_scores')->insert($score);
+
+
+        // user log 
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'Added Performance Task # ' . $ptn->number . ' on ' . $section->grade_level->name . ' - ' . $section->name;
+        $log->save();
+
+        return redirect()->back()->with('success', 'Performance Task #' . $ptn->number . ' Sucessfully Saved!');
+        
+        return 'error in post add performance task';
+
+    }
+
+
+    // method use to view performance task
+    public function viwePerformanceTask($sectionid = null, $subjectid = null, $assignid = null)
+    {
+
+        $students = $this->getMyStudents();
+
+        $school_year = SchoolYear::whereStatus(1)->first();
+        $quarter = Quarter::whereStatus(1)->first();
+        $semester = Semester::whereStatus(1)->first();
+
+        $section = Section::findorfail($sectionid);
+        $subject = Subject::findorfail($subjectid);
+        $assign = SubjectAssign::findorfail($assignid);
+
+        // check how many written works has taken
+        // check also if junior or senior high
+        if($section->grade_level->id == 1 || $section->grade_level->id == 2 || $section->grade_level->id == 3 || $section->grade_level->id == 4) {
+
+            $ptn = PerformanceTaskNumber::where('school_year_id', $school_year->id)
+                                        ->where('quarter_id', $quarter->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+        else {
+            $ptn = PerformanceTaskNumber::where('school_year_id', $school_year->id)
+                                        ->where('semester_id', $semester->id)
+                                        ->where('section_id', $section->id)
+                                        ->where('subject_id', $subject->id)
+                                        ->first();
+        }
+
+    
+        // get all scores in the quarter/sem using the id of the written work
+        $scores = PerformanceTaskScore::where('performance_task_id', $ptn->id)->get();
+
+    
+
+        return view('teacher.view-performance-task-scores', ['scores' => $scores, 'ptn' => $ptn, 'students' => $students, 'assign' => $assign]);
+
     }
 
 

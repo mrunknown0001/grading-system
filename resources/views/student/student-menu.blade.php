@@ -96,8 +96,9 @@
           </a>
           <ul class="treeview-menu">
             @foreach($info->section1->grade_level->subjects as $sub)
-            <li><a href="{{ route('student_view_written_works', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $sub->id, 'student_number' => Auth::user()->user_id]) }}"> {{ $sub->title }}</a></li>
+            <li><a href="{{ route('student_subject_view', $sub->id) }}"> {{ $sub->title }}</a></li>
             @endforeach
+          </ul>
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
 <!--         <li class="treeview">
@@ -112,6 +113,7 @@
           </ul>
         </li> -->
 
+        <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Records</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -470,6 +470,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+
+    // route to add performance task
+    Route::post('add/performance-task', [
+        'uses' => 'TeacherController@postAddPerformanceTask',
+        'as' => 'post_add_performance_task'
+    ]);
+
+
     // route to add exam in record of the students
     Route::get('add/exam/section/{section_id}/subject/{subject_id}/{assign_id}/get', [
         'uses' => 'TeacherController@addExam',
@@ -482,6 +490,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     Route::get('view/written-work/score/{sectionid}/{subjectid}/{assignid}/get', [
         'uses' => 'TeacherController@viewWrittenWorkScore',
         'as' => 'view_written_work_socre'
+    ]);
+
+
+    // route to view performance task scores
+    Route::get('view/performance-task/score/{sectionid}/{subjectid}/{assignid}/get', [
+        'uses' => 'TeacherController@viwePerformanceTask',
+        'as' => 'view_performance_task_socre'
     ]);
 
 });
@@ -504,6 +519,15 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
         'uses' => 'StudentController@getStudentDashboard',
         'as' => 'get_student_dashboard'
     ]);
+
+
+
+    // route to show option for each subject
+    Route::get('subject/{id}/view', [
+        'uses' => 'StudentController@studentSubjectView',
+        'as' => 'student_subject_view'
+    ]);
+
 
 
     // route to show written scores of the student

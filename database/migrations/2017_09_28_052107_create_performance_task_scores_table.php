@@ -15,6 +15,12 @@ class CreatePerformanceTaskScoresTable extends Migration
     {
         Schema::create('performance_task_scores', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('performance_task_number');
+            $table->integer('performance_task_id');
+            $table->integer('student_id');
+            $table->string('student_number');
+            $table->integer('score');
+            $table->integer('total');
             $table->timestamps();
         });
     }
