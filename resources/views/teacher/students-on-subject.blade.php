@@ -38,9 +38,9 @@
             <a href="{{ url('teacher/add/performance-task/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Performance Task</a>
             <a href="{{ url('teacher/add/exam/section/' . $assign->section->id . '/subject/' . $assign->subject->id) . '/' . $assign->id . '/get' }}" class="btn btn-primary btn-xs">Add Exam</a>
             |
-            <a href="{{ route('view_written_work_socre', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Written Works Scores</a>
-            <a href="{{ route('view_performance_task_socre', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Performance Task Scores</a>
-            <a href="#" class="btn btn-success btn-xs">View Exam Scores</a>
+            <a href="{{ route('view_written_work_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Written Works Scores</a>
+            <a href="{{ route('view_performance_task_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Performance Task Scores</a>
+            <a href="{{ route('view_exam_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Exam Scores</a>
           </div>
           <table class="table table-hover">
             <thead>

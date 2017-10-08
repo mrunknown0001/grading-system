@@ -15,6 +15,12 @@ class CreateExamScoresTable extends Migration
     {
         Schema::create('exam_scores', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('exam_number');
+            $table->integer('exam_id');
+            $table->integer('student_id');
+            $table->string('student_number');
+            $table->integer('score');
+            $table->integer('total');
             $table->timestamps();
         });
     }

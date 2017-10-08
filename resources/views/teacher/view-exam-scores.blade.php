@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') View Performance Task Scores - Student Grading System @endsection
+@section('title') View Exam Scores - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            View Performance Task Scores: {{ $assign->section->grade_level->name }} - {{ ucwords($assign->section->name) }} - {{ ucwords($assign->subject->title) }}
+            View Exam Scores: {{ $assign->section->grade_level->name }} - {{ ucwords($assign->section->name) }} - {{ ucwords($assign->subject->title) }}
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -34,9 +34,9 @@
           @include('includes.notice')
 
           
-          @for($x = 1; $x <= $ptn->number; $x++)
-          <p><a href="#" data-toggle="modal" data-target="#score-{{ $x }}">Performance Task # {{ $x }}</a></p>
-          @include('teacher.includes.modal-view-performance-task-scores')
+          @for($x = 1; $x <= $exam->number; $x++)
+          <p><a href="#" data-toggle="modal" data-target="#score-{{ $x }}">Exam # {{ $x }}</a></p>
+          @include('teacher.includes.modal-view-exam-scores')
           @endfor
 
         </div>

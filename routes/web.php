@@ -485,18 +485,32 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+    // route to add exam
+    Route::post('add/exam', [
+        'uses' => 'TeacherController@postAddExam',
+        'as' => 'post_add_exam_score'
+    ]);
+
+
 
     // route to view written work scores
     Route::get('view/written-work/score/{sectionid}/{subjectid}/{assignid}/get', [
         'uses' => 'TeacherController@viewWrittenWorkScore',
-        'as' => 'view_written_work_socre'
+        'as' => 'view_written_work_score'
     ]);
 
 
     // route to view performance task scores
     Route::get('view/performance-task/score/{sectionid}/{subjectid}/{assignid}/get', [
         'uses' => 'TeacherController@viwePerformanceTask',
-        'as' => 'view_performance_task_socre'
+        'as' => 'view_performance_task_score'
+    ]);
+
+
+    // route to view exam scores
+    Route::get('view/exam/score/{sectionid}/{subjectid}/{assignid}/get', [
+        'uses' => 'TeacherController@viewExamScore',
+        'as' => 'view_exam_score'
     ]);
 
 });
