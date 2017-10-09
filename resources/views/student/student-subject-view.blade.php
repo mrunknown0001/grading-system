@@ -35,7 +35,7 @@
           <hr>
           <a href="{{ route('student_view_written_works', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $subject->id, 'student_number' => Auth::user()->user_id]) }}" class="btn btn-primary btn-lg">Written Works</a>
           <a href="{{ route('student_view_performance_tasks', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $subject->id, 'student_number' => Auth::user()->user_id]) }}" class="btn btn-primary btn-lg">Performance Tasks</a>
-          <button class="btn btn-primary btn-lg">Exams</button>
+          <a href="{{ route('student_view_exams', ['year_id' => $year->id, 'section' => $info->section1->id, 'subject' => $subject->id, 'student_number' => Auth::user()->user_id]) }}" class="btn btn-primary btn-lg">Exams</a>
         </div>
       </div>
 

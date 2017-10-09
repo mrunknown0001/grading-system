@@ -26,7 +26,7 @@
 
       <!-- Your Page Content Here -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')

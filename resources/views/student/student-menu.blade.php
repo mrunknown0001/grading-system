@@ -112,8 +112,9 @@
             <li><a href="#"> Menu 2</a></li>
           </ul>
         </li> -->
+        <li><a href="#"><i class="fa fa-circle"></i> <span>Final Grades</span></a></li>
 
-        <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Records</span></a></li>
+        <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

@@ -556,6 +556,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
         'uses' => 'StudentController@viwePerformanceTask',
         'as' => 'student_view_performance_tasks'
     ]);
+
+
+    // route to show exam score of the student
+    Route::get('score/exam/{year_id}/{section}/{subject}/{student_number}/view', [
+        'uses' => 'StudentController@viewExamScore',
+        'as' => 'student_view_exams'
+    ]);
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

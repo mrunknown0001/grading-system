@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Written Work Score of {{ ucwords($subject->grade_level->name) . ' - ' . ucwords($section->name) . ' - ' . ucwords($subject->title) }}
+            My Written Work Scores on {{ ucwords($subject->grade_level->name) . ' - ' . ucwords($section->name) . ' - ' . ucwords($subject->title) }}
        
       </h1>
 <!--       <ol class="breadcrumb">

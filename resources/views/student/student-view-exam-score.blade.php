@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') View Performance Task Score - Student Grading System @endsection
+@section('title') View Exam Score - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            My Performance Task Scores on {{ ucwords($subject->grade_level->name) . ' - ' . ucwords($section->name) . ' - ' . ucwords($subject->title) }}
+            My Exam Score on {{ ucwords($subject->grade_level->name) . ' - ' . ucwords($section->name) . ' - ' . ucwords($subject->title) }}
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -37,18 +37,18 @@
           <table class="table table-hover">
               <thead>
                   <tr>
-                      <th>Performance Task #</th>
+                      <th>Exam #</th>
                       <th>Score</th>
                   </tr>
               </thead>
               <tbody>
-                @for($x = 1; $x <= $ptn->number; $x++)
+                @for($x = 1; $x <= $exam->number; $x++)
         
                   @foreach($scores as $score)
                   <tr>
-                      @if($x == $score->performance_task_number)
+                      @if($x == $score->exam_number)
                       <td>{{ $x }}</td>
-                      <td>{{ $score->score }}/{{ $ptn->total }}</td>
+                      <td>{{ $score->score }}/{{ $exam->total }}</td>
 
                       @endif
                   </tr>
