@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Teacher Dashboard
+            Teacher Dashboard | 
        
       </h1>
 <!--       <ol class="breadcrumb">

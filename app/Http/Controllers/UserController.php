@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 use App\UserLog;
 use App\User;
+use App\SchoolYear;
+use App\Quarter;
+use App\Semester;
 
 class UserController extends Controller
 {
@@ -32,6 +35,12 @@ class UserController extends Controller
 		 */
 		$id = $request['id'];
 		$password = $request['password'];
+
+
+		$school_year = SchoolYear::whereStatus(1)->first();
+		$quater = Quarter::whereStatus(1)->first();
+		$semester = Semester::whereStatus(1)->first();
+
 
 		/*
 		 * Authentication Login attemp
@@ -70,6 +79,19 @@ class UserController extends Controller
 			 */
 			if(Auth::user()->privilege == 2) {
 
+				if(count($school_year) == 0) {
+					return 'System is initializing by admin';
+				}
+
+				if(count($quater) == 0) {
+					return 'System is initializing by admin';
+				}
+
+				if(count($semester) == 0) {
+					return 'System is initializing by admin';
+				}
+
+
 				/*
             	 * User Log
             	 */
@@ -84,6 +106,19 @@ class UserController extends Controller
 			}
 
 			if(Auth::user()->privilege == 3) {
+
+
+				if(count($school_year) == 0) {
+					return 'System is initializing by admin';
+				}
+
+				if(count($quater) == 0) {
+					return 'System is initializing by admin';
+				}
+
+				if(count($semester) == 0) {
+					return 'System is initializing by admin';
+				}
 
 				/*
             	 * User Log

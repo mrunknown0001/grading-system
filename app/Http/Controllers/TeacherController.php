@@ -28,6 +28,11 @@ use App\ExamScoreNumber;
 class TeacherController extends Controller
 {
 
+    public function __construct()
+    {
+        
+    }
+
 	private function getMyStudents()
 	{
 		$user = Auth::user();
