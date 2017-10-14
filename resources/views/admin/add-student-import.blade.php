@@ -46,9 +46,18 @@
                   </select>
                 </div>
                 <div class="form-group">
-
-                    <input type="file" name="students" id="students" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" title="Select Excel Files Only" data-toggle="tooltip" data-placement="bottom" />
-
+<!--                   <label class="btn btn-default">
+                    Browse Excel File...
+                    <input type="file" name="students" id="students" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" title="Select Excel Files Only" data-toggle="tooltip" data-placement="bottom" hidden />
+                  </label> -->
+                <div style="position:relative;">
+                  <a class='btn btn-default' href='javascript:;'>
+                      Browse Excel File...
+                      <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="students" id="students" size="40"  onchange='$("#upload-file-info").html($(this).val());' accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                  </a>
+                  &nbsp;
+                  <span class='label label-info' id="upload-file-info"></span>
+                </div>
                 </div>
                 <div class="form-group">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />

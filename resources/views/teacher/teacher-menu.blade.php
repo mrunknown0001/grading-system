@@ -33,18 +33,18 @@
           <!-- Menu Body -->
           <li class="text-center">
             <div>
-              <a href="#">Change Profile Picture</a>
+              <a href="{{ route('teacher_change_profile_picture') }}">Change Profile Picture</a>
             </div>
           </li>
           <li class="text-center">
             <div>
-                <a href="#" class=""><span>View Profile</span></a>
+                <a href="{{ route('view_teacher_profile') }}" class=""><span>View Profile</span></a>
             </div>
           </li>
           <li class="text-center">
 
             <div>
-                <a href="#" class="">Change Password</a>
+                <a href="{{ route('teacher_password_change') }}" class="">Change Password</a>
             </div>
           </li>
           <!-- Menu Footer-->
@@ -89,9 +89,13 @@
           <ul class="treeview-menu">
             <!-- <li><a href="#"> Menu 1</a></li>
             <li><a href="#"> Menu 2</a></li> -->
+            @if(count($students) == 0)
+            <li><a href="#">No Assigned Section/Subject</a></li>
+            @else
             @foreach($students as $std)
             <li><a href="{{ route('get_student_class_subject', $std->id) }}">{{ ucwords($std->section->grade_level->name) }} - {{ ucwords($std->section->name) }} - {{ ucwords($std->subject->title) }}</a></li>
             @endforeach
+            @endif
           </ul>
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->

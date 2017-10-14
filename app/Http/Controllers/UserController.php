@@ -80,14 +80,17 @@ class UserController extends Controller
 			if(Auth::user()->privilege == 2) {
 
 				if(count($school_year) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 
 				if(count($quater) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 
 				if(count($semester) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 
@@ -109,14 +112,17 @@ class UserController extends Controller
 
 
 				if(count($school_year) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 
 				if(count($quater) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 
 				if(count($semester) == 0) {
+					Auth::logout();
 					return 'System is initializing by admin';
 				}
 

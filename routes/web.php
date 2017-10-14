@@ -441,6 +441,40 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+
+    // route to change password of the teacher
+    Route::get('password/change', [
+        'uses' => 'TeacherController@teacherPasswordChange',
+        'as' => 'teacher_password_change'
+    ]);
+
+    Route::post('password', [
+        'uses' => 'UserController@postChangePassword',
+        'as' => 'post_teacher_password_change'
+    ]);
+
+
+
+    // route to view profile of the teacher
+    Route::get('profile/view', [
+        'uses' => 'TeacherController@viewTeacherProfile',
+        'as' => 'view_teacher_profile'
+    ]);
+
+
+
+    // route to change profile picture of the teacher
+    Route::get('profile/picture/change', [
+        'uses' => 'TeacherController@teacherChangeProfilePicture',
+        'as' => 'teacher_change_profile_picture'
+    ]);
+
+    Route::post('profile/picture/change', [
+        'uses' => 'TeacherController@postTeacherChangeProfilePicture',
+        'as' => 'post_teacher_change_profile_picture'
+    ]);
+
+
     Route::get('students/subject/{id}/all', [
         'uses' => 'TeacherController@getStudentClassSubject',
         'as' => 'get_student_class_subject'

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Teacher Dashboard - Student Grading System @endsection
+@section('title') Teacher Profile - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Teacher Dashboard 
+            Teacher Profile 
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -32,6 +32,32 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+          <table class="table">
+            <tr>
+              <td>Name:</td>
+              <td>{{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}</td>
+            </tr>
+            <tr>
+              <td>Gender:</td>
+              <td>{{ Auth::user()->gender }}</td>
+            </tr>
+            <tr>
+              <td>Birthday:</td>
+              <td>{{ date('F d, Y', strtotime(Auth::user()->birthday)) }}</td>
+            </tr>
+            <tr>
+              <td>Address:</td>
+              <td>{{ Auth::user()->address }}</td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>{{ Auth::user()->email }}</td>
+            </tr>
+            <tr>
+              <td>Contact #:</td>
+              <td>{{ Auth::user()->mobile }}</td>
+            </tr>
+          </table>
         </div>
       </div>
 

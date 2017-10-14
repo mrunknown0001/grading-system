@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Teacher Dashboard - Student Grading System @endsection
+@section('title') Change Password - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Teacher Dashboard 
+            Change Password 
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -26,12 +26,27 @@
 
       <!-- Your Page Content Here -->
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-6">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+          <form action="{{ route('post_teacher_password_change') }}" method="POST" autocomplete="off">
+            <div class="form-group">
+              <input type="password" name="old_password" class="form-control" placeholder="Enter Old Password" />
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" class="form-control" placeholder="Enter New Password" />
+            </div>
+            <div class="form-group">
+              <input type="password" name="password_confirmation" class="form-control" placeholder="Re-Enter New Password" />
+            </div>
+            <div class="form-group">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+              <button class="btn btn-primary">Change Password</button>
+            </div>
+          </form>
         </div>
       </div>
 

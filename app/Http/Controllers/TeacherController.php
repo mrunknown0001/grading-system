@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
+use Illuminate\Http\UploadedFile;
+use Image;
+
 use App\User;
 use App\UserLog;
 use App\GradeLevel;
@@ -30,27 +33,23 @@ class TeacherController extends Controller
 
     public function __construct()
     {
-        
+
     }
 
 	private function getMyStudents()
 	{
-		$user = Auth::user();
+		// $user = Auth::user();
 
 
 		$asy = SchoolYear::where('status', 1)->first();
 
-        if(count($asy) != 1) {
+        if(count($asy) == 0) {
             return 'No Active School Year. Report to admin.';
         }
 
-		$students = SubjectAssign::where('teacher_id', $user->id)
+		$students = SubjectAssign::where('teacher_id', Auth::user()->id)
 								->where('school_year_id', $asy->id)
 								->get();
-
-        if(count($students) == 0) {
-            return 'Error. Let the admin finished the initialize setup.';
-        }
 
 		return $students;
 	}
@@ -63,6 +62,46 @@ class TeacherController extends Controller
 
 
     	return view('teacher.teacher-dashboard', ['students' => $students]);
+    }
+
+
+    // method use to change password the teacher
+    public function teacherPasswordChange()
+    {
+        $students = $this->getMyStudents();
+        return view('teacher.password-change', ['students' => $students]);
+    }
+
+
+    // method use to view teacher profile
+    public function viewTeacherProfile()
+    {
+        $students = $this->getMyStudents();
+
+        return view('teacher.teacher-view-profile', ['students' => $students]);
+    }
+
+
+
+    // method use to change profile picture of the teacher
+    public function teacherChangeProfilePicture()
+    {
+        $students = $this->getMyStudents();
+
+        return view('teacher.teacher-change-profile-picture', ['students' => $students]);
+    }
+
+    public function postTeacherChangeProfilePicture(Request $request)
+    {
+        // return 'image';
+        if( $request->hasFile('image') ) {
+           $file = $request->file('image');
+
+           $img = Auth::user()->user_id . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
+
+           return $img;
+
+        }
     }
 
 
