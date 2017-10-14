@@ -118,6 +118,7 @@
             <li><a href="{{ route('import_students') }}"> Batch Import Students</a></li>
             <li><a href="{{ route('get_add_student') }}"> Add Student</a></li>
             <li><a href="{{ route('get_view_all_students') }}"> View All Students</a></li>
+
           </ul>
         </li>
         <li class="treeview">

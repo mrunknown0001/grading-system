@@ -68,7 +68,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ URL::asset('uploads/profile/default.jpg') }}" class="img-circle" alt="Admin Image">
+          @if(count(Auth::user()->avatar) == 0)
+          <img src="{{ URL::asset('uploads/profile/default.jpg') }}" class="img-circle" alt="Teacher Image">
+          @else
+          <img src="{{ URL::asset('uploads/profile/' . Auth::user()->avatar->name) }}" class="img-circle" alt="Teacher Image">
+          @endif
         </div>
         <div class="pull-left info">
           <p>{{ ucwords(Auth::user()->firstname) }} {{ ucwords(Auth::user()->lastname) }}</p>

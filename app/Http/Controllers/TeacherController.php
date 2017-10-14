@@ -27,6 +27,7 @@ use App\ExamScore;
 use App\WrittenWorkNumber;
 use App\PerformanceTaskNumber;
 use App\ExamScoreNumber;
+use App\Avatar;
 
 class TeacherController extends Controller
 {
@@ -99,7 +100,32 @@ class TeacherController extends Controller
 
            $img = Auth::user()->user_id . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
 
-           return $img;
+           // return $img;
+           Image::make($file)->save(public_path('/uploads/profile/' . $img))->resize(500, 500);;
+
+
+           // check if the user already upload an image
+           $avatar = Avatar::whereUserId(Auth::user()->id)->first();
+
+            if(count($avatar) == 0) {
+               $avatar = new Avatar();
+               $avatar->user_id = Auth::user()->id;
+               $avatar->name = $img;
+               $avatar->save();
+            }
+            else {
+                $avatar->name = $img;
+                $avatar->save();
+            }
+
+
+            // user log
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = "Teacher Change Profile Picture";
+            $log->save();
+
+           return redirect()->route('teacher_change_profile_picture')->with('success', 'Sucessfully Change Your Profile Picture!');
 
         }
     }
