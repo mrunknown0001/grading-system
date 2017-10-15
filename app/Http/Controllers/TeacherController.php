@@ -325,7 +325,7 @@ class TeacherController extends Controller
 
 
         if(count($ww_number) == 0) {
-            return 'No Scores in Written Work';
+            return view('teacher.no-score-written-work', ['students' => $students, 'assign' => $assign]);
         }
 
     
@@ -514,7 +514,7 @@ class TeacherController extends Controller
         }
 
         if(count($ptn) == 0) {
-            return 'No Scores in Performance Task';
+            return view('teacher.no-score-performance-task', ['students' => $students, 'assign' => $assign]);
         }
     
         // get all scores in the quarter/sem using the id of the written work
@@ -702,7 +702,7 @@ class TeacherController extends Controller
         }
 
         if(count($exam) == 0) {
-            return 'No Scores in Exam';
+            return view('teacher.no-score-exam', ['students' => $students, 'assign' => $assign]);
         }
     
         // get all scores in the quarter/sem using the id of the written work

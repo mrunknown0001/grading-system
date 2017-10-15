@@ -136,9 +136,13 @@
 
             @endforeach
         </div>
-
+        
         </div>
+        <br><br>
+        <p><a href="{{ route('select_semester') }}">Click here to select semester...</a></p>
       </div>
+
+        
 
     </section>
     <!-- /.content -->

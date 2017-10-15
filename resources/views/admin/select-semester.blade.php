@@ -108,9 +108,9 @@
             @endforeach
           </div>
 
-
-
         </div>
+        <br><br>
+        <p><a href="{{ route('select_quarter') }}">Click here to select quarter...</a></p>
       </div>
 
     </section>
