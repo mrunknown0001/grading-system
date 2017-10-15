@@ -125,12 +125,12 @@
               </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#">Grade 7</a></li>
-                <li><a href="#">Grade 8</a></li>
-                <li><a href="#">Grade 9</a></li>
-                <li><a href="#">Grade 10</a></li>
-                <li><a href="#">Grade 11</a></li>
-                <li><a href="#">Grade 12</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 1]) }}">Grade 7</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 2]) }}">Grade 8</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 3]) }}">Grade 9</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 4]) }}">Grade 10</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 5]) }}">Grade 11</a></li>
+                <li><a href="{{ route('view_sections_grade_level', ['id' => 6]) }}">Grade 12</a></li>
               </ul>
             </li>
           </ul>

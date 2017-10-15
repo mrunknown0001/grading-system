@@ -1419,4 +1419,18 @@ class AdminController extends Controller
         return 'close school year';
     }
 
+
+
+    // method use to view sections of all grade level
+    public function viewSectionsGradeLevel($id = null) // id of the grade level
+    {
+        $sections = Section::whereLevel($id)->get();
+        $grade_level = GradeLevel::findorfail($id);
+
+
+        return view('admin.all-sections-grade-level', [ 'sections' => $sections, 'grade_level' => $grade_level]);
+
+
+    }
+
 }

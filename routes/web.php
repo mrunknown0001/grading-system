@@ -420,6 +420,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
 
 
+    // route to view all sections in grade level
+    Route::get('view/grade-level/{id}/sections', [
+        'uses' => 'AdminController@viewSectionsGradeLevel',
+        'as' => 'view_sections_grade_level'
+    ]);
+
+
+
+
 
     // route to finished or close school year
     Route::post('school-year/close', [

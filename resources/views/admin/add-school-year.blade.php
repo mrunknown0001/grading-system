@@ -64,5 +64,4 @@
 </div>
 <!-- ./wrapper -->
 
-</div>
 @endsection
