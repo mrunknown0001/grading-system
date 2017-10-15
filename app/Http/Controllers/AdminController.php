@@ -1411,4 +1411,12 @@ class AdminController extends Controller
 
     }
 
+
+
+    // method use to close school year and compute all grades and get the average and ranking of the students
+    public function postAdminCloseSchoolYear()
+    {
+        return 'close school year';
+    }
+
 }

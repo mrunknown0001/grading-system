@@ -76,6 +76,7 @@
         </div>
         <div class="pull-left info">
           <p>{{ ucwords(Auth::user()->firstname) }} {{ ucwords(Auth::user()->lastname) }}</p>
+          <p>ID: {{ Auth::user()->user_id }}</p>
         </div>
       </div>
 

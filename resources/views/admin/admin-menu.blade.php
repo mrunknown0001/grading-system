@@ -31,11 +31,11 @@
         </a>
         <ul class="dropdown-menu">
           <!-- Menu Body -->
-          <li class="text-center">
+          <!-- <li class="text-center">
             <div>
               <a href="#">Change Profile Picture</a>
             </div>
-          </li>
+          </li> -->
           <li class="text-center">
             <div>
                 <a href="{{ route('admin_profile') }}" class=""><span>View Profile</span></a>
@@ -118,7 +118,21 @@
             <li><a href="{{ route('import_students') }}"> Batch Import Students</a></li>
             <li><a href="{{ route('get_add_student') }}"> Add Student</a></li>
             <li><a href="{{ route('get_view_all_students') }}"> View All Students</a></li>
-
+            <li class="treeview">
+              <a href="#"> <span>View Students Per Section</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#">Grade 7</a></li>
+                <li><a href="#">Grade 8</a></li>
+                <li><a href="#">Grade 9</a></li>
+                <li><a href="#">Grade 10</a></li>
+                <li><a href="#">Grade 11</a></li>
+                <li><a href="#">Grade 12</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
         <li class="treeview">

@@ -419,6 +419,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         ]);
 
 
+
+
+    // route to finished or close school year
+    Route::post('school-year/close', [
+        'uses' => 'AdminController@postAdminCloseSchoolYear',
+        'as' => 'post_admin_close_school_year'
+    ]);
     
 
 });

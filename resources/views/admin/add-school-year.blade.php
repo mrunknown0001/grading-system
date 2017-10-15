@@ -49,7 +49,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-6">
-          <button class="btn btn-warning">Close School Year</button>
+          <button class="btn btn-warning" data-toggle="modal" data-target="#close-school-year">Close School Year</button>
         </div>
       </div>
       <p><i>Note: You can't Add a new School Year if there is an Active School Year.</i></p>
@@ -59,6 +59,7 @@
   </div>
   <!-- /.content-wrapper -->
 
+  @include('admin.includes.modal-close-school-year')
   @include('includes.footer')
 </div>
 <!-- ./wrapper -->
