@@ -1459,6 +1459,9 @@ class AdminController extends Controller
         // search for students
         $students = StudentInfo::where('section', $sectionid)->where('school_year', $asy->id)->get();
 
+
+        // average and final grade of the students if necessary
+
         return view('admin.admin-view-section-students', ['students' => $students, 'section' => $section]);
 
     }
