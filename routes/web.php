@@ -362,6 +362,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'select_active_quarter'
         ]);
 
+
     /*
      * route to finish selected quarter
      */
@@ -372,7 +373,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
 
     // reselect quarter
-    // here
+    Route::get('reselect-quarter/{id}', [
+        'uses' => 'AdminController@adminReselectQuarter',
+        'as' => 'admin_reselect_quater'
+    ]);
 
     /*
      * route to select semester

@@ -1229,6 +1229,31 @@ class AdminController extends Controller
     }
 
 
+
+    // method use to reselect quarter
+    public function adminReselectQuarter($id = null)
+    {
+        $quarter = Quarter::findorfail($id);
+
+        $active_quarter = Quarter::whereStatus(1)->first();
+        if(count($active_quarter) > 0) {
+            $active_quarter->status = 0;
+            $active_quarter->save();
+        }
+
+        $quarter->status = 1;
+        $quarter->finish = 0;
+        $quarter->save();
+
+        // userlog
+        // uer log
+        // uerlog
+        // 
+
+        return redirect()->route('select_quarter')->with('success', 'Quarter Reselected');
+    }
+
+
     /*
      * selectSemester method use to select semester
      */
@@ -1268,7 +1293,7 @@ class AdminController extends Controller
             // Add user log for activating quarter
             $log = new UserLog();
             $log->user_id = Auth::user()->id;
-            $log->action = 'Activated ' . ucwords($semester->name) . ' quarter of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
+            $log->action = 'Activated ' . ucwords($semester->name) . ' semester of ' . $check_school_year->from . ' - ' . $check_school_year->to . ' school year';
             $log->save();
 
             return redirect()->route('select_semester');

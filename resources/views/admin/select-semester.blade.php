@@ -95,7 +95,7 @@
                                 <a href="{{ route('select_active_semester', $sem->id) }}" class="btn btn-primary btn-xs">Select</a>
                                 @break
                             @elseif($sem->status == 1)
-                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $sem->id }}-finish">Finish</button>
+                                <!-- <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $sem->id }}-finish">Finish</button> -->
                                 @include('admin.includes.modal-finish-semester')
                                 @break
                             @endif

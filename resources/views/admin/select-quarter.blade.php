@@ -87,7 +87,8 @@
             <div class="col-lg-3 col-md-6">
                 <p class="text-center">
                     @if($q->finish == 1)
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#-select2">Select Again</button>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#{{ $q->id }}-reselect">Select Again</button>
+                        @include('admin.includes.modal-reselect-quarter')
                     @else
                         @if($q->id == 1 && $q->finish == 0)
                             @if($q->status == 0)
@@ -124,7 +125,7 @@
                                 <a href="{{ route('select_active_quarter', $q->id) }}" class="btn btn-primary btn-xs">Select</a>
                                 @break
                             @elseif($q->status == 1)
-                                <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $q->id }}-finish">Finish</button>
+                                <!-- <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#{{ $q->id }}-finish">Finish</button> -->
                                 @include('admin.includes.modal-finish-quarter')
                                 @break
                             @endif

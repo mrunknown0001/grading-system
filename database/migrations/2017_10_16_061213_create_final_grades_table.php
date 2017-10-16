@@ -13,7 +13,7 @@ class CreateFinalGradesTable extends Migration
      */
     public function up()
     {
-        Schema::create('finalgrades', function (Blueprint $table) {
+        Schema::create('final_grades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_id', 15); // student number of the students
             $table->integer('school_year_id');
