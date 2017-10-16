@@ -12,13 +12,15 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            No Exam Score 
+            No Exam Score in {{ ucwords($assign->subject->title) }} | <a href="{{ route('get_student_class_subject', $assign->id) }}">{{ ucwords($assign->section->grade_level->name) }} - {{ ucwords($assign->section->name) }}</a>
        
       </h1>
-<!--       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>-->
+      
+      <hr>
+      <h1>Go to <a href="{{ route('get_student_class_subject', $assign->id) }}">{{ ucwords($assign->section->grade_level->name) }} - {{ ucwords($assign->section->name) }} - {{ ucwords($assign->subject->title) }}</a></h1>
+       
+      </h1>
+
     </section>
 
     <!-- Main content -->

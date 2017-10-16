@@ -435,6 +435,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'uses' => 'AdminController@postAdminCloseSchoolYear',
         'as' => 'post_admin_close_school_year'
     ]);
+
+
+
+    // route students per section in grade level by admin
+    Route::get('view/grade-level/{levelid}/section/{sectionid}/students', [
+        'uses' => 'AdminController@adminViewSectionStudents',
+        'as' => 'admin_view_section_students'
+    ]);
     
 
 });

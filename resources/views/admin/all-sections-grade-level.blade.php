@@ -17,7 +17,7 @@
     </section>
     <section class="content">
       @foreach($sections as $sec)
-      <h3><a href="#">{{ ucwords($sec->name) }}</a></h3>
+      <h3><a href="{{ route('admin_view_section_students', ['levelid' => $grade_level->id, 'sectionid' => $sec->id]) }}">{{ ucwords($sec->name) }}</a></h3>
       @endforeach
 
       @if($sections->count() == 0)

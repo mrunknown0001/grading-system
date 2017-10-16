@@ -1416,7 +1416,21 @@ class AdminController extends Controller
     // method use to close school year and compute all grades and get the average and ranking of the students
     public function postAdminCloseSchoolYear()
     {
-        return 'close school year';
+        // check if the quarter is 4th and semester is second
+        $quarter = Quarter::whereName('forth')->whereStatus(1)->first();
+        $semester = Semester::whereName('second')->whereStatus(1)->first();
+
+        if(count($quarter) == 0 || count($semester) == 0) {
+            return redirect()->route('add_school_year')->with('notice', 'It must be on 4th Quarter and 2nd Semester to close the school year.');
+        }
+
+
+        // compute all grades
+        // save grades to final grades
+        // reset the quater to 0
+        // reset the semester to 0
+        // set no activet school year
+        
     }
 
 
@@ -1430,6 +1444,22 @@ class AdminController extends Controller
 
         return view('admin.all-sections-grade-level', [ 'sections' => $sections, 'grade_level' => $grade_level]);
 
+
+    }
+
+
+
+    // method ot view students on sections per grade level
+    public function adminViewSectionStudents($levelid = null, $sectionid = null)
+    {
+        $asy = SchoolYear::whereStatus(1)->first(); // active school year
+        $level = GradeLevel::findorfail($levelid);
+        $section = Section::findorfail($sectionid);
+
+        // search for students
+        $students = StudentInfo::where('section', $sectionid)->where('school_year', $asy->id)->get();
+
+        return view('admin.admin-view-section-students', ['students' => $students, 'section' => $section]);
 
     }
 
