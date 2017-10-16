@@ -605,6 +605,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
     ]);
 
 
+    // route to view profile of the stuent
+    Route::get('profile', [
+        'uses' => 'StudentController@viewProfile',
+        'as' => 'student_view_profile'
+    ]);
+
+
 
     // route to show written scores of the student
     Route::get('score/written-works/{year_id}/{section}/{subject}/{student_number}/view', [

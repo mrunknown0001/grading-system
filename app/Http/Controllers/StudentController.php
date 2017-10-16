@@ -183,4 +183,13 @@ class StudentController extends Controller
 
         return view('student.student-view-exam-score', ['subject' => $subject, 'section' => $section, 'exam' => $exam, 'scores' => $scores]);
     }
+
+
+
+
+    // method to view profile of students
+    public function viewProfile()
+    {
+        return view('student.student-view-profile');
+    }
 }

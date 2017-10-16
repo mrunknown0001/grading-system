@@ -45,7 +45,7 @@
           </li>
           <li class="text-center">
             <div>
-                <a href="#" class=""><span>View Profile</span></a>
+                <a href="{{ route('student_view_profile') }}" class=""><span>View Profile</span></a>
             </div>
           </li>
           <li class="text-center">
@@ -112,7 +112,7 @@
             <li><a href="#"> Menu 2</a></li>
           </ul>
         </li> -->
-        <li><a href="#"><i class="fa fa-circle"></i> <span>Final Grades</span></a></li>
+        <li><a href="#"><i class="fa fa-circle"></i> <span>My Grades</span></a></li>
 
         <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li>
       </ul>
