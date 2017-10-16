@@ -32,6 +32,36 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+          <table class="table">
+            <tr>
+              <td>Student Number:</td>
+              <td>{{ Auth::user()->user_id }}</td>
+            </tr>
+            <tr>
+              <td>Name:</td>
+              <td>{{ ucwords(Auth::user()->firstname . ' ' . Auth::user()->lastname) }}</td>
+            </tr>
+            <tr>
+              <td>Birthday:</td>
+              <td>{{ date('F d, Y', strtotime(Auth::user()->birthday)) }}</td>
+            </tr>
+            <tr>
+              <td>Gender:</td>
+              <td>{{ ucwords(Auth::user()->gender) }}</td>
+            </tr>
+            <tr>
+              <td>Address:</td>
+              <td>{{ ucwords(Auth::user()->address) }}</td>
+            </tr>
+            <tr>
+              <td>Emai:</td>
+              <td>{{ Auth::user()->email }}</td>
+            </tr>
+            <tr>
+              <td>Mobile Number:</td>
+              <td>{{ Auth::user()->mobile }}</td>
+            </tr>
+          </table>
         </div>
       </div>
 
