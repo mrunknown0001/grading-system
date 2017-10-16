@@ -59,6 +59,7 @@
 						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
 					</div>
 				</form>
+				<p><a href="#">Forgot Password?</a></p>
 			</div>
 		</div>
 	</div>
