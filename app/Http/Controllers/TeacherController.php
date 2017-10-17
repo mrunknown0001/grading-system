@@ -98,7 +98,7 @@ class TeacherController extends Controller
         if( $request->hasFile('image') ) {
            $file = $request->file('image');
 
-           $img = Auth::user()->user_id . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
+           $img = Auth::user()->user_id . '_' . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
 
            // return $img;
            Image::make($file)->save(public_path('/uploads/profile/' . $img))->resize(500, 500);;

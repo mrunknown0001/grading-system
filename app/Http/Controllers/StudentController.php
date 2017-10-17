@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 use DB;
 
+use Illuminate\Http\UploadedFile;
+use Image;
+
 use App\User;
 use App\UserLog;
 use App\GradeLevel;
@@ -24,6 +27,7 @@ use App\ExamScore;
 use App\WrittenWorkNumber;
 use App\PerformanceTaskNumber;
 use App\ExamScoreNumber;
+use App\Avatar;
 
 class StudentController extends Controller
 {
@@ -186,10 +190,78 @@ class StudentController extends Controller
 
 
 
+    // method use to view grades of the student
+    public function studentViewGrades()
+    {
+        return view('student.student-view-grades');
+    }
+
+
 
     // method to view profile of students
     public function viewProfile()
     {
         return view('student.student-view-profile');
     }
+
+
+
+
+    // method use to view change password
+    public function studentChangePassword()
+    {
+        return view('student.student-change-password');
+    }
+
+
+
+
+
+    // method use to change profile picture of students
+    public function studentProfilePictureChange()
+    {
+        return view('student.student-change-profile-picture');
+    }
+
+
+
+    // method use to change password of the student
+    public function postProfilePictureChange(Request $request)
+    {
+        // return 'image';
+        if( $request->hasFile('image') ) {
+           $file = $request->file('image');
+
+           $img = Auth::user()->user_id . '_' . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
+
+           // return $img;
+           Image::make($file)->save(public_path('/uploads/profile/' . $img))->resize(500, 500);;
+
+
+           // check if the user already upload an image
+           $avatar = Avatar::whereUserId(Auth::user()->id)->first();
+
+            if(count($avatar) == 0) {
+               $avatar = new Avatar();
+               $avatar->user_id = Auth::user()->id;
+               $avatar->name = $img;
+               $avatar->save();
+            }
+            else {
+                $avatar->name = $img;
+                $avatar->save();
+            }
+
+
+            // user log
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = "Teacher Change Profile Picture";
+            $log->save();
+
+           return redirect()->route('student_profile_picture_change')->with('success', 'Sucessfully Change Your Profile Picture!');
+
+        }
+    }
+
 }

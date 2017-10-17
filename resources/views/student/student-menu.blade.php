@@ -40,7 +40,7 @@
           <!-- Menu Body -->
           <li class="text-center">
             <div>
-              <a href="#">Change Profile Picture</a>
+              <a href="{{ route('student_profile_picture_change') }}">Change Profile Picture</a>
             </div>
           </li>
           <li class="text-center">
@@ -51,7 +51,7 @@
           <li class="text-center">
 
             <div>
-                <a href="#" class="">Change Password</a>
+                <a href="{{ route('student_change_password') }}" class="">Change Password</a>
             </div>
           </li>
           <!-- Menu Footer-->
@@ -75,7 +75,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ URL::asset('uploads/profile/default.jpg') }}" class="img-circle" alt="Admin Image">
+          @if(count(Auth::user()->avatar) == 0)
+          <img src="{{ URL::asset('uploads/profile/default.jpg') }}" class="img-circle" alt="Teacher Image">
+          @else
+          <img src="{{ URL::asset('uploads/profile/' . Auth::user()->avatar->name) }}" class="img-circle" alt="Teacher Image">
+          @endif
         </div>
         <div class="pull-left info">
           <p>{{ ucwords(Auth::user()->firstname) }} {{ ucwords(Auth::user()->lastname) }}</p>
@@ -112,7 +116,7 @@
             <li><a href="#"> Menu 2</a></li>
           </ul>
         </li> -->
-        <li><a href="#"><i class="fa fa-circle"></i> <span>My Grades</span></a></li>
+        <li><a href="{{ route('student_view_grades') }}"><i class="fa fa-circle"></i> <span>My Grades</span></a></li>
 
         <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li>
       </ul>

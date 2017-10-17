@@ -612,6 +612,32 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
     ]);
 
 
+    // route to change password student
+    Route::get('password/change', [
+        'uses' => 'StudentController@studentChangePassword',
+        'as' => 'student_change_password'
+    ]);
+
+
+    // post route change password
+    Route::post('password/change', [
+        'uses' => 'UserController@postChangePassword',
+        'as' => 'post_student_change_password'
+    ]);
+
+
+
+    // route to change profile picture of students
+    Route::get('profile/picture/change', [
+        'uses' => 'StudentController@studentProfilePictureChange',
+        'as' => 'student_profile_picture_change'
+    ]);
+
+    Route::post('profile/picture/change', [
+        'uses' => 'StudentController@postProfilePictureChange',
+        'as' => 'post_profile_picture_change'
+    ]);
+
 
     // route to show written scores of the student
     Route::get('score/written-works/{year_id}/{section}/{subject}/{student_number}/view', [
@@ -631,6 +657,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
     Route::get('score/exam/{year_id}/{section}/{subject}/{student_number}/view', [
         'uses' => 'StudentController@viewExamScore',
         'as' => 'student_view_exams'
+    ]);
+
+
+    // route to view grade of the student
+    Route::get('my-grades/view', [
+        'uses' => 'StudentController@studentViewGrades',
+        'as' => 'student_view_grades'
     ]);
 });
 /*********************************************
