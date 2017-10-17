@@ -193,7 +193,32 @@ class StudentController extends Controller
     // method use to view grades of the student
     public function studentViewGrades()
     {
-        return view('student.student-view-grades');
+
+        $asy = SchoolYear::whereStatus(1)->first();
+        $quarter = Quarter::whereStatus(1)->first();
+        $semester = Semester::whereStatus(1)->first();
+
+        $finished_quarter = Quarter::whereFinish(1)->last();
+        $finished_sem = Semester::whereFinish(1)->last();
+
+        $section_id = Auth::user()->info->section1->id;
+        $level_id = Auth::user()->info->section1->grade_level->id;
+        $subjects = Auth::user()->info->section1->grade_level->subjects;
+
+
+        // get all raw grades per subject per quarter or semester
+        // for senior high
+        if($level_id == 5 || $level_id ==6) {
+
+        }
+        else {
+            // for first quarter
+            
+            
+        }
+
+
+        return view('student.student-view-grades', ['subjects' => $subjects]);
     }
 
 
