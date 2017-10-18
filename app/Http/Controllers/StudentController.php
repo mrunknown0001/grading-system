@@ -198,8 +198,17 @@ class StudentController extends Controller
         $quarter = Quarter::whereStatus(1)->first();
         $semester = Semester::whereStatus(1)->first();
 
-        $finished_quarter = Quarter::whereFinish(1)->last();
-        $finished_sem = Semester::whereFinish(1)->last();
+        $finished_quarter = Quarter::whereFinish(1)->first();
+        $finished_sem = Semester::whereFinish(1)->first();
+
+        $first_quarter = Quarter::findorfail(1);
+        $second_quarter = Quarter::findorfail(2);
+        $third_quarter = Quarter::findorfail(3);
+        $fourth_quarter = Quarter::findorfail(4);
+
+        $first_sem = Semester::findorfail(1);
+        $second_sem = Semester::findorfail(2);
+
 
         $section_id = Auth::user()->info->section1->id;
         $level_id = Auth::user()->info->section1->grade_level->id;
@@ -211,8 +220,35 @@ class StudentController extends Controller
         if($level_id == 5 || $level_id ==6) {
 
         }
+        // for junior high
         else {
             // for first quarter
+            if($first_quarter->finish == 1) {
+                // compute grade here
+                // get all raw scores and compute
+                // get all written work in first quarter
+                foreach($subjects as $sub) {
+                    // total subject total in first quarter\
+                    $ww_scores[] = WrittenWorkScore::where('school_year_id', $asy->id)
+                                            ->where('quarter_id', 1)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->get();
+
+
+                }
+                $first_quarter_total_ww = 0;
+                foreach($ww_scores as $scores) {
+                    foreach($scores as $s) {
+                        $first_quarter_total_ww = $first_quarter_total_ww + $s->score;
+                    }
+                }
+
+                return $first_quarter_total_ww;
+                // return $ww_scores;
+            }
+            
             
             
         }

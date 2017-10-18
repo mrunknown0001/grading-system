@@ -48,7 +48,7 @@
                   <tr>
                       @if($x == $score->written_work_number)
                       <td>{{ $x }}</td>
-                      <td>{{ $score->score }}/{{ $ww_number->total }}</td>
+                      <td>{{ $score->score }}/{{ $score->total }}</td>
 
                       @endif
                   </tr>

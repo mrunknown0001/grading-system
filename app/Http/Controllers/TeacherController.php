@@ -249,27 +249,51 @@ class TeacherController extends Controller
             $wwn->section_id = $section->id;
             $wwn->subject_id = $subject->id;
             $wwn->total = $total;
+            $wwn->number = 1;
             $wwn->save();
             
         }
+        else {
 
-        // increase the number of the written work number
-        $wwn->number = $wwn->number + 1;
-        $wwn->total = $total;
-        $wwn->save();
-
+            // increase the number of the written work number
+            $wwn->number = $wwn->number + 1;
+            $wwn->total = $wwn->total + $total;
+            $wwn->save();
+        }
         // set array for score together with student id of the student
         foreach($section->students as $std) {
-            // 
-            $score[] = [
-                'student_id' => $std->id,
-                'student_number' => $std->user->user_id,
-                'written_work_number' => $wwn->number,
-                'written_work_id' => $wwn->id,
-                'score' => $request[$std->user_id],
-                'total' => $total
+            if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
 
-            ];
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'semester_id' => $active_sem->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'written_work_number' => $wwn->number,
+                    'written_work_id' => $wwn->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+
+                ];
+            }
+            else {
+
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'quarter_id' => $active_quarter->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'written_work_number' => $wwn->number,
+                    'written_work_id' => $wwn->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+
+                ];
+            }
         }
 
         // insert score in written work scores table
@@ -441,27 +465,57 @@ class TeacherController extends Controller
             $ptn->section_id = $section->id;
             $ptn->subject_id = $subject->id;
             $ptn->total = $total;
+            $ptn->number = 1;
             $ptn->save();
             
         }
+        else {
+            // increase the number of the written work number
+            $ptn->number = $ptn->number + 1;
+            $ptn->total = $total;
+            $ptn->save();
 
-        // increase the number of the written work number
-        $ptn->number = $ptn->number + 1;
-        $ptn->total = $total;
-        $ptn->save();
+        }
+
+
 
         // set array for score together with student id of the student
         foreach($section->students as $std) {
-            // 
-            $score[] = [
-                'student_id' => $std->id,
-                'student_number' => $std->user->user_id,
-                'performance_task_number' => $ptn->number,
-                'performance_task_id' => $ptn->id,
-                'score' => $request[$std->user_id],
-                'total' => $total
 
-            ];
+            if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
+
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'semester_id' => $active_sem->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'performance_task_number' => $ptn->number,
+                    'performance_task_id' => $ptn->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+ 
+                ];
+            }
+            else {
+
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'quarter_id' => $active_quarter->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'performance_task_number' => $ptn->number,
+                    'performance_task_id' => $ptn->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+
+                ];
+            }
+
+
         }
 
         // insert score in written work scores table
