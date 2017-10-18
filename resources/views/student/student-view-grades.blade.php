@@ -51,7 +51,7 @@
           </table>
           
           @else 
-          <table class="table ">
+          <table class="table table-hover">
             <thead>
               <tr>
                 <th><strong>Subjects</strong></th>
@@ -67,10 +67,60 @@
               @foreach($subjects as $sub)
               <tr>
                 <td><strong>{{ $sub->title }}</strong></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  @if(count($fqg) != 0)
+                    @foreach($fqg as $f)
+                      @if($f['subject_id'] == $sub->id)
+                        @if($f['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @if(count($sqg) != 0)
+                    @foreach($sqg as $s)
+                      @if($s['subject_id'] == $sub->id)
+                        @if($s['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @if(count($tqg) != 0)
+                    @foreach($tqg as $t)
+                      @if($t['subject_id'] == $sub->id)
+                        @if($t['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($t['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                  
+                </td>
+                <td>
+                  
+                  @if(count($foqg) != 0)
+                    @foreach($foqg as $f)
+                      @if($f['subject_id'] == $sub->id)
+                        @if($f['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
                 <td></td>
                 <td></td>
               </tr>

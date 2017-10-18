@@ -682,27 +682,53 @@ class TeacherController extends Controller
             $exam->section_id = $section->id;
             $exam->subject_id = $subject->id;
             $exam->total = $total;
+            $exam->number = 1;
             $exam->save();
             
         }
-
-        // increase the number of the written work number
-        $exam->number = $exam->number + 1;
-        $exam->total = $total;
-        $exam->save();
-
+        else {
+            // increase the number of the written work number
+            $exam->number = $exam->number + 1;
+            $exam->total = $total;
+            $exam->save();
+        }
         // set array for score together with student id of the student
         foreach($section->students as $std) {
-            // 
-            $score[] = [
-                'student_id' => $std->id,
-                'student_number' => $std->user->user_id,
-                'exam_number' => $exam->number,
-                'exam_id' => $exam->id,
-                'score' => $request[$std->user_id],
-                'total' => $total
 
-            ];
+
+            if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
+
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'semester_id' => $active_sem->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'exam_number' => $exam->number,
+                    'exam_id' => $exam->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+ 
+                ];
+            }
+            else {
+
+                $score[] = [
+                    'school_year_id' => $active_school_year->id,
+                    'quarter_id' => $active_quarter->id,
+                    'section_id' => $section->id,
+                    'subject_id' => $subject->id,
+                    'student_id' => $std->id,
+                    'student_number' => $std->user->user_id,
+                    'exam_number' => $exam->number,
+                    'exam_id' => $exam->id,
+                    'score' => $request[$std->user_id],
+                    'total' => $total
+
+                ];
+
+            }
         }
 
         // insert score in written work scores table
