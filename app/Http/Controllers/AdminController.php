@@ -1449,12 +1449,21 @@ class AdminController extends Controller
             return redirect()->route('add_school_year')->with('notice', 'It must be on 4th Quarter and 2nd Semester to close the school year.');
         }
 
+        $quarter->finish = 1;
+
+        $semester->finish = 1;
+        
+        if($quarter->save() && $semester->save()) {
+            return redirect()->route('add_school_year')->with('success', 'Successfully Close School Year');
+        }
 
         // compute all grades
         // save grades to final grades
         // reset the quater to 0
         // reset the semester to 0
         // set no activet school year
+        // 
+        
         
     }
 

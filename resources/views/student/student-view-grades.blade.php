@@ -35,20 +35,7 @@
 
           @if(Auth::user()->info->section1->grade_level->id == 5 ||
           Auth::user()->info->section1->grade_level->id == 6)
-          <table>
-            <thead>
-              <tr>
-                <th>First Semester</th>
-                <th>Second Semester</th>
-                <th>Final</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                
-              </tr>
-            </tbody>
-          </table>
+
           
           @else 
           <table class="table table-hover">
