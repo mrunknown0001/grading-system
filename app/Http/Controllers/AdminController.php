@@ -1452,6 +1452,8 @@ class AdminController extends Controller
         $quarter->finish = 1;
 
         $semester->finish = 1;
+
+
         
         if($quarter->save() && $semester->save()) {
             return redirect()->route('add_school_year')->with('success', 'Successfully Close School Year');
@@ -1497,6 +1499,20 @@ class AdminController extends Controller
         // average and final grade of the students if necessary
 
         return view('admin.admin-view-section-students', ['students' => $students, 'section' => $section]);
+
+    }
+
+
+    // method use to start new school year
+    public function startSchoolYear()
+    {
+        // make school year finish 1
+        $sy = SchoolYear::whereStatus(1)->first();
+        $sy->finish = 1;
+        $sy->status = 0;
+        $sy->save();
+
+        return redirect()->route('add_school_year')->with('success', 'You Can Now Start New School Year');
 
     }
 

@@ -25,18 +25,24 @@
       <!-- Your Page Content Here -->
       <hr>
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6 col-md-offset-3">
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+
           <form action="{{ route('post_add_school_year') }}" method="POST" class="">
             <div class="form-group">
 
               <select name="school_year" class="form-control">
               <option value="">Select School Year</option>
               <option value="{{ date('Y') }}">{{ date('Y') }} - {{ date('Y')+1 }}</option>
+              <option value="{{ date('Y') + 1 }}">{{ date('Y') + 1 }} - {{ date('Y')+2 }}</option>
               </select>
 
             </div>
@@ -47,9 +53,11 @@
           </form>
           <hr>
         </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-6">
-          <button class="btn btn-warning" data-toggle="modal" data-target="#close-school-year">Close School Year</button>
+        <div class="col-md-4">
+          <p class="text-center"><button class="btn btn-warning" data-toggle="modal" data-target="#close-school-year">Close School Year</button></p>
+        </div>
+        <div class="col-md-4">
+          <p class="text-center"><button class="btn btn-success" data-toggle="modal" data-target="#start-school-year">Start Next School Year</button></p>
         </div>
       </div>
       <p><i>Note: You can't Add a new School Year if there is an Active School Year.</i></p>
@@ -60,6 +68,7 @@
   <!-- /.content-wrapper -->
 
   @include('admin.includes.modal-close-school-year')
+  @include('admin.includes.modal-start-next-school-year')
   @include('includes.footer')
 </div>
 <!-- ./wrapper -->

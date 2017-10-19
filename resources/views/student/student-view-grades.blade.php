@@ -47,11 +47,17 @@
                 <th>Third Quarter</th>
                 <th>Fourth Quarter</th>
                 <th>Final</th>
-                <th>GWA</th>
+                <!-- <th>GWA</th> -->
               </tr>
             </thead>
             <tbody>
               @foreach($subjects as $sub)
+              <?php
+              $g1 = 0;
+              $g2 = 0;
+              $g3 = 0;
+              $g4 = 0;
+              ?>
               <tr>
                 <td><strong>{{ $sub->title }}</strong></td>
                 <td>
@@ -61,7 +67,7 @@
                         @if($f['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
                         @endif
                       @endif
                     @endforeach
@@ -74,7 +80,7 @@
                         @if($s['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
                         @endif
                       @endif
                     @endforeach
@@ -87,7 +93,7 @@
                         @if($t['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($t['grade']) }}</strong>
+                        <strong>{{ $g3 = \App\Http\Controllers\StudentController::getGrade($t['grade']) }}</strong>
                         @endif
                       @endif
                     @endforeach
@@ -102,14 +108,16 @@
                         @if($f['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <strong>{{ $g4 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
                         @endif
                       @endif
                     @endforeach
                   @endif
                 </td>
-                <td></td>
-                <td></td>
+                <td>
+                  {{ $final = ($g1 + $g2 + $g3 + $g4)/4 }}
+                </td>
+                <!-- <td></td> -->
               </tr>
               @endforeach
             </tbody>

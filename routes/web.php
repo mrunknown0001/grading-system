@@ -449,6 +449,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     ]);
     
 
+    // route to start new school year
+    Route::post('start/schoo-year', [
+        'uses' => 'AdminController@startSchoolYear',
+        'as' => 'admin_start_school_year'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP ADMIN **********
@@ -664,6 +670,13 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
     Route::get('my-grades/view', [
         'uses' => 'StudentController@studentViewGrades',
         'as' => 'student_view_grades'
+    ]);
+
+
+    // route to view old grades
+    Route::get('previews-grades/view', [
+        'uses' => 'StudentController@viewPreviewsGrades',
+        'as' => 'student_view_previews_grades'
     ]);
 });
 /*********************************************

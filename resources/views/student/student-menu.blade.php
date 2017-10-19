@@ -118,7 +118,7 @@
         </li> -->
         <li><a href="{{ route('student_view_grades') }}"><i class="fa fa-circle"></i> <span>My Grades</span></a></li>
 
-        <li><a href="#"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li>
+        <li><a href="{{ route('student_view_previews_grades') }}"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

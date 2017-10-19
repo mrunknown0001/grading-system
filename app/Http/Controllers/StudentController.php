@@ -954,4 +954,12 @@ class StudentController extends Controller
         }
     }
 
+
+    // method use to view old grades of students
+    public function viewPreviewsGrades()
+    {
+        $sy = SchoolYear::get();
+
+        return view('student.student-view-previews-grades', ['sy' => $sy]);
+    }
 }
