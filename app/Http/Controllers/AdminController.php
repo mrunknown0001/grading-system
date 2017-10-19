@@ -1512,6 +1512,13 @@ class AdminController extends Controller
         $sy->status = 0;
         $sy->save();
 
+        Quarter::whereFinish(1)->update(['finish' => 0]);
+        Quarter::whereStatus(1)->update(['status' => 0]);
+        Semester::whereFinish(1)->update(['finish' => 0]);
+        Semester::whereStatus(1)->update(['status' => 0]);
+
+
+
         return redirect()->route('add_school_year')->with('success', 'You Can Now Start New School Year');
 
     }
