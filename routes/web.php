@@ -455,6 +455,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'admin_start_school_year'
     ]);
 
+
+
+    // route to compute grade of students per section
+    Route::get('compute/{section_id}', [
+        'uses' => 'Admincontroller@adminComputeGrades',
+        'as' => 'admin_compute_grades'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP ADMIN **********

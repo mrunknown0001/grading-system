@@ -8,6 +8,9 @@ use DB;
 use Excel;
 use Illuminate\Support\Facades\Input;
 
+use Illuminate\Http\UploadedFile;
+use Image;
+
 use App\User;
 use App\UserLog;
 use App\GradeLevel;
@@ -19,6 +22,13 @@ use App\Semester;
 use App\StudentInfo;
 use App\StudentImport;
 use App\SubjectAssign;
+use App\WrittenWorkScore;
+use App\PerformanceTaskScore;
+use App\ExamScore;
+use App\WrittenWorkNumber;
+use App\PerformanceTaskNumber;
+use App\ExamScoreNumber;
+use App\Avatar;
 
 class AdminController extends Controller
 {
@@ -1522,5 +1532,51 @@ class AdminController extends Controller
         return redirect()->route('add_school_year')->with('success', 'You Can Now Start New School Year');
 
     }
+
+
+
+
+
+
+
+
+    // compute grades of the students
+    // per section
+    public function adminComputeGrades($section_id = null)
+    {
+
+        $asy = SchoolYear::whereStatus(1)->first();
+        $quarter = Quarter::whereStatus(1)->first();
+        $semester = Semester::whereStatus(1)->first();
+
+        $first_quarter = Quarter::findorfail(1);
+        $second_quarter = Quarter::findorfail(2);
+        $third_quarter = Quarter::findorfail(3);
+        $fourth_quarter = Quarter::findorfail(4);
+
+        $first_sem = Semester::findorfail(1);
+        $second_sem = Semester::findorfail(2);
+
+
+        // check if forth quarter and second sem is finished
+        if($fourth_quarter->finish != 1 && $second_sem->finish != 1) {
+            return redirect()->back()->with('notice', 'Forth Quarter and Second Semester Must be finished first before you can compute grades');
+        }
+
+
+        $section = Section::findorfail($section_id);
+
+        $level_id = $section->grade_level->id;
+        $subjects = $section->grade_level->subjects;
+
+
+        // get all raw grades per subject per quarter or semester
+        // for senior high
+
+        return 'Insert All Grades in Database in this subject.';
+ 
+
+    }
+
 
 }

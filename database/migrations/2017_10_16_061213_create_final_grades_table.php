@@ -15,18 +15,13 @@ class CreateFinalGradesTable extends Migration
     {
         Schema::create('final_grades', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id', 15); // student number of the students
+            $table->string('student_id', 15); // student number of the students
             $table->integer('school_year_id');
             $table->integer('grade_level_id');
             $table->integer('subject_id');
-            $table->integer('first_quarter')->nullable();
-            $table->integer('second_quarter')->nullable();
-            $table->integer('third_quarter')->nullable();
-            $table->integer('fourth_quarter')->nullable();
-            $table->integer('first_sem')->nullable();
-            $table->integer('second_sem')->nullable();            
-            $table->integer('final_grade')->nullable();
-            $table->decimal('gwa', 1, 2)->nullable(); // general weighted average
+            $table->intger('quarter_id')->nullable();
+            $table->integer('semester_id')->nullalbe();          
+            $table->integer('grade')->nullable();
             $table->timestamps();
         });
     }
