@@ -19,7 +19,7 @@ class CreateFinalGradesTable extends Migration
             $table->integer('school_year_id');
             $table->integer('grade_level_id');
             $table->integer('subject_id');
-            $table->intger('quarter_id')->nullable();
+            $table->integer('quarter_id')->nullable();
             $table->integer('semester_id')->nullalbe();          
             $table->integer('grade')->nullable();
             $table->timestamps();

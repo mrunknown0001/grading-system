@@ -91,7 +91,7 @@
       <ul class="sidebar-menu">
         <li class="header">Menu</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="treeview">
+<!--         <li class="treeview">
           <a href="#">
             <i class="fa fa-book fa-fw"></i> <span>My Subjects</span>
             <span class="pull-right-container">
@@ -103,7 +103,7 @@
             <li><a href="{{ route('student_subject_view', $sub->id) }}"> {{ $sub->title }}</a></li>
             @endforeach
           </ul>
-        </li>
+        </li> -->
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
 <!--         <li class="treeview">
           <a href="#"><i class="fa fa-graduation-cap"></i> <span>My Students</span>

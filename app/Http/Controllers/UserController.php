@@ -13,6 +13,7 @@ use App\User;
 use App\SchoolYear;
 use App\Quarter;
 use App\Semester;
+use App\ResetCode;
 
 class UserController extends Controller
 {
@@ -290,4 +291,106 @@ class UserController extends Controller
     
     }
 
+
+
+    // method use to reset password
+    public function passwordReset()
+    {
+    	return view('password-reset');
+    }
+
+
+    // method use to reset password
+    public function postPasswordReset(Request $request)
+    {
+    	$this->validate($request, [
+    		'email' => 'required'
+    	]);
+
+    	$email = $request['email'];
+
+    	$user = User::where('email', $email)->first();
+
+    	if(count($user) == 0) {
+    		return redirect()->route('password_reset')->with('error_msg', 'Email Address Not Found! Please Check Try Again');
+    	}
+
+    	$length = 10;
+		$chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+	    $str = substr( str_shuffle( $chars ), 0, $length );
+
+    	// create code here
+    	$code = uniqid() .  $str . md5($email);
+
+    	$rc = new ResetCode();
+    	$rc->user_id = $user->id;
+    	$rc->code = $code;
+    	$rc->save();
+
+    	// message reset code to email here
+    	// 
+    	
+
+    	return redirect()->route('password_reset')->with('success', 'Reset Code Sent to your email');
+
+    }
+
+
+    // method use to reset password wth the code
+    public function passwordResetCode($code = null)
+    {
+    	$rc = ResetCode::where('code', $code)->first();
+
+    	if(count($rc) == 0) {
+    		return redirect()->route('password_reset')->with('error_msg','Error! Invalid Code!');
+    	}
+    	elseif($rc->status == 1) {
+    		return redirect()->route('password_reset')->with('error_msg','Error! Invalid Code!');
+    	}
+
+
+
+    	$log = new UserLog();
+    	$log->user_id = $rc->user_id;
+    	$log->action = 'Password Reset Attempt';
+    	$log->save();
+
+    	return view('password-reset-form', ['id' => $rc->user_id, 'rc' => $rc->id]);
+    }
+
+
+
+    public function passwordResetLast(Request $request)
+    {
+    	$id = $request['id'];
+    	$c = $request['code_id'];
+
+    	$this->validate($request, [
+    		'password' => 'required| min:8 | max:64 | confirmed'
+    	]);
+
+
+    	$password = $request['password'];
+
+    	$rc = ResetCode::findorfail($c);
+    	$user = User::findorfail($id);
+
+    	$user->password = bcrypt($password);
+
+    	$user->save();
+
+    	// return the view of the resetcode
+    	//once
+    	// make the code invalide
+    	$rc->status = 1;
+    	$rc->save();
+
+    	// check if user is student .r teacher
+    	if($user->privilege == 3) {
+    		return redirect()->route('student_login')->with('success', 'Your Password is Updated!');
+    	}
+    	elseif ($user->privilege == 2) {
+    		return redirect()->route('teacher_login')->with('success', 'Your Password is Updated!');
+    	}
+    }
 }

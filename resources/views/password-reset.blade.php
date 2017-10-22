@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Teacher Login</title>
+	<title>Welcome to Concepcion Catholic School - Student Grading System</title>
 
 
 	{{-- Bootstrap 3.3.7 --}}
@@ -33,34 +33,28 @@
 	<![endif]-->
 </head>
 <body>
-<header class="main-header">
-	<h3 class="text-center">Concepcion Catholic School - Student Grading System</h3>
-</header>
+	<header class="main-header">
+		<!-- <h3 class="text-center">Welcome to Concepcion Catholic School - Student Grading System</h3> -->
+		
+	</header>
+	<hr>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-	          
-			<div class="login text-center">
-				{{-- Includes errors and session flash message display container --}}
-		          @include('includes.errors')
-		          @include('includes.error')
-		          @include('includes.success')
-		          @include('includes.notice')
-				<form action="{{ route('post_login') }}" role="form" method="POST" autocomplete="off">
-					<h3>Teacher Login</h3>
-					<div class="form-group">
-						<input type="text" name="id" class="form-control" placeholder="ID Number" />
-					</div>
-					<div class="form-group">
-						<input type="password" name="password" class="form-control" placeholder="Password" />
-					</div>
-					<div class="form-group">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-						<button class="btn btn-primary">Login</button>
-						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
-					</div>
-				</form>
-				<p><a href="{{ route('password_reset') }}">Forgot Password?</a></p>
-			</div>
+			<h1>Password Reset</h1>
+			@include('includes.success')
+			@include('includes.errors')
+			@include('includes.error')
+			@include('includes.notice')
+			<form action="{{ route('post_password_reset') }}" method="POST" autocomplete="off">
+				<div class="form-group">
+					<input type="text" name="email" class="form-control" placeholder="Enter Your Register Email" />
+				</div>
+				<div class="form-group">
+					<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+					<button class="btn btn-primary">Continue...</button>
+					<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
+				</div>
+			</form>
 		</div>
 	</div>
 	{{-- jQuery2.2.3 --}}

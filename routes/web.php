@@ -690,3 +690,27 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********
 **********************************************/
+
+
+// route to reset password
+Route::get('password/reset', [
+    'uses' => 'UserController@passwordReset',
+    'as' => 'password_reset'
+]);
+
+Route::post('password/reset', [
+    'uses' => 'UserController@postPasswordReset',
+    'as' => 'post_password_reset'
+]);
+
+
+// route use to reset password with the given reset code
+Route::get('password/reset/code/{code}', [
+    'uses' => 'UserController@passwordResetCode'
+]);
+
+
+Route::post('password/reset/last', [
+    'uses' => 'UserController@passwordResetLast',
+    'as' => 'password_reset_last'
+]);
