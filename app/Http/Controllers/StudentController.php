@@ -781,6 +781,30 @@ class StudentController extends Controller
     }
 
 
+
+    // method use to go to messages
+    public function studentMessages()
+    {
+        $asy = SchoolYear::whereStatus(1)->first();
+        $info = StudentInfo::where('user_id', Auth::user()->user_id)->first();
+
+        // get all teacher with the subject
+        $teachers = SubjectAssign::where('school_year_id', $asy->id)
+                                ->where('section_id', $info->section)
+                                ->get();
+
+        return view('student.student-messages', ['teachers' => $teachers]);
+    }
+
+
+    // method in messages between teacher and students
+    public function studentMessageThread()
+    {
+        return view('student.student-message-thread');
+    }
+
+
+
     public static function getGrade($i)
     {
         switch ($i) {
@@ -962,4 +986,7 @@ class StudentController extends Controller
 
         return view('student.student-view-previews-grades', ['sy' => $sy]);
     }
+
+
+
 }

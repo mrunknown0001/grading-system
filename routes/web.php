@@ -686,6 +686,21 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
         'uses' => 'StudentController@viewPreviewsGrades',
         'as' => 'student_view_previews_grades'
     ]);
+
+
+    // route to messages of student
+    Route::get('messages', [
+        'uses' => 'StudentController@studentMessages',
+        'as' => 'student_messages'
+    ]);
+
+
+    // route to show conversation
+    Route::get('message/{teacher}/thread', [
+        'uses' => 'StudentController@studentMessageThread',
+        'as' => 'student_message_thread'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********
