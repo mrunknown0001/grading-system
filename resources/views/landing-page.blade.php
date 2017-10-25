@@ -56,10 +56,16 @@
 			</p>
 		</div>
 		<div class="col-md-4">
-			<p class="text-center">Mission/Vision/Objective</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis expedita, maiores repellat reprehenderit culpa corrupti ad omnis ut vel fugiat rem rerum voluptate itaque optio voluptatibus natus eius reiciendis consectetur.</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex ipsam provident reprehenderit delectus nobis laboriosam, accusamus maxime voluptate at commodi, inventore iure impedit quos iste id voluptatum voluptatem. Aliquam, expedita.</p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis sequi, hic enim. Debitis placeat, ducimus! Doloribus sed architecto itaque dolorem quidem libero. Magni ab neque, corporis quae, quaerat in omnis?
+			<p class="text-center">Vision</p>
+			<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
+
+			<p class="text-center">Our Mission</p>
+			<ul class="disk">
+				<li>To develop Christian and moral values</li>
+				<li>To provide quality education to our pupils and students</li>
+				<li>To integrate the aspects of their human knowledge to their daily experiences</li>
+			</ul>
+			
 		</div>
 	</div>
 	{{-- jQuery2.2.3 --}}

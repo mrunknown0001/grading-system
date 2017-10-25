@@ -696,9 +696,16 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
 
 
     // route to show conversation
-    Route::get('message/{teacher}/thread', [
+    Route::get('message/{teacher_id}/thread', [
         'uses' => 'StudentController@studentMessageThread',
         'as' => 'student_message_thread'
+    ]);
+
+
+    // route to send message
+    Route::post('message/send', [
+        'uses' => 'StudentController@studentSendMessage',
+        'as' => 'student_send_message'
     ]);
 
 });

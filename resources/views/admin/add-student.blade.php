@@ -42,7 +42,7 @@
             </select>
           </div>
           <div class="form-group">
-            <input type="text" name="student_number" class="form-control" placeholder="Student Number" autofocus="" />
+            <input type="number" name="student_number" class="form-control" placeholder="Student Number" autofocus="" />
           </div>
           <div class="form-group">
             <input type="text" name="firstname" class="form-control text-capitalize" placeholder="First Name" />

@@ -785,6 +785,7 @@ class StudentController extends Controller
     // method use to go to messages
     public function studentMessages()
     {
+
         $asy = SchoolYear::whereStatus(1)->first();
         $info = StudentInfo::where('user_id', Auth::user()->user_id)->first();
 
@@ -798,9 +799,24 @@ class StudentController extends Controller
 
 
     // method in messages between teacher and students
-    public function studentMessageThread()
+    public function studentMessageThread($teacher_id = null)
     {
-        return view('student.student-message-thread');
+
+        $teacher = User::findorfail($teacher_id);
+
+        return view('student.student-message-thread', ['teacher' => $teacher]);
+    }
+
+
+    // method to send message
+    public function studentSendMessage(Request $request)
+    {
+        $teacher_id = $request['teacher_id'];
+
+
+        // insert message to the database
+
+        return redirect()->route('student_message_thread', ['teacher_id' => $teacher_id]);
     }
 
 
