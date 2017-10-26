@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') View All Students - Student Grading System @endsection
+@section('title') Student Search Result - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-        View All Students
+        Student Search Result
       </h1>
       <hr>
       <div class="row">
@@ -71,7 +71,7 @@
               </tbody>
           </table>
           <!-- Count and Total count() of total() -->
-          <p class="text-center"><strong>{{ $students->count() + $students->perPage() * ($students->currentPage() - 1) }} of {{ $students->total() }}</strong></p>
+          <p class="text-center"><strong>{{ $students->count() + $students->perPage() * ($students->currentPage() - 1) }} of {{ $students->total() }} total result</strong></p>
 
           <!-- Page Number render() -->
           <div class="text-center"> {{ $students->links() }}</div>

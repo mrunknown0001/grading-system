@@ -38,36 +38,38 @@
 		
 	</header>
 	<hr>
-	<div class="row">
-		<div class="col-md-4">
-			<p class="text-center">Hisotry</p>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint vel, possimus atque. Totam sed eligendi incidunt distinctio, eos, cumque soluta asperiores, est accusantium vitae dignissimos excepturi veniam quis, ducimus. Veniam?</p>
-		</div>
-		<div class="col-md-4">
-			<p class="text-center">Login Options</p>
-			<p class="text-center">
-				<a href="{{ route('admin_login') }}">Admin Login</a>
-			</p>
-			<p class="text-center">
-				<a href="{{ route('teacher_login') }}">Teacher Login</a>
-			</p>
-			<p class="text-center">
-				<a href="{{ route('student_login') }}">Student Login</a>
-			</p>
-		</div>
-		<div class="col-md-4">
-			<p class="text-center">Vision</p>
-			<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
+	<section class="content-header">
+		<div class="row">
+			<div class="col-md-4">
+				<p class="text-center">Hisotry</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint vel, possimus atque. Totam sed eligendi incidunt distinctio, eos, cumque soluta asperiores, est accusantium vitae dignissimos excepturi veniam quis, ducimus. Veniam?</p>
+			</div>
+			<div class="col-md-4">
+				<p class="text-center">Login Options</p>
+				<p class="text-center">
+					<a href="{{ route('admin_login') }}">Admin Login</a>
+				</p>
+				<p class="text-center">
+					<a href="{{ route('teacher_login') }}">Teacher Login</a>
+				</p>
+				<p class="text-center">
+					<a href="{{ route('student_login') }}">Student Login</a>
+				</p>
+			</div>
+			<div class="col-md-4">
+				<p class="text-center">Vision</p>
+				<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
 
-			<p class="text-center">Our Mission</p>
-			<ul class="disk">
-				<li>To develop Christian and moral values</li>
-				<li>To provide quality education to our pupils and students</li>
-				<li>To integrate the aspects of their human knowledge to their daily experiences</li>
-			</ul>
-			
+				<p class="text-center">Our Mission</p>
+				<ul class="disk">
+					<li>To develop Christian and moral values</li>
+					<li>To provide quality education to our pupils and students</li>
+					<li>To integrate the aspects of their human knowledge to their daily experiences</li>
+				</ul>
+				
+			</div>
 		</div>
-	</div>
+	</section>
 	{{-- jQuery2.2.3 --}}
 	<script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
 

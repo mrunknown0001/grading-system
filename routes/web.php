@@ -463,6 +463,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'admin_compute_grades'
     ]);
 
+
+
+    // rout to search students
+    Route::post('student/search', [
+        'uses' => 'AdminController@adminSearchStudent',
+        'as' => 'post_admin_search_student'
+    ]);
+    Route::get('student/search', function () {
+        return redirect()->route('get_view_all_students');
+    });
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP ADMIN **********

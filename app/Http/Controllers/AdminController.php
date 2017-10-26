@@ -1579,4 +1579,24 @@ class AdminController extends Controller
     }
 
 
+    public function adminSearchStudent(Request $request)
+    {
+        $this->validate($request, [
+            'keyword' => 'required'
+        ]);
+
+        $keyword = $request['keyword'];
+
+        $students = User::where('privilege', 3)
+            ->where('status', 'like', "%$keyword%")
+            ->orwhere('user_id', 'like', "%$keyword%")
+            ->orwhere('firstname', 'like', "%$keyword%")
+            ->orwhere('lastname', 'like', "%$keyword%")
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+
+        return view('admin.admin-student-search-result', ['students' => $students]);
+    }
+
+
 }
