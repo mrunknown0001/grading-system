@@ -600,6 +600,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'view_exam_score'
     ]);
 
+
+    // route to messages
+    Route::get('messages', [
+        'uses' => 'TeacherController@getMessages',
+        'as' => 'teacher_get_messages'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

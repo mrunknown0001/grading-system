@@ -28,6 +28,7 @@ use App\WrittenWorkNumber;
 use App\PerformanceTaskNumber;
 use App\ExamScoreNumber;
 use App\Avatar;
+use App\Message;
 
 class TeacherController extends Controller
 {
@@ -792,5 +793,18 @@ class TeacherController extends Controller
 
         return view('teacher.view-exam-scores', ['scores' => $scores, 'exam' => $exam, 'students' => $students, 'assign' => $assign]);
 
+    }
+
+
+
+
+    // method to go to messages
+    public function getMessages()
+    {
+        // find all message under the teacher
+        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->get(['student_id']);
+
+
+        return view('teacher.teacher-messages', ['students' => $this->getMyStudents(), 'student_messages' => $student_messages]);
     }
 }

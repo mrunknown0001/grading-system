@@ -28,6 +28,7 @@ use App\WrittenWorkNumber;
 use App\PerformanceTaskNumber;
 use App\ExamScoreNumber;
 use App\Avatar;
+use App\Message;
 
 class StudentController extends Controller
 {
@@ -804,7 +805,12 @@ class StudentController extends Controller
 
         $teacher = User::findorfail($teacher_id);
 
-        return view('student.student-message-thread', ['teacher' => $teacher]);
+        $messages = Message::where('teacher_id', $teacher->id)
+                            ->where('student_id', Auth::user()->id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
+        return view('student.student-message-thread', ['teacher' => $teacher, 'messages' => $messages]);
     }
 
 
@@ -815,6 +821,13 @@ class StudentController extends Controller
 
 
         // insert message to the database
+        $message = $request['message'];
+
+        $new = new Message();
+        $new->teacher_id = $teacher_id;
+        $new->student_id = Auth::user()->id;
+        $new->message = $message;
+        $new->save();
 
         return redirect()->route('student_message_thread', ['teacher_id' => $teacher_id]);
     }
