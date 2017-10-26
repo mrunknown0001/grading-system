@@ -34,7 +34,7 @@
           @include('includes.notice')
 
           @foreach($teachers as $t)
-          <p><a href="{{ route('student_message_thread', $t->teacher_id) }}">{{ $t->teacher->firstname }}</a></p>
+          <p><a href="{{ route('student_message_thread', $t->teacher_id) }}">{{ ucwords($t->teacher->firstname . ' ' . $t->teacher->lastname) }}</a></p>
           @endforeach
         </div>
       </div>

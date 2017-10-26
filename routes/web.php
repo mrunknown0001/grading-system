@@ -607,6 +607,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'teacher_get_messages'
     ]);
 
+
+    // route to message thread 
+    Route::get('message/student/{student_id}/thread', [
+        'uses' => 'TeacherController@studentMessageThread',
+        'as' => 'teacher_student_message_thread'
+    ]);
+
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

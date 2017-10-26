@@ -802,9 +802,25 @@ class TeacherController extends Controller
     public function getMessages()
     {
         // find all message under the teacher
-        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->get(['student_id']);
+        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->paginate(10);
 
 
         return view('teacher.teacher-messages', ['students' => $this->getMyStudents(), 'student_messages' => $student_messages]);
+    }
+
+
+
+    // method use to go to thread view
+    public function studentMessageThread($student_id = null)
+    {
+
+        $student = User::where('user_id', $student_id)->first();
+
+        $messages = Message::where('teacher_id', Auth::user()->id)
+                            ->where('student_id', $student->id)
+                            ->orderBy('created_at', 'desc')
+                            ->get();
+
+        return view('teacher.teacher-message-thread', ['students' => $this->getMyStudents(), 'messages' => $messages, 'student' => $student]);
     }
 }

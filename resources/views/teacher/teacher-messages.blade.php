@@ -32,10 +32,27 @@
           @include('includes.error')
           @include('includes.success')
           @include('includes.notice')
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Student Number</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($student_messages as $msg)
+              <tr>
+                <td>
+                  {{ ucwords($msg->user->firstname . ' ' . $msg->user->lastname) }}
+                </td>
+                <td>{{ $msg->user->user_id }}</td>
+                <td><a href="{{ route('teacher_student_message_thread', ['student_id' => $msg->user->user_id]) }}">Open</a></td>
+              </tr>
+              @endforeach       
+            </tbody>
+          </table>
 
-          @foreach($student_messages as $msg)
-          <a href="#">{{ ucwords($msg->user->firstname . ' ' . $msg->user->lastname) }}</a>
-          @endforeach
         </div>
       </div>
 
