@@ -2,6 +2,12 @@
 <?php
   $info = App\StudentInfo::where('user_id', Auth::user()->user_id)->first();
   $year = App\SchoolYear::whereStatus(1)->first();
+
+
+  $unread = \App\Message::where('student_id', Auth::user()->id)
+                ->whereSender(2)
+                ->whereStatus(0)
+                ->get();
 ?>
 
 
@@ -29,7 +35,7 @@
             <!-- Menu toggle button -->
             <a href="{{ route('student_messages') }}" class="dropdown-toggle" >
               <i class="fa fa-envelope-o"></i>
-              <span class="label label-success"></span>
+              <span class="label label-danger">@if($unread->count() != 0) {{ $unread->count() }} @endif</span>
             </a>
           </li>
 

@@ -614,6 +614,15 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'teacher_student_message_thread'
     ]);
 
+
+    // route to send message
+    Route::post('message/send', [
+        'uses' => 'TeacherController@teacherSendMessage',
+        'as' => 'teacher_send_message'
+    ]);
+    Route::get('message/send', function () {
+        return redirect()->route('teacher_student_message_thread');
+    });
 });
 /*********************************************
 ********** END OF ROUTE GROUP TEACHER ********

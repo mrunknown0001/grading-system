@@ -45,6 +45,7 @@
               <tr>
                 <td>
                   {{ ucwords($msg->user->firstname . ' ' . $msg->user->lastname) }}
+                  <span class="label label-danger">@if($msg->where('status', 0)->count() != 0){{ $msg->where('status', 0)->count() }} @endif</span>
                 </td>
                 <td>{{ $msg->user->user_id }}</td>
                 <td><a href="{{ route('teacher_student_message_thread', ['student_id' => $msg->user->user_id]) }}">Open</a></td>
@@ -52,7 +53,13 @@
               @endforeach       
             </tbody>
           </table>
+          {{--
+          <!-- Count and Total count() of total() -->
+          <p class="text-center"><strong>{{ $student_messages->count() + $student_messages->perPage() * ($student_messages->currentPage() - 1) }} of {{ $student_messages->total() }}</strong></p>
 
+          <!-- Page Number render() -->
+          <div class="text-center"> {{ $student_messages->links() }}</div>
+          --}}
         </div>
       </div>
 

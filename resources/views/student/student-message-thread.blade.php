@@ -53,11 +53,11 @@
               <div class="direct-chat-messages">
 
                 @foreach($messages as $message)
-                @if($message->student_id == Auth::user()->id)
+                @if($message->sender == 3)
                 <!-- Message. Default to the left -->
                 <div class="direct-chat-msg right">
                   <div class="direct-chat-info clearfix">
-                    <span class="direct-chat-name pull-left">{{ ucwords($message->user->firstname . ' ' . $message->user->lastname) }}</span>
+                    <span class="direct-chat-name pull-left">Me</span>
                     <span class="direct-chat-timestamp pull-right">{{ date('F d, Y H:i:s a', strtotime($message->created_at)) }}</span>
                   </div>
                   <!-- /.direct-chat-info -->

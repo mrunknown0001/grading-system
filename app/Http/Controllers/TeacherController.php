@@ -802,7 +802,7 @@ class TeacherController extends Controller
     public function getMessages()
     {
         // find all message under the teacher
-        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->paginate(10);
+        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->orderBy('status', 'desc')->get(['student_id']);
 
 
         return view('teacher.teacher-messages', ['students' => $this->getMyStudents(), 'student_messages' => $student_messages]);
@@ -821,6 +821,31 @@ class TeacherController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->get();
 
+        Message::where('teacher_id', Auth::user()->id)
+                ->where('student_id', $student->id)
+                ->whereSender(3)
+                ->update(['status' => 1]);
+
         return view('teacher.teacher-message-thread', ['students' => $this->getMyStudents(), 'messages' => $messages, 'student' => $student]);
+    }
+
+
+    // method use to send message
+    public function teacherSendMessage(Request $request)
+    {
+        $message = $request['message'];
+        $student_id = $request['student_id'];
+
+        $student = User::findorfail($student_id);
+
+        $new = new Message();
+        $new->teacher_id = Auth::user()->id;
+        $new->student_id = $student_id;
+        $new->message = $message;
+        $new->sender = 2;
+        $new->status = 0;
+        $new->save();
+
+        return redirect()->route('teacher_student_message_thread', ['student_id' => $student->user_id]);
     }
 }

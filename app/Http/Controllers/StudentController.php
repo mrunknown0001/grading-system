@@ -810,6 +810,12 @@ class StudentController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->get();
 
+        Message::where('teacher_id', Auth::user()->id)
+                ->where('student_id', $student->id)
+                ->whereSender(2)
+                ->update(['status' => 1]);
+
+
         return view('student.student-message-thread', ['teacher' => $teacher, 'messages' => $messages]);
     }
 
@@ -827,6 +833,8 @@ class StudentController extends Controller
         $new->teacher_id = $teacher_id;
         $new->student_id = Auth::user()->id;
         $new->message = $message;
+        $new->sender = 3;
+        $new->status = 0;
         $new->save();
 
         return redirect()->route('student_message_thread', ['teacher_id' => $teacher_id]);

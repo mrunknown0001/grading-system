@@ -1,8 +1,16 @@
+<?php
+
+  $unread = \App\Message::where('teacher_id', Auth::user()->id)
+                ->whereSender(3)
+                ->whereStatus(0)
+                ->get();
+?>
+
 <!-- Main Header -->
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="#" class="logo">
+    <a href="{{ route('teacher_dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><img src="{{ URL::asset('uploads/logo/logo.png') }}" alt="Concepcion Catholic School" class="img-circle" height="50px" width="50px"></span>
         <!-- logo for regular state and mobile devices -->
@@ -22,6 +30,7 @@
             <!-- Menu toggle button -->
             <a href="{{ route('teacher_get_messages') }}" >
               <i class="fa fa-envelope-o"></i>
+              <span class="label label-danger">@if($unread->count() != 0) {{ $unread->count() }} @endif</span>
             </a>
           </li>
 
