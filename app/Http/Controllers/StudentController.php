@@ -810,8 +810,8 @@ class StudentController extends Controller
                             ->orderBy('created_at', 'desc')
                             ->get();
 
-        Message::where('teacher_id', Auth::user()->id)
-                ->where('student_id', $student->id)
+        Message::where('teacher_id', $teacher->id)
+                ->where('student_id', Auth::user()->id)
                 ->whereSender(2)
                 ->update(['status' => 1]);
 

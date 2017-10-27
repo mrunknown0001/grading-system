@@ -34,7 +34,7 @@
           @include('includes.notice')
 
           @foreach($teachers as $t)
-          <p><a href="{{ route('student_message_thread', $t->teacher_id) }}">{{ ucwords($t->teacher->firstname . ' ' . $t->teacher->lastname) }} <span class="label label-danger"></span></a></p>
+          <p><a href="{{ route('student_message_thread', $t->teacher_id) }}">{{ ucwords($t->teacher->firstname . ' ' . $t->teacher->lastname) }} <span class="label label-danger">{{ $t->messages->where('student_id', Auth::user()->id)->where('status', 0)->count() }}</span></a></p>
           @endforeach
         </div>
       </div>

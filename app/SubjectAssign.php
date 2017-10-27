@@ -20,4 +20,10 @@ class SubjectAssign extends Model
     {
     	return $this->belongsTo('App\Section', 'section_id', 'id');
     }
+
+    // messages for teachers
+    public function messages()
+    {
+        return $this->hasMany('App\Message', 'teacher_id', 'teacher_id');
+    }
 }
