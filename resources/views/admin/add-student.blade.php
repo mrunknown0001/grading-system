@@ -51,7 +51,7 @@
             <input type="text" name="lastname" class="form-control text-capitalize" placeholder="Last Name" />
           </div>
           <div class="form-group">
-            <input type="text" name="birthday" class="form-control" placeholder="MM/DD/YYYY" />
+            <input type="date" name="birthday" class="form-control" placeholder="MM/DD/YYYY" />
           </div>
           <div class="form-group">
             <select name="gender" id="gender" class="form-control">
@@ -67,7 +67,7 @@
             <input type="email" name="email" class="form-control" placeholder="Email Address" />
           </div>
           <div class="form-group">
-            <input type="text" name="mobile" class="form-control" placeholder="11 Digit Mobile Number" />
+            <input type="number" name="mobile" class="form-control" placeholder="Mobile / Contact Number" />
           </div>
           <div class="form-group">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />

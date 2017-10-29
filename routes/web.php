@@ -340,6 +340,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     ]);
 
 
+    // route to change profile picture of admin
+    Route::get('profile/picture/change', [
+        'uses' => 'AdminController@adminChangeProfilePicture',
+        'as' => 'admin_profile_picture_change'
+    ]); 
+
+
+    // route to post change profile picture of admin
+    Route::post('profile/picture/change', [
+        'uses' => 'AdminController@adminPostChangeProfilePicture',
+        'as' => 'post_admin_profile_picture_change'
+    ]);
+
+
+
     /*
      * viewProfile view admin profile
      */

@@ -37,8 +37,6 @@
               <tr>
                 <th onclick="sortTable(0)" style="cursor: pointer;">Student Number</th>
                 <th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
-                <th onclick="sortTable(2)" style="cursor: pointer;">Rank</th>
-                <th onclick="sortTable(3)" style="cursor: pointer;">Average</th>
               </tr>
             </thead>
             <tbody>
@@ -46,8 +44,7 @@
               <tr>
                 <td>{{ $std->user_id }}</td>
                 <td>{{ ucwords($std->user->lastname . ', ' . $std->user->firstname) }}</td>
-                <td></td>
-                <td></td>
+                
               </tr>
               @endforeach
             </tbody>

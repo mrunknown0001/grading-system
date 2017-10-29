@@ -279,7 +279,9 @@ class UserController extends Controller
 	    	elseif(Auth::user()->privilege == 2) {
 	    		return redirect()->route('teacher_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
 	    	}
-	    	// if error occured
+	    	elseif(Auth::user()->privilege == 3) {
+	    		return redirect()->route('get_student_dashboard')->with('success', 'Your Password Has Been Successfully Changed!');
+	    	}
 	    	else {
 	    		return 'Error Occured! Please Reload this page';
 	    	}

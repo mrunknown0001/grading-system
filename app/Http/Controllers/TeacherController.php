@@ -188,7 +188,7 @@ class TeacherController extends Controller
     public function postAddWrittenWork(Request $request)
     {
         $this->validate($request, [
-            'total' => 'required'
+            'total' => 'required|numeric'
         ]);
 
         // total number of score
@@ -263,6 +263,11 @@ class TeacherController extends Controller
         }
         // set array for score together with student id of the student
         foreach($section->students as $std) {
+
+            if($total < $request[$std->user_id]) {
+                return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
+            }
+
             if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
 
                 $score[] = [
@@ -404,7 +409,7 @@ class TeacherController extends Controller
     {
 
         $this->validate($request, [
-            'total' => 'required'
+            'total' => 'required|numeric'
         ]);
 
         // total number of score
@@ -482,6 +487,10 @@ class TeacherController extends Controller
 
         // set array for score together with student id of the student
         foreach($section->students as $std) {
+            
+            if($total < $request[$std->user_id]) {
+                return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
+            }
 
             if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
 
@@ -621,7 +630,7 @@ class TeacherController extends Controller
     {
 
         $this->validate($request, [
-            'total' => 'required'
+            'total' => 'required|numeric'
         ]);
 
         // total number of score
@@ -696,6 +705,9 @@ class TeacherController extends Controller
         // set array for score together with student id of the student
         foreach($section->students as $std) {
 
+            if($total < $request[$std->user_id]) {
+                return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
+            }
 
             if($section->grade_level->id == 5 || $section->grade_level->id == 6) {
 

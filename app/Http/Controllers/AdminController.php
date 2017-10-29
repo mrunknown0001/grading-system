@@ -1533,6 +1533,8 @@ class AdminController extends Controller
 
         // search for students
         $students = StudentInfo::where('section', $sectionid)->where('school_year', $asy->id)->get();
+        
+        
 
 
         // average and final grade of the students if necessary
@@ -1628,4 +1630,48 @@ class AdminController extends Controller
     }
 
 
+
+    // method use to change profile picture of admin
+    public function adminChangeProfilePicture()
+    {
+        return view('admin.admin-change-profile-picture');
+    }
+
+
+    public function adminPostChangeProfilePicture(Request $request)
+    {
+        // return 'image';
+        if( $request->hasFile('image') ) {
+           $file = $request->file('image');
+
+           $img = Auth::user()->user_id . '_' . time() . "__n" . uniqid() . '.' . $file->getClientOriginalExtension();
+
+           // return $img;
+           Image::make($file)->save(public_path('/uploads/profile/' . $img))->resize(500, 500);;
+
+
+           // check if the user already upload an image
+           $avatar = Avatar::whereUserId(Auth::user()->id)->first();
+
+            if(count($avatar) == 0) {
+               $avatar = new Avatar();
+               $avatar->user_id = Auth::user()->id;
+               $avatar->name = $img;
+               $avatar->save();
+            }
+            else {
+                $avatar->name = $img;
+                $avatar->save();
+            }
+
+
+            // user log
+            $log = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->action = "Admin Change Profile Picture";
+            $log->save();
+
+           return redirect()->route('admin_profile_picture_change')->with('success', 'Sucessfully Change Your Profile Picture!');
+        }
+    }
 }
