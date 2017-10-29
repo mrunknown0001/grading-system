@@ -1256,9 +1256,10 @@ class AdminController extends Controller
         $quarter->save();
 
         // userlog
-        // uer log
-        // uerlog
-        // 
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'admin reselect quarter: ' . $quarter->name;
+        $log->save();
 
         return redirect()->route('select_quarter')->with('success', 'Quarter Reselected');
     }
@@ -1280,6 +1281,34 @@ class AdminController extends Controller
         $semester = Semester::all();
 
         return view('admin.select-semester', ['semester' => $semester]);
+    }
+
+
+
+    /*
+     * method use to reselect semester
+     */
+    public function adminReselectSemester($id = null)
+    {
+        $sem = Semester::findorfail($id);
+
+        $active_sem = Semester::whereStatus(1)->first();
+        if(count($active_sem) > 0) {
+            $active_sem->status = 0;
+            $active_sem->save();
+        }
+
+        $sem->status = 1;
+        $sem->finish = 0;
+        $sem->save();
+
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'admin reselect semester: ' . $sem->name;
+        $log->save();
+
+        return redirect()->route('select_semester')->with('success', 'Semester Reselected');
+
     }
 
 

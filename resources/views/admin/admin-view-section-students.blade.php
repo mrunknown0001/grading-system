@@ -45,7 +45,7 @@
               @foreach($students as $std)
               <tr>
                 <td>{{ $std->user_id }}</td>
-                <td>{{ ucwords($std->user->firstname . ' ' . $std->user->lastname) }}</td>
+                <td>{{ ucwords($std->user->lastname . ', ' . $std->user->firstname) }}</td>
                 <td></td>
                 <td></td>
               </tr>

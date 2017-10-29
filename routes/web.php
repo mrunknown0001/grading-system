@@ -386,6 +386,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         'as' => 'select_semester'
         ]);
 
+
+
+    // route to reselect semester
+    Route::get('reselect-semester/{id}', [
+        'uses' => 'Admincontroller@adminReselectSemester',
+        'as' => 'admin_reselect_semester'
+    ]);
+
+
     Route::get('select-active-semester/{id}', [
         'uses' => 'AdminController@selectActiveSemester',
         'as' => 'select_active_semester'

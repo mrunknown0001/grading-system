@@ -78,7 +78,8 @@
             <div class="col-lg-3">
                 <p class="text-center">
                     @if($sem->finish == 1)
-                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#-select2">Select Again</button>
+                        <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modal-semester{{ $sem->id }}">Select Again</button>
+                        @include('admin.includes.modal-reselect-semester')
                     @else
                         @if($sem->id == 1 && $sem->finish == 0)
                             @if($sem->status == 0)
