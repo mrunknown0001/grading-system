@@ -374,6 +374,45 @@ class TeacherController extends Controller
     }
 
 
+
+    // method to update written work score
+    public function updateWrittenWorkScore($id = null, $user_id = null, $assignid = null)
+    {
+        $score = WrittenWorkScore::findorfail($id);
+        $student = User::where('user_id', $user_id)->first();
+
+        return view('teacher.teacher-update-written-work-score', ['students' => $this->getMyStudents(), 'score' => $score, 'student' => $student, 'assignid' => $assignid]);
+    }
+
+
+
+    // method use to updat the score of the students
+    public function postUpdateWrittenWorkScore(Request $request)
+    {
+        $this->validate($request, [
+            'score' => 'required|numeric'
+        ]);
+
+        $score = $request['score'];
+        $total = $request['total'];
+        $assignid = $request['assignid'];
+
+        $wws = WrittenWorkScore::findorfail($request['id']);
+        $wws->score = $score;
+        $wws->save();
+
+        // log
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'Update Written Work Score';
+        $log->save();
+
+
+        return redirect()->route('view_written_work_score', ['sectionid' => $wws->section_id, 'subjectid' => $wws->subject_id, 'assignid' => $assignid]);
+    }
+
+
+
     // method use to add performance task score
     public function addPerformanceTask($section_id = null, $subject_id = null, $assign_id = null)
     {

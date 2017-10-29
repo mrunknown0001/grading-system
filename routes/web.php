@@ -611,6 +611,20 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+    // route to update individual score of student in written work
+    Route::get('update/written-work/score/{id}/{user_id}/{assignid}', [
+        'uses' => 'TeacherController@updateWrittenWorkScore',
+        'as' => 'update_written_work_score'
+    ]);
+
+
+    // route to post update writen work score
+    Route::post('update/written-work/score', [
+        'uses' => 'TeacherController@postUpdateWrittenWorkScore',
+        'as' => 'post_update_written_work_score'
+    ]);
+
+
     // route to view performance task scores
     Route::get('view/performance-task/score/{sectionid}/{subjectid}/{assignid}/get', [
         'uses' => 'TeacherController@viwePerformanceTask',
