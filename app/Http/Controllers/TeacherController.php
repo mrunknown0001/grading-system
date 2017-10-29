@@ -265,6 +265,10 @@ class TeacherController extends Controller
         foreach($section->students as $std) {
 
             if($total < $request[$std->user_id]) {
+                $wwn->number = $wwn->number -  1;
+                $wwn->total = $wwn->total - $total;
+                $wwn->save();
+
                 return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
             }
 
@@ -488,7 +492,12 @@ class TeacherController extends Controller
         // set array for score together with student id of the student
         foreach($section->students as $std) {
             
+            // check if theres an error preventing having an higher score than the total
             if($total < $request[$std->user_id]) {
+                $ptn->number = $ptn->number -  1;
+                $ptn->total = $ptn->total - $total;
+                $ptn->save();
+
                 return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
             }
 
@@ -706,6 +715,10 @@ class TeacherController extends Controller
         foreach($section->students as $std) {
 
             if($total < $request[$std->user_id]) {
+                $exam->number = $exam->number -  1;
+                $exam->total = $exam->total - $total;
+                $exam->save();
+
                 return redirect()->back()->with('error_msg', 'The Scores Must NOT Be Greater Than The Total.');
             }
 
