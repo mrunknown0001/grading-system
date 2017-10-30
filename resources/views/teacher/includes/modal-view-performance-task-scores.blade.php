@@ -13,6 +13,8 @@
                         <tr>
                             <th>Student Name</th>
                             <th>Score</th>
+                            <th>Total</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,7 +23,8 @@
                             @if($x == $score->performance_task_number)
                             <td>{{ ucwords($score->student->user->firstname . ' ' . $score->student->user->lastname)  }}</td>
                             <td>{{ $score->score }}</td>
-
+                            <td>{{ $score->total }}</td>
+                            <td><a href="{{ route('update_performance_task_score', ['id' => $score->id, 'user_id' => $score->student_number, 'assignid' => $assign->id]) }}" class="btn btn-primary btn-xs">Change Score</a></td>
                             @endif
                         </tr>
                         @endforeach

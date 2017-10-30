@@ -589,6 +589,20 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+    // route update performance task
+    Route::get('update/performance-task/score/{sectionid}/{subjectid}/{assignid}/get', [
+        'uses' => 'TeacherController@updatePerformanceTaskScore',
+        'as' => 'update_performance_task_score'
+    ]);
+
+
+    // route post update performance task
+    Route::post('update/performance-task/score', [
+        'uses' => 'TeacherController@postUpdatePerformanceTaskScore',
+        'as' => 'post_update_performance_task_score'
+    ]);
+
+
     // route to add exam in record of the students
     Route::get('add/exam/section/{section_id}/subject/{subject_id}/{assign_id}/get', [
         'uses' => 'TeacherController@addExam',

@@ -408,7 +408,7 @@ class TeacherController extends Controller
         $log->save();
 
 
-        return redirect()->route('view_written_work_score', ['sectionid' => $wws->section_id, 'subjectid' => $wws->subject_id, 'assignid' => $assignid]);
+        return redirect()->route('view_written_work_score', ['sectionid' => $wws->section_id, 'subjectid' => $wws->subject_id, 'assignid' => $assignid])->with('success', 'Score Updated!');
     }
 
 
@@ -636,6 +636,44 @@ class TeacherController extends Controller
 
         return view('teacher.view-performance-task-scores', ['scores' => $scores, 'ptn' => $ptn, 'students' => $students, 'assign' => $assign]);
 
+    }
+
+
+
+    // method use to viwe update performance task
+    public function updatePerformanceTaskScore($id = null, $user_id = null, $assignid = null)
+    {
+        $score = PerformanceTaskScore::findorfail($id);
+        $student = User::where('user_id', $user_id)->first();
+
+        return view('teacher.teacher-update-performance-task-score', ['students' => $this->getMyStudents(), 'score' => $score, 'student' => $student, 'assignid' => $assignid]);
+    }
+
+
+
+    // method post update performance task
+    public function postUpdatePerformanceTaskScore(Request $request)
+    {
+        $this->validate($request, [
+            'score' => 'required|numeric'
+        ]);
+
+        $score = $request['score'];
+        $total = $request['total'];
+        $assignid = $request['assignid'];
+
+        $pts = PerformanceTaskScore::findorfail($request['id']);
+        $pts->score = $score;
+        $pts->save();
+
+        // log
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'Update Performance Task Score';
+        $log->save();
+
+
+        return redirect()->route('view_performance_task_score', ['sectionid' => $pts->section_id, 'subjectid' => $pts->subject_id, 'assignid' => $assignid])->with('success', 'Score Updated!');
     }
 
 
