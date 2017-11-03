@@ -117,6 +117,11 @@ function sortTable(n) {
     }
   }
 }
+
+window.onload = function() {
+  sortTable(1);
+};
+</script>
 </script>
 
 

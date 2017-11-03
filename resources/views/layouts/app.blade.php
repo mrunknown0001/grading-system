@@ -66,6 +66,7 @@
 		{{-- jQuery2.2.3 --}}
 		<script src="{{ URL::asset('js/jquery-2.2.3.min.js') }}"></script>
 
+
 		{{-- Bootstrap JS --}}
 		<script src="{{ URL::asset('js/app.js') }}"></script>
 
