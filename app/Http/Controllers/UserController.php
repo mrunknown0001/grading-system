@@ -36,6 +36,9 @@ class UserController extends Controller
 		 */
 		$id = $request['id'];
 		$password = $request['password'];
+		$code = $request['code'];
+
+
 
 
 		$school_year = SchoolYear::whereStatus(1)->first();
@@ -56,6 +59,30 @@ class UserController extends Controller
 				Auth::logout();
 				return redirect()->back()->with('error_msg', 'Your Accout is Inactive! Please Report to Admin.');
 			}
+
+
+
+
+			// check if user is using right login page
+			if($code != Auth::user()->privilege) {
+				// redirect to a message
+				if(Auth::user()->privilege == 1) {
+					// redirect to admin login
+					Auth::logout();
+					return redirect()->route('admin_login')->with('error_msg', 'You use wrong login page. Use this instead.');
+				}
+				if(Auth::user()->privilege == 2) {
+					// redirect to teacher login
+					Auth::logout();
+					return redirect()->route('teacher_login')->with('error_msg', 'You use wrong login page. Use this instead.');
+				}
+				if(Auth::user()->privilege == 3) {
+					// redirect to admin login
+					Auth::logout();
+					return redirect()->route('student_login')->with('error_msg', 'You use wrong login page. Use this instead.');
+				}
+			}
+
 
             /*
              * Redirect to Admin Panel if privilege is admin

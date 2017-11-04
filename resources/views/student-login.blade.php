@@ -52,6 +52,7 @@
 						<input type="password" name="password" class="form-control" placeholder="Password" />
 					</div>
 					<div class="form-group">
+						<input type="hidden" name="code" value="3" />
 						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 						<button class="btn btn-primary">Login</button>
 						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>

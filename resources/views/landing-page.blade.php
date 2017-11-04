@@ -41,8 +41,8 @@
 	<section class="content-header">
 		<div class="row">
 			<div class="col-md-4">
-				<p class="text-center">Hisotry</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint vel, possimus atque. Totam sed eligendi incidunt distinctio, eos, cumque soluta asperiores, est accusantium vitae dignissimos excepturi veniam quis, ducimus. Veniam?</p>
+				<p class="text-center">Vision</p>
+				<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
 			</div>
 			<div class="col-md-4">
 				<p class="text-center">Login Options</p>
@@ -57,8 +57,7 @@
 				</p>
 			</div>
 			<div class="col-md-4">
-				<p class="text-center">Vision</p>
-				<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
+				
 
 				<p class="text-center">Our Mission</p>
 				<ul class="disk">
