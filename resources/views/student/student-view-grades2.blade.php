@@ -79,7 +79,8 @@
                         N/A
                         @else
                         <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
-                        
+                        <!-- <div>{{ $g2_total = $g2_total + $g2 }}
+                        {{ $g2_count = $g2_count + 1 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -94,7 +95,7 @@
               <tr>
                 <th>Average</th>
                 <td>{{ $g1_total/$g1_count }}</td>
-                <td></td>
+                <td>{{ $g2_total/$g2_count }}</td>
                 <td></td>
               </tr>
             </tbody>
