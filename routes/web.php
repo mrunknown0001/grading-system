@@ -652,12 +652,27 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'view_exam_score'
     ]);
 
+    // route to edit exam score
+    Route::get('update/exam/score/{id}/{user_id}/{assignid}', [
+        'uses' => 'TeacherController@updateExamScore',
+        'as' => 'update_exam_score'
+    ]);
+    
+    // route to POST edit exam score
+    Route::post('update/exam/score', [
+        'uses' => 'TeacherController@postUpdateExamScore',
+        'as' => 'post_update_exam_score'
+    ]);
+    
 
     // route to messages
     Route::get('messages', [
         'uses' => 'TeacherController@getMessages',
         'as' => 'teacher_get_messages'
     ]);
+
+
+
 
 
     // route to message thread 

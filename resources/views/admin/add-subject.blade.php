@@ -46,9 +46,9 @@
               <textarea name="description" id="description" cols="30" rows="10" class="form-control text-capitalize" placeholder="Description of the Subject..."></textarea>
             </div>
             <div class="form-group">
-              Written Work: <input type="number" name="written_work" class="form-control" placeholder="%" />
-              Performance Task: <input type="number" name="performance_task" class="form-control" placeholder="%" />
-              Exam: <input type="number" name="exam" class="form-control" placeholder="%" />
+              Written Work: <input type="text" name="written_work" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="%" />
+              Performance Task: <input type="text" name="performance_task" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="%" />
+              Exam: <input type="text" name="exam" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="%" />
             </div>
             <div class="form-group">
               <input type="hidden" name="_token" value="{{ csrf_token() }}" />

@@ -42,7 +42,7 @@
             </select>
           </div>
           <div class="form-group">
-            <input type="number" name="student_number" class="form-control" placeholder="Student Number" autofocus="" />
+            <input type="text" name="student_number" class="form-control" placeholder="Student Number" onkeypress='return event.charCode >= 48 && event.charCode <= 57' autofocus="" />
           </div>
           <div class="form-group">
             <input type="text" name="firstname" class="form-control text-capitalize" placeholder="First Name" />
@@ -67,7 +67,7 @@
             <input type="email" name="email" class="form-control" placeholder="Email Address" />
           </div>
           <div class="form-group">
-            <input type="number" name="mobile" class="form-control" placeholder="Mobile / Contact Number" />
+            <input type="text" name="mobile" class="form-control" onkeypress="return isNumberKey(event);" placeholder="Mobile / Contact Number" />
           </div>
           <div class="form-group">
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -86,6 +86,17 @@
   @include('includes.footer')
 </div>
 <!-- ./wrapper -->
+<script>
+function isNumberKey(evt)
+{
+  var charCode = (evt.which) ? evt.which : event.keyCode;
+ console.log(charCode);
+    if (charCode != 46 && charCode != 45 && charCode > 31
+    && (charCode < 48 || charCode > 57))
+     return false;
 
+  return true;
+}
+</script>
 </div>
 @endsection

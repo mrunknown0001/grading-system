@@ -899,6 +899,41 @@ class TeacherController extends Controller
 
 
 
+    public function updateExamScore($id = null, $user_id = null, $assignid = null)
+    {
+        $score = ExamScore::findorfail($id);
+        $student = User::where('user_id', $user_id)->first();
+
+        return view('teacher.teacher-update-exam-score', ['students' => $this->getMyStudents(), 'score' => $score, 'student' => $student, 'assignid' => $assignid]);
+    }
+
+
+
+    // update exam score
+    public function postUpdateExamScore(Request $request)
+    {
+        $this->validate($request, [
+            'score' => 'required|numeric'
+        ]);
+
+        $score = $request['score'];
+        $total = $request['total'];
+        $assignid = $request['assignid'];
+
+        $exam = ExamScore::findorfail($request['id']);
+        $exam->score = $score;
+        $exam->save();
+
+        // log
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = 'Update Exam Score';
+        $log->save();
+
+
+        return redirect()->route('view_exam_score', ['sectionid' => $exam->section_id, 'subjectid' => $exam->subject_id, 'assignid' => $assignid])->with('success', 'Score Updated!');
+    }
+
 
     // method to go to messages
     public function getMessages()

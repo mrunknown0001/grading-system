@@ -31,7 +31,8 @@
           @include('includes.notice')
           <form action="{{ route('post_add_teacher') }}" method="POST" autocomplete="off">
           <div class="form-group">
-          <input type="text" name="id_number" class="form-control" placeholder="ID Number (e.g.: 0000-0000)" autofocus="" />
+          <input type="text" name="id_number" class="form-control" onkeypress="return isNumberKey(event);" placeholder="ID Number (e.g.: 0000-0000)" autofocus="" />
+          
           </div>
           <div class="form-group">
           <input type="text" name="firstname" class="form-control text-capitalize" placeholder="First Name" />
@@ -56,7 +57,7 @@
           <input type="email" name="email" class="form-control" placeholder="Email Address" />
           </div>
           <div class="form-group">
-          <input type="number" name="mobile" class="form-control" placeholder="Mobile or Contact Number" />
+          <input type="text" name="mobile" class="form-control" onkeypress="return isNumberKey(event);" placeholder="Mobile or Contact Number" />
           </div>
           <div class="form-group">
           {{ csrf_field() }}
@@ -76,6 +77,17 @@
   @include('includes.footer')
 </div>
 <!-- ./wrapper -->
+<script>
+function isNumberKey(evt)
+{
+  var charCode = (evt.which) ? evt.which : event.keyCode;
+ console.log(charCode);
+    if (charCode != 46 && charCode != 45 && charCode > 31
+    && (charCode < 48 || charCode > 57))
+     return false;
 
+  return true;
+}
+</script>
 </div>
 @endsection

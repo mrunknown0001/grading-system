@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title') Update Written Work Score - Student Grading System @endsection
+@section('title') Update Exam Score - Student Grading System @endsection
 
 @section('content')
 <div class="wrapper">
@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Update Written Work Score 
+            Update Exam Score 
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -33,7 +33,7 @@
           @include('includes.success')
           @include('includes.notice')
           <h4>{{ ucwords($student->firstname . ' ' . $student->lastname) }}</h4>
-          <form action="{{ route('post_update_written_work_score') }}" method="POST" autocomplete="off">
+          <form action="{{ route('post_update_exam_score') }}" method="POST" autocomplete="off">
             <div class="form-group">
               <p><strong>Total: {{ $score->total }}</strong></p>
               <input type="hidden" name="total" value="{{ $score->total }}" />

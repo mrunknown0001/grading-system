@@ -34,14 +34,14 @@
 
           <form action="{{ route('post_add_exam_score') }}" method="POST" autocomplete="off">
             <div class="form-group">
-              <input type="number" name="total" placeholder="Total" />
+              <input type="text" name="total" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" />
             </div>
             <div class="form-group">
             <table class="table">
             @foreach($section->students as $std)
               <tr>
               <td>{{ ucwords($std->user->firstname) }} {{ ucwords($std->user->lastname) }}</td>
-               <td><input type="number" name="{{ $std->user->user_id }}" value=0 placeholder="Score" /></td>
+               <td><input type="text" name="{{ $std->user->user_id }}" value=0 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Score" /></td>
               </tr>
             @endforeach
             </table>

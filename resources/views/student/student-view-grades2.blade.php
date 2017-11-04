@@ -44,11 +44,45 @@
                 <th>GWA</th>
               </tr>
             </thead>
-            <tbody>
+              @foreach($subjects as $sub)
+              <?php
+              $g1 = 0;
+              $g2 = 0;
+              ?>
               <tr>
-                
+                <td><strong>{{ $sub->title }}</strong></td>
+                <td>
+                  @if(count($fsg) != 0)
+                    @foreach($fsg as $f)
+                      @if($f['subject_id'] == $sub->id)
+                        @if($f['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @if(count($ssg) != 0)
+                    @foreach($ssg as $s)
+                      @if($s['subject_id'] == $sub->id)
+                        @if($s['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  {{ $final = ($g1 + $g2 + $g3 + $g4)/4 }}
+                </td>
+                <!-- <td></td> -->
               </tr>
-            </tbody>
+              @endforeach
           </table>
           
           @else 
