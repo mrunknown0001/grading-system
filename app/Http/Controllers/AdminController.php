@@ -1640,6 +1640,10 @@ class AdminController extends Controller
 
     public function adminPostChangeProfilePicture(Request $request)
     {
+        $this->validate($request, [
+            'image' => 'required|image'
+        ]);
+
         // return 'image';
         if( $request->hasFile('image') ) {
            $file = $request->file('image');
@@ -1673,5 +1677,7 @@ class AdminController extends Controller
 
            return redirect()->route('admin_profile_picture_change')->with('success', 'Sucessfully Change Your Profile Picture!');
         }
+
+        return redirect()->route('admin_profile_picture_change')->with('error_msg', 'No Image File!');
     }
 }
