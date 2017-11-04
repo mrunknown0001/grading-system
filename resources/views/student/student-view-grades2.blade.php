@@ -35,22 +35,27 @@
 
           @if(Auth::user()->info->section1->grade_level->id == 5 ||
           Auth::user()->info->section1->grade_level->id == 6)
-          <table>
+          <table class="table">
             <thead>
               <tr>
+                <th>Subject</th>
                 <th>First Semester</th>
                 <th>Second Semester</th>
                 <th>Final</th>
-                <th>GWA</th>
               </tr>
             </thead>
+            <tbody>
               @foreach($subjects as $sub)
               <?php
               $g1 = 0;
               $g2 = 0;
+              $g1_total = 0;
+              $g1_count = 0;
+              $g2_total = 0;
+              $g2_count = 0;
               ?>
               <tr>
-                <td><strong>{{ $sub->title }}</strong></td>
+                <td><strong>{{ ucwords($sub->title) }}</strong></td>
                 <td>
                   @if(count($fsg) != 0)
                     @foreach($fsg as $f)
@@ -59,6 +64,8 @@
                         N/A
                         @else
                         <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <!-- <div>{{ $g1_total = $g1_total + $g1 }}
+                        {{ $g1_count = $g1_count + 1 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -72,17 +79,25 @@
                         N/A
                         @else
                         <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        
                         @endif
                       @endif
                     @endforeach
                   @endif
                 </td>
                 <td>
-                  {{ $final = ($g1 + $g2 + $g3 + $g4)/4 }}
+                  {{ $final = ($g1 + $g2)/2 }}
                 </td>
                 <!-- <td></td> -->
               </tr>
               @endforeach
+              <tr>
+                <th>Average</th>
+                <td>{{ $g1_total/$g1_count }}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
           </table>
           
           @else 

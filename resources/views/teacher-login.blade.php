@@ -48,7 +48,7 @@
 				<form action="{{ route('post_login') }}" role="form" method="POST" autocomplete="off">
 					<h3>Teacher Login</h3>
 					<div class="form-group">
-						<input type="text" name="id" class="form-control" placeholder="ID Number" />
+						<input type="text" name="id" class="form-control" placeholder="ID Number" onkeypress="return isNumberKey(event);" />
 					</div>
 					<div class="form-group">
 						<input type="password" name="password" class="form-control" placeholder="Password" />
@@ -71,5 +71,18 @@
 
 	{{-- AdminLTE JS --}}
 	<script src="{{ URL::asset('dist/js/app.min.js') }}"></script>
+
+	<script>
+		function isNumberKey(evt)
+		{
+		  var charCode = (evt.which) ? evt.which : event.keyCode;
+		 console.log(charCode);
+		    if (charCode != 46 && charCode != 45 && charCode > 31
+		    && (charCode < 48 || charCode > 57))
+		     return false;
+
+		  return true;
+		}
+	</script>
 </body>
 </html>

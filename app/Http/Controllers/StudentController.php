@@ -231,13 +231,13 @@ class StudentController extends Controller
                     $ww_scores[] = [
                                     'subject_id' => $sub->id,
                                     'score' => WrittenWorkScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
                                             ->sum('score'),
                                     'total' => WrittenWorkScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
@@ -248,13 +248,13 @@ class StudentController extends Controller
                     $pt_scores[] = [
                                     'subject_id' => $sub->id,
                                     'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
                                             ->sum('score'),
                                     'total' => PerformanceTaskScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
@@ -264,13 +264,13 @@ class StudentController extends Controller
                     $exam_scores[] = [
                                     'subject_id' => $sub->id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
                                             ->sum('score'),
                                     'total' => ExamScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 5)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section_id)
                                             ->where('subject_id', $sub->id)
                                             ->where('student_number', Auth::user()->user_id)
@@ -316,6 +316,102 @@ class StudentController extends Controller
                 
 
             }
+
+            if($second_sem->finish == 1) {
+                // compute grade here
+                // get all raw scores and compute
+                // get all written work in first quarter
+                foreach($subjects as $sub) {
+                    // total subject total in first quarter\
+                    $ww_scores[] = [
+                                    'subject_id' => $sub->id,
+                                    'score' => WrittenWorkScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('score'),
+                                    'total' => WrittenWorkScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('total')
+                                    ];
+
+
+                    $pt_scores[] = [
+                                    'subject_id' => $sub->id,
+                                    'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('score'),
+                                    'total' => PerformanceTaskScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('total')
+                                ];
+
+                    $exam_scores[] = [
+                                    'subject_id' => $sub->id,
+                                    'score' => ExamScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('score'),
+                                    'total' => ExamScore::where('school_year_id', $asy->id)
+                                            ->where('semester_id', 2)
+                                            ->where('section_id', $section_id)
+                                            ->where('subject_id', $sub->id)
+                                            ->where('student_number', Auth::user()->user_id)
+                                            ->sum('total')
+                                ];
+
+                }
+
+
+
+                foreach($subjects as $sub) {
+                    $ww_percentage = 0;
+                    $pt_percentage = 0;
+                    $exam_percentage = 0;
+
+                    foreach ($ww_scores as $ws) {
+                        if($sub->id == $ws['subject_id'] && $ws['score'] != 0) {
+                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                        }
+                    }
+
+                    foreach ($pt_scores as $pt) {
+                        if($sub->id == $pt['subject_id'] && $pt['score'] != 0) {
+                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                        }
+                    }
+
+                    foreach ($exam_scores as $es) {
+                        if($sub->id == $es['subject_id'] && $es['score'] != 0) {
+                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                        }
+                    }
+
+                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+
+                    $ssg[] = [
+                        'subject_id' => $sub->id,
+                        'grade' => $grade
+                        ];
+                }
+
+
+                
+
+            }
+
 
             return view('student.student-view-grades2', ['subjects' => $subjects, 'fsg' => $fsg, 'ssg' => $ssg]);
 

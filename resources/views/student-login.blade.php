@@ -46,7 +46,7 @@
 				<form action="{{ route('post_login') }}" role="form" method="POST" autocomplete="off">
 					<h3>Student Login</h3>
 					<div class="form-group">
-						<input type="text" name="id" class="form-control" placeholder="Student Number" />
+						<input type="text" name="id" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Student Number" />
 					</div>
 					<div class="form-group">
 						<input type="password" name="password" class="form-control" placeholder="Password" />
