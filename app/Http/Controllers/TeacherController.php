@@ -982,6 +982,7 @@ class TeacherController extends Controller
                 }
 
 
+
                 foreach($section->students as $std) {
                     $ww_percentage = 0;
                     $pt_percentage = 0;
@@ -995,18 +996,20 @@ class TeacherController extends Controller
                     }
 
 
-
                     foreach ($pt_scores as $pt) {
-                        if($std->user_id == $ws['student_id'] && $pt['score'] != 0) {
+                        if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
                         }
                     }
 
+
                     foreach ($exam_scores as $es) {
-                        if($std->user_id == $ws['student_id'] && $es['score'] != 0) {
+                        if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
                         }
                     }
+
+
 
                     $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
 
@@ -1017,7 +1020,6 @@ class TeacherController extends Controller
                 }
 
             } // end of first quarter
-
 
 
             // for second quarter

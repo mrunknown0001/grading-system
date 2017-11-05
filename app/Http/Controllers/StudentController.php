@@ -216,6 +216,8 @@ class StudentController extends Controller
         $subjects = Auth::user()->info->section1->grade_level->subjects;
 
 
+        $section = Section::find($section_id);
+
         // get all raw grades per subject per quarter or semester
         // for senior high
         if($level_id == 5 || $level_id ==6) {
@@ -413,7 +415,7 @@ class StudentController extends Controller
             }
 
 
-            return view('student.student-view-grades2', ['subjects' => $subjects, 'fsg' => $fsg, 'ssg' => $ssg]);
+            return view('student.student-view-grades2', ['subjects' => $subjects, 'fsg' => $fsg, 'ssg' => $ssg, 'section' => $section, 'asy' => $asy]);
 
 
         }
@@ -799,7 +801,7 @@ class StudentController extends Controller
 
 
 
-            return view('student.student-view-grades', ['subjects' => $subjects, 'fqg' => $fqg, 'sqg' => $sqg, 'tqg' => $tqg, 'foqg' => $foqg]);
+            return view('student.student-view-grades', ['subjects' => $subjects, 'fqg' => $fqg, 'sqg' => $sqg, 'tqg' => $tqg, 'foqg' => $foqg, 'section' => $section, 'asy' => $asy]);
             
             
         }
