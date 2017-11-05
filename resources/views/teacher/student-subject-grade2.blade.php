@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1>
         <!-- Dashboard -  -->
-            Subject Grades 
+            {{ ucwords($section->grade_level->name . ' - ' . $section->name) }} - {{ ucwords($subject->title) }} Grades 
        
       </h1>
 <!--       <ol class="breadcrumb">
@@ -43,9 +43,21 @@
             <tbody>
               @foreach($section->students as $std)
                 <tr>
-                  <td>{{ $std->user->firstname }}</td>
-                  <td></td>
-                  <td></td>
+                  <td>{{ ucwords($std->user->lastname . ', ' . $std->user->firstname) }}</td>
+                  <td>
+                    @foreach($fsg as $f)
+                      @if($f['student_id'] == $std->user_id)
+                      {{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}
+                      @endif
+                    @endforeach
+                  </td>
+                  <td>
+                    @foreach($ssg as $s)
+                      @if($s['student_id'] == $std->user_id)
+                      {{ \App\Http\Controllers\StudentController::getGrade($s['grade']) }}
+                      @endif
+                    @endforeach
+                  </td>
                 </tr>
               @endforeach
             </tbody>
