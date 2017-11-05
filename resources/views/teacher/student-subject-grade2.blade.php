@@ -10,7 +10,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1> 
+      <h1>
         <!-- Dashboard -  -->
             Subject Grades 
        
@@ -38,16 +38,12 @@
                 <th>Name</th>
                 <th>First</th>
                 <th>Second</th>
-                <th>Third</th>
-                <th>Fourth</th>
               </tr>
             </thead>
             <tbody>
               @foreach($section->students as $std)
                 <tr>
                   <td>{{ $std->user->firstname }}</td>
-                  <td></td>
-                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>
