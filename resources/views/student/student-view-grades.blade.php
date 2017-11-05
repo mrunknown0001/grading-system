@@ -63,6 +63,10 @@
               $g2 = 0;
               $g3 = 0;
               $g4 = 0;
+              $g1_total = 0;
+              $g2_total = 0;
+              $g3_total = 0;
+              $g4_total = 0;
               ?>
               <tr>
                 <td><strong>{{ $sub->title }}</strong></td>
@@ -74,6 +78,7 @@
                         N/A
                         @else
                         <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <div>{{ $g1_total = $g1_total + $g1 }}</div>
                         @endif
                       @endif
                     @endforeach
@@ -87,6 +92,7 @@
                         N/A
                         @else
                         <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        <!-- <div>{{ $g2_total = $g2_total + $g2 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -100,6 +106,7 @@
                         N/A
                         @else
                         <strong>{{ $g3 = \App\Http\Controllers\StudentController::getGrade($t['grade']) }}</strong>
+                        <!-- <div>{{ $g3_total = $g3_total + $g3 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -115,6 +122,7 @@
                         N/A
                         @else
                         <strong>{{ $g4 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <!-- <div>{{ $g4_total = $g4_total + $g4 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -126,6 +134,31 @@
                 <!-- <td></td> -->
               </tr>
               @endforeach
+              <tr>
+                <th>Average</th>
+                <td>
+                  {{ $g1_total }}
+                  @if($g1_total != 0)
+                    {{ $g1_total/$subjects->count() }}
+                  @endif
+                </td>
+                <td>
+                  @if($g2_total != 0)
+                    {{ $g2_total/$subjects->count() }}
+                  @endif
+                </td>
+                <td>
+                  @if($g3_total != 0)
+                    {{ $g3_total/$subjects->count() }}
+                  @endif
+                </td>
+                <td>
+                  @if($g4_total != 0)
+                    {{ $g4_total/$subjects->count() }}
+                  @endif
+                </td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
           @endif

@@ -50,9 +50,7 @@
               $g1 = 0;
               $g2 = 0;
               $g1_total = 0;
-              $g1_count = 0;
               $g2_total = 0;
-              $g2_count = 0;
               ?>
               <tr>
                 <td><strong>{{ ucwords($sub->title) }}</strong></td>
@@ -64,8 +62,7 @@
                         N/A
                         @else
                         <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
-                        <!-- <div>{{ $g1_total = $g1_total + $g1 }}
-                        {{ $g1_count = $g1_count + 1 }}</div> -->
+                        <!-- <div>{{ $g1_total = $g1_total + $g1 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -79,8 +76,7 @@
                         N/A
                         @else
                         <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
-                        <!-- <div>{{ $g2_total = $g2_total + $g2 }}
-                        {{ $g2_count = $g2_count + 1 }}</div> -->
+                        <!-- <div>{{ $g2_total = $g2_total + $g2 }}</div> -->
                         @endif
                       @endif
                     @endforeach
@@ -94,8 +90,16 @@
               @endforeach
               <tr>
                 <th>Average</th>
-                <td>{{ $g1_total/$g1_count }}</td>
-                <td>{{ $g2_total/$g2_count }}</td>
+                <td>
+                  @if($g1_total != 0)
+                    {{ $g1_total/$subjects->count() }}
+                  @endif
+                </td>
+                <td>
+                  @if($g2_total != 0)
+                    {{ $g2_total/$subjects->count() }}
+                  @endif
+                </td>
                 <td></td>
               </tr>
             </tbody>
