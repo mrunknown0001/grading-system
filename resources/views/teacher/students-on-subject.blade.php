@@ -41,21 +41,23 @@
             <a href="{{ route('view_written_work_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Written Works Scores</a>
             <a href="{{ route('view_performance_task_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Performance Task Scores</a>
             <a href="{{ route('view_exam_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Exam Scores</a>
+            
+            <a href="{{ route('teacher_view_subject_grades', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id]) }}" class="btn btn-success btn-xs">View Grades</a>
           </div>
           <table class="table table-hover" id="studentsTable">
             <thead>
               <tr>
-                <th onclick="sortTable(0)" style="cursor: pointer;">Student Number</th>
+                <th onclick="sortTable(4)" style="cursor: pointer;">Student Number</th>
+                <th onclick="sortTable(0)" style="cursor: pointer;">Last Name</th>
                 <th onclick="sortTable(1)" style="cursor: pointer;">First Name</th>
-                <th onclick="sortTable(2)" style="cursor: pointer;">Last Name</th>
               </tr>
             </thead>
             <tbody>
               @foreach($all_students as $astd)
               <tr>
                 <td>{{ $astd->user->user_id }}</td>
-                <td>{{ ucwords($astd->user->firstname) }}</td>
                 <td>{{ ucwords($astd->user->lastname) }}</td>
+                <td>{{ ucwords($astd->user->firstname) }}</td>
               </tr>
               @endforeach
             </tbody>
@@ -132,5 +134,9 @@ function sortTable(n) {
     }
   }
 }
+
+window.onload = function() {
+  sortTable(0);
+};
 </script>
 @endsection

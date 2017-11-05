@@ -899,6 +899,16 @@ class TeacherController extends Controller
 
 
 
+    // method use to view exam score
+    public function viewSubjectGrades($sectionid = null, $subjectid = null, $assignid = null)
+    {
+
+        $section = Section::find($sectionid);
+
+        return view('teacher.student-subject-grade', ['section' => $section, 'students' => $this->getMyStudents()]);
+    }
+
+
     public function updateExamScore($id = null, $user_id = null, $assignid = null)
     {
         $score = ExamScore::findorfail($id);

@@ -78,7 +78,7 @@
                         N/A
                         @else
                         <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
-                        <div>{{ $g1_total = $g1_total + $g1 }}</div>
+                        <!-- <div>{{ $g1_total = $g1_total + $g1 }}</div> -->
                         @endif
                       @endif
                     @endforeach

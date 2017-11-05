@@ -652,6 +652,14 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
         'as' => 'view_exam_score'
     ]);
 
+
+    // route to view grades per subject
+    Route::get('grade/{sectionid}/{subjectid}/{assignid}/view', [
+        'uses' => 'TeacherController@viewSubjectGrades',
+        'as' => 'teacher_view_subject_grades'
+    ]);
+
+
     // route to edit exam score
     Route::get('update/exam/score/{id}/{user_id}/{assignid}', [
         'uses' => 'TeacherController@updateExamScore',
