@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <form action="{{ route('admin_reselect_quater', $q->id) }}" method="GET">
-                    <button type="submit" class="btn btn-success">Finish</button>
+                    <button type="submit" class="btn btn-success">Continue</button>
                 </form>
             </div>
         </div>

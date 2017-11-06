@@ -47,14 +47,14 @@
                   <td>
                     @foreach($fsg as $f)
                       @if($f['student_id'] == $std->user_id)
-                      {{ floor($f['grade']) }}
+                      {{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}
                       @endif
                     @endforeach
                   </td>
                   <td>
                     @foreach($ssg as $s)
                       @if($s['student_id'] == $std->user_id)
-                      {{ floor($s['grade']) }}
+                      {{ \App\Http\Controllers\StudentController::getGrade($s['grade']) }}
                       @endif
                     @endforeach
                   </td>

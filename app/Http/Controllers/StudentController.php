@@ -315,7 +315,6 @@ class StudentController extends Controller
                 }
 
 
-                
 
             }
 
@@ -492,32 +491,30 @@ class StudentController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($sub->id == $ws['subject_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
                     foreach ($pt_scores as $pt) {
                         if($sub->id == $pt['subject_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
                     foreach ($exam_scores as $es) {
                         if($sub->id == $es['subject_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $fqg[] = [
                         'subject_id' => $sub->id,
                         'grade' => $grade
                         ];
+
                 }
-
-
-                
 
             }
             
@@ -587,23 +584,23 @@ class StudentController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($sub->id == $ws['subject_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
                     foreach ($pt_scores as $pt) {
                         if($sub->id == $pt['subject_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
                     foreach ($exam_scores as $es) {
                         if($sub->id == $es['subject_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $sqg[] = [
                         'subject_id' => $sub->id,
@@ -674,7 +671,6 @@ class StudentController extends Controller
                 }
 
 
-
                 foreach($subjects as $sub) {
                     $ww_percentage = 0;
                     $pt_percentage = 0;
@@ -682,23 +678,23 @@ class StudentController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($sub->id == $ws['subject_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
                     foreach ($pt_scores as $pt) {
                         if($sub->id == $pt['subject_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
                     foreach ($exam_scores as $es) {
                         if($sub->id == $es['subject_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $tqg[] = [
                         'subject_id' => $sub->id,
@@ -773,23 +769,23 @@ class StudentController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($sub->id == $ws['subject_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
                     foreach ($pt_scores as $pt) {
                         if($sub->id == $pt['subject_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
                     foreach ($exam_scores as $es) {
                         if($sub->id == $es['subject_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $foqg[] = [
                         'subject_id' => $sub->id,

@@ -88,8 +88,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Filipino',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
@@ -98,8 +98,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Araling Panlipunan',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
@@ -108,8 +108,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - English',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
@@ -118,8 +118,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Edukasyon sa Pagpapakatao',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
@@ -128,8 +128,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Christian Living',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
@@ -158,8 +158,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Music, Arts, Physical Education and Health',
                     'number_of_teacher' => 3,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
@@ -168,8 +168,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Technology and Livelihood Education',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
@@ -178,8 +178,8 @@ class DatabaseSeeder extends Seeder
                     'type' => '1',
                     'description' => 'Grade 7 - Information Communication Technology',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ]
             ]);
@@ -192,57 +192,57 @@ class DatabaseSeeder extends Seeder
                     'level' => '2',
                     'title' => 'Filipino',
                     'type' => '1',
-                    'description' => 'Grade 8 - Filipino',
+                    'description' => 'Grade 7 - Filipino',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                    'level' => '2',
                     'title' => 'Araling Panlipunan',
                     'type' => '1',
-                    'description' => 'Grade 8 - Araling Panlipunan',
+                    'description' => 'Grade 7 - Araling Panlipunan',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'English',
                     'type' => '1',
-                    'description' => 'Grade 8 - English',
+                    'description' => 'Grade 7 - English',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'Edukasyon sa Pagpapakatao',
                     'type' => '1',
-                    'description' => 'Grade 8 - Edukasyon sa Pagpapakatao',
+                    'description' => 'Grade 7 - Edukasyon sa Pagpapakatao',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'Christian Living',
                     'type' => '1',
-                    'description' => 'Grade 8 - Christian Living',
+                    'description' => 'Grade 7 - Christian Living',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'Science',
                     'type' => '1',
-                    'description' => 'Grade 8 - Science',
+                    'description' => 'Grade 7 - Science',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -252,7 +252,7 @@ class DatabaseSeeder extends Seeder
                     'level' => '2',
                     'title' => 'Mathematics',
                     'type' => '1',
-                    'description' => 'Grade 8 - Mathematics',
+                    'description' => 'Grade 7 - Mathematics',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -262,33 +262,35 @@ class DatabaseSeeder extends Seeder
                     'level' => '2',
                     'title' => 'MAPEH',
                     'type' => '1',
-                    'description' => 'Grade 8 - Music, Arts, Physical Education and Health',
+                    'description' => 'Grade 7 - Music, Arts, Physical Education and Health',
                     'number_of_teacher' => 3,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'TLE',
                     'type' => '1',
-                    'description' => 'Grade 8 - Technology and Livelihood Education',
+                    'description' => 'Grade 7 - Technology and Livelihood Education',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '2',
                     'title' => 'ICT',
                     'type' => '1',
-                    'description' => 'Grade 8 - Information Communication Technology',
+                    'description' => 'Grade 7 - Information Communication Technology',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ]
             ]);
+
+
 
 
         // subject for grade 9
@@ -297,57 +299,57 @@ class DatabaseSeeder extends Seeder
                     'level' => '3',
                     'title' => 'Filipino',
                     'type' => '1',
-                    'description' => 'Grade 9 - Filipino',
+                    'description' => 'Grade 7 - Filipino',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                    'level' => '3',
                     'title' => 'Araling Panlipunan',
                     'type' => '1',
-                    'description' => 'Grade 9 - Araling Panlipunan',
+                    'description' => 'Grade 7 - Araling Panlipunan',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '3',
                     'title' => 'English',
                     'type' => '1',
-                    'description' => 'Grade 9 - English',
+                    'description' => 'Grade 7 - English',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '3',
                     'title' => 'Edukasyon sa Pagpapakatao',
                     'type' => '1',
-                    'description' => 'Grade 9 - Edukasyon sa Pagpapakatao',
+                    'description' => 'Grade 7 - Edukasyon sa Pagpapakatao',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '3',
                     'title' => 'Christian Living',
                     'type' => '1',
-                    'description' => 'Grade 9 - Christian Living',
+                    'description' => 'Grade 7 - Christian Living',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
-                    'level' => '3',
+                    'level' => '1',
                     'title' => 'Science',
                     'type' => '1',
-                    'description' => 'Grade 9 - Science',
+                    'description' => 'Grade 7 - Science',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -357,7 +359,7 @@ class DatabaseSeeder extends Seeder
                     'level' => '3',
                     'title' => 'Mathematics',
                     'type' => '1',
-                    'description' => 'Grade 9 - Mathematics',
+                    'description' => 'Grade 7 - Mathematics',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -367,33 +369,35 @@ class DatabaseSeeder extends Seeder
                     'level' => '3',
                     'title' => 'MAPEH',
                     'type' => '1',
-                    'description' => 'Grade 9 - Music, Arts, Physical Education and Health',
+                    'description' => 'Grade 7 - Music, Arts, Physical Education and Health',
                     'number_of_teacher' => 3,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '3',
                     'title' => 'TLE',
                     'type' => '1',
-                    'description' => 'Grade 9 - Technology and Livelihood Education',
+                    'description' => 'Grade 7 - Technology and Livelihood Education',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '3',
                     'title' => 'ICT',
                     'type' => '1',
-                    'description' => 'Grade 9 - Information Communication Technology',
+                    'description' => 'Grade 7 - Information Communication Technology',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ]
             ]);
+
+
 
 
         // subject for grade 10
@@ -402,57 +406,57 @@ class DatabaseSeeder extends Seeder
                     'level' => '4',
                     'title' => 'Filipino',
                     'type' => '1',
-                    'description' => 'Grade 10 - Filipino',
+                    'description' => 'Grade 7 - Filipino',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                    'level' => '4',
                     'title' => 'Araling Panlipunan',
                     'type' => '1',
-                    'description' => 'Grade 10 - Araling Panlipunan',
+                    'description' => 'Grade 7 - Araling Panlipunan',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'English',
                     'type' => '1',
-                    'description' => 'Grade 10 - English',
+                    'description' => 'Grade 7 - English',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'Edukasyon sa Pagpapakatao',
                     'type' => '1',
-                    'description' => 'Grade 10 - Edukasyon sa Pagpapakatao',
+                    'description' => 'Grade 7 - Edukasyon sa Pagpapakatao',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'Christian Living',
                     'type' => '1',
-                    'description' => 'Grade 10 - Christian Living',
+                    'description' => 'Grade 7 - Christian Living',
                     'number_of_teacher' => 1,
-                    'performance_task' => 30,
-                    'written_work' => 50,
+                    'performance_task' => 50,
+                    'written_work' => 30,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'Science',
                     'type' => '1',
-                    'description' => 'Grade 10 - Science',
+                    'description' => 'Grade 7 - Science',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -462,7 +466,7 @@ class DatabaseSeeder extends Seeder
                     'level' => '4',
                     'title' => 'Mathematics',
                     'type' => '1',
-                    'description' => 'Grade 10 - Mathematics',
+                    'description' => 'Grade 7 - Mathematics',
                     'number_of_teacher' => 1,
                     'performance_task' => 40,
                     'written_work' => 40,
@@ -472,33 +476,35 @@ class DatabaseSeeder extends Seeder
                     'level' => '4',
                     'title' => 'MAPEH',
                     'type' => '1',
-                    'description' => 'Grade 10 - Music, Arts, Physical Education and Health',
+                    'description' => 'Grade 7 - Music, Arts, Physical Education and Health',
                     'number_of_teacher' => 3,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'TLE',
                     'type' => '1',
-                    'description' => 'Grade 10 - Technology and Livelihood Education',
+                    'description' => 'Grade 7 - Technology and Livelihood Education',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ],
                 [
                     'level' => '4',
                     'title' => 'ICT',
                     'type' => '1',
-                    'description' => 'Grade 10 - Information Communication Technology',
+                    'description' => 'Grade 7 - Information Communication Technology',
                     'number_of_teacher' => 1,
-                    'performance_task' => 20,
-                    'written_work' => 60,
+                    'performance_task' => 60,
+                    'written_work' => 20,
                     'exam' => 20
                 ]
             ]);
+
+
 
 
          DB::table('quarters')->insert([
