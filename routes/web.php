@@ -488,6 +488,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     ]);
 
 
+    // ranking
+    Route::get('ranking/section/{sectionid}/view', [
+        'uses' => 'AdminController@adminViewRanking',
+        'as' => 'admin_view_ranking'
+    ]);
+
 
     // rout to search students
     Route::post('student/search', [
@@ -497,6 +503,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     Route::get('student/search', function () {
         return redirect()->route('get_view_all_students');
     });
+
+
+
 
 });
 /*********************************************

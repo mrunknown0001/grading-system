@@ -18,7 +18,7 @@
     <section class="content">
       @foreach($sections as $sec)
       <h3><a href="{{ route('admin_view_section_students', ['levelid' => $grade_level->id, 'sectionid' => $sec->id]) }}">{{ ucwords($sec->name) }}</a>
-      <!-- <a href="{{ route('admin_compute_grades', ['section_id' => $sec->id]) }}" class="btn btn-warning">Compute</a> -->
+      <a href="{{ route('admin_view_ranking', ['section_id' => $sec->id]) }}" class="btn btn-primary">Ranking</a>
       </h3>
       @endforeach
 
