@@ -78,7 +78,7 @@
                         @if($f['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <strong>{{ $g1 = floor($f['grade']) }}</strong>
                         <!-- <div>{{ $g1_total = $g1_total + $g1 }}</div> -->
                         @endif
                       @endif
@@ -92,7 +92,7 @@
                         @if($s['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        <strong>{{ $g2 = floor($s['grade']) }}</strong>
                         <!-- <div>{{ $g2_total = $g2_total + $g2 }}</div> -->
                         @endif
                       @endif
@@ -106,7 +106,7 @@
                         @if($t['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g3 = \App\Http\Controllers\StudentController::getGrade($t['grade']) }}</strong>
+                        <strong>{{ $g3 = floor($t['grade']) }}</strong>
                         <!-- <div>{{ $g3_total = $g3_total + $g3 }}</div> -->
                         @endif
                       @endif
@@ -122,7 +122,7 @@
                         @if($f['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g4 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <strong>{{ $g4 = floor($f['grade']) }}</strong>
                         <!-- <div>{{ $g4_total = $g4_total + $g4 }}</div> -->
                         @endif
                       @endif

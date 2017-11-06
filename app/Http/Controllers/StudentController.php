@@ -1113,6 +1113,8 @@ class StudentController extends Controller
         }
     }
 
+    
+
 
     // method use to view old grades of students
     public function viewPreviewsGrades()
