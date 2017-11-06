@@ -138,7 +138,6 @@
               <tr>
                 <th>Average</th>
                 <td>
-                  {{ $g1_total }}
                   @if($g1_total != 0)
                     {{ $g1_total/$subjects->count() }}
                   @endif
