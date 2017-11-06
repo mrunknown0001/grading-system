@@ -331,6 +331,8 @@ class TeacherController extends Controller
 
         $students = $this->getMyStudents();
 
+
+
         $school_year = SchoolYear::whereStatus(1)->first();
         $quarter = Quarter::whereStatus(1)->first();
         $semester = Semester::whereStatus(1)->first();
@@ -338,6 +340,10 @@ class TeacherController extends Controller
         $section = Section::findorfail($sectionid);
         $subject = Subject::findorfail($subjectid);
         $assign = SubjectAssign::findorfail($assignid);
+
+        if($quarter == null || $semester == null) {
+            return 'system is initializing by admin';
+        }
 
         // check how many written works has taken
         // check also if junior or senior high
@@ -1109,7 +1115,7 @@ class TeacherController extends Controller
 
 
 
-                    $grade =  ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $sqg[] = [
                         'student_id' => $std->user_id,
@@ -1187,27 +1193,29 @@ class TeacherController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
-
 
 
                     foreach ($pt_scores as $pt) {
-                        if($std->user_id == $ws['student_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                        if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
+
 
                     foreach ($exam_scores as $es) {
-                        if($std->user_id == $ws['student_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                        if($std->user_id == $es['student_id'] && $es['score'] != 0) {
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
 
-                    $fqg[] = [
+
+                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+
+                    $tqg[] = [
                         'student_id' => $std->user_id,
                         'grade' => $grade
                         ];
@@ -1218,7 +1226,7 @@ class TeacherController extends Controller
 
 
             // for fourth quarter
-            if($fourth_quarter->finish == 1) {
+            if($fourth_quarter->status == 1) {
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1284,27 +1292,29 @@ class TeacherController extends Controller
 
                     foreach ($ww_scores as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
-
 
 
                     foreach ($pt_scores as $pt) {
-                        if($std->user_id == $ws['student_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                        if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
+
 
                     foreach ($exam_scores as $es) {
-                        if($std->user_id == $ws['student_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                        if($std->user_id == $es['student_id'] && $es['score'] != 0) {
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
 
-                    $fqg[] = [
+
+                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+
+                    $foqg[] = [
                         'student_id' => $std->user_id,
                         'grade' => $grade
                         ];
@@ -1417,7 +1427,7 @@ class TeacherController extends Controller
             } // end of first sem
 
             // for first sem
-            if($second_sem->finish == 1) {
+            if($second_sem->status == 1) {
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
