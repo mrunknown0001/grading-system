@@ -483,7 +483,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 
     // route to compute grade of students per section
     Route::get('compute/{section_id}', [
-        'uses' => 'Admincontroller@adminComputeGrades',
+        'uses' => 'AdminController@adminComputeGrades',
         'as' => 'admin_compute_grades'
     ]);
 

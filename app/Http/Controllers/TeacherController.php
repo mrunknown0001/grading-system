@@ -1434,7 +1434,7 @@ class TeacherController extends Controller
             } // end of first sem
 
             // for first sem
-            if($second_sem->status == 1) {
+            if($second_sem->finish == 1) {
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
