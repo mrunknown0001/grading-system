@@ -35,9 +35,9 @@
           <table class="table table-hover" id="studentsTable">
             <thead>
               <tr>
-                <th onclick="sortTable(0)" style="cursor: pointer;">Student Number</th>
+                <th onclick="sortTable(2)" style="cursor: pointer;">Student Number</th>
                 <th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
-                <th onclick="sortTable(2)">Average</th>
+                <th onclick="sortTable(0)">Average</th>
               </tr>
             </thead>
             <tbody>
@@ -75,7 +75,7 @@ function sortTable(n) {
   table = document.getElementById("studentsTable");
   switching = true;
   // Set the sorting direction to ascending:
-  dir = "asc"; 
+  dir = "desc"; 
   /* Make a loop that will continue until
   no switching has been done: */
   while (switching) {
@@ -93,13 +93,13 @@ function sortTable(n) {
       y = rows[i + 1].getElementsByTagName("TD")[n];
       /* Check if the two rows should switch place,
       based on the direction, asc or desc: */
-      if (dir == "asc") {
+      if (dir == "desc") {
         if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
           // If so, mark as a switch and break the loop:
           shouldSwitch= true;
           break;
         }
-      } else if (dir == "desc") {
+      } else if (dir == "asc") {
         if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
           // If so, mark as a switch and break the loop:
           shouldSwitch= true;
@@ -126,7 +126,7 @@ function sortTable(n) {
 }
 
 window.onload = function() {
-  sortTable(2);
+  sortTable(0);
 };
 </script>
 
