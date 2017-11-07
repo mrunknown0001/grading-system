@@ -32,6 +32,8 @@
             <h4 class="text-center">Concepcion Catholic School</h4>
             <p>Student Name: {{ ucwords(Auth::user()->firstname) }} {{ ucwords(Auth::user()->lastname) }}</p>
             <p>ID Number: {{ Auth::user()->user_id }}</p>
+            <h5>Grade &amp; Section: {{ ucwords($section->grade_level->name) }} - {{ ucwords($section->name) }}</h5>
+            <h5>School Year: {{ $asy->from }} - {{ $asy->to }}</h5>
           </div>
 
           {{-- Includes errors and session flash message display container --}}
@@ -163,8 +165,6 @@
           </table>
           @endif
           <div id="info">
-            <h5>Grade &amp; Section: {{ ucwords($section->grade_level->name) }} - {{ ucwords($section->name) }}</h5>
-            <h5>School Year: {{ $asy->from }} - {{ $asy->to }}</h5>
           </div>
         </div>
       </div>

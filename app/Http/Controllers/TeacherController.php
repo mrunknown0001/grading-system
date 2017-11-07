@@ -1376,6 +1376,7 @@ class TeacherController extends Controller
                                             ->sum('total')
                                 ];
 
+
                     $exam_scores_s1[] = [
                                     'student_id' => $std->user_id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
@@ -1403,25 +1404,26 @@ class TeacherController extends Controller
 
                     foreach ($ww_scores_s1 as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
-                            $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
+                            $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) *100;
                         }
                     }
 
 
 
                     foreach ($pt_scores_s1 as $pt) {
-                        if($std->user_id == $ws['student_id'] && $pt['score'] != 0) {
-                            $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
+                        if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
+                            $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
+
 
                     foreach ($exam_scores_s1 as $es) {
-                        if($std->user_id == $ws['student_id'] && $es['score'] != 0) {
-                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
+                        if($std->user_id == $es['student_id'] && $es['score'] != 0) {
+                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
                     $fsg[] = [
                         'student_id' => $std->user_id,
