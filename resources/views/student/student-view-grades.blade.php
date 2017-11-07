@@ -92,7 +92,7 @@
                         @if($s['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($S['grade']) }}</strong>
+                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
                         <!-- <div>{{ $g2_total = $g2_total + $g2 }}</div> -->
                         @endif
                       @endif
