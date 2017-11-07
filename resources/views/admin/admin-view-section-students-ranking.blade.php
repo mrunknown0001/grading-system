@@ -129,7 +129,6 @@ window.onload = function() {
   sortTable(2);
 };
 </script>
-</script>
 
 
 </div>

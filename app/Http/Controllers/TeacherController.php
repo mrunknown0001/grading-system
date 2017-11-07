@@ -923,11 +923,17 @@ class TeacherController extends Controller
         $sub = Subject::find($subjectid);
 
 
+       $fqg = [];
+       $sqg = [];
+       $tqg = [];
+       $foqg = [];
+       $fsg = [];
+       $ssg = [];
+
         if($section->level <= 4) {
 
             // for first quarter
             if($first_quarter->finish == 1) {
-               $fqg = [];
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1027,7 +1033,7 @@ class TeacherController extends Controller
 
             // for second quarter
             if($second_quarter->finish == 1) {
-                $sqg = [];
+                
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1126,7 +1132,7 @@ class TeacherController extends Controller
 
             // for third quarter
             if($third_quarter->finish == 1) {
-                $tqg = [];
+                
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1226,7 +1232,7 @@ class TeacherController extends Controller
 
             // for fourth quarter
             if($fourth_quarter->status == 1) {
-                $foqg = [];
+                
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1329,8 +1335,6 @@ class TeacherController extends Controller
         }
         else {
 
-            $fsg = [];
-            $ssg = [];
 
             // for first sem
             if($first_sem->finish == 1) {
@@ -1569,7 +1573,7 @@ class TeacherController extends Controller
     public function getMessages()
     {
         // find all message under the teacher
-        $student_messages = Message::where('teacher_id', Auth::user()->id)->distinct()->orderBy('status', 'desc')->get(['student_id']);
+        $student_messages = Message::where('teacher_id', Auth::user()->id)->orderBy('status', 'desc')->get(['student_id']);
 
 
         return view('teacher.teacher-messages', ['students' => $this->getMyStudents(), 'student_messages' => $student_messages]);
