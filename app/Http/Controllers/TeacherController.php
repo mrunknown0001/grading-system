@@ -1231,7 +1231,7 @@ class TeacherController extends Controller
 
 
             // for fourth quarter
-            if($fourth_quarter->status == 1) {
+            if($fourth_quarter->finish == 1) {
                 
                 // compute grade here
                 // get all raw scores and compute

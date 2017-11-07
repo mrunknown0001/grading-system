@@ -117,12 +117,12 @@
                 <td>
                   
                   @if(count($foqg) != 0)
-                    @foreach($foqg as $f)
-                      @if($f['subject_id'] == $sub->id)
-                        @if($f['grade'] == 0)
+                    @foreach($foqg as $fo)
+                      @if($fo['subject_id'] == $sub->id)
+                        @if($fo['grade'] == 0)
                         N/A
                         @else
-                        <strong>{{ $g4 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <strong>{{ $g4 = \App\Http\Controllers\StudentController::getGrade($fo['grade']) }}</strong>
                         <!-- <div>{{ $g4_total = $g4_total + $g4 }}</div> -->
                         @endif
                       @endif
