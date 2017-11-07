@@ -1507,13 +1507,13 @@ class TeacherController extends Controller
 
 
                     foreach ($pt_scores_s2 as $pt) {
-                        if($std->user_id == $ws['student_id'] && $pt['score'] != 0) {
+                        if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
                         }
                     }
 
                     foreach ($exam_scores_s2 as $es) {
-                        if($std->user_id == $ws['student_id'] && $es['score'] != 0) {
+                        if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
                         }
                     }
