@@ -53,6 +53,7 @@
               </tr>
             </thead>
             <tbody>
+              <?php $grade_total = 0; ?>
               @foreach($subjects as $sub)
               <?php
               $g1 = 0;
@@ -92,23 +93,16 @@
                 </td>
                 <td>
                   {{ $final = ($g1 + $g2)/2 }}
+                  <!-- <div>{{ $grade_total = $grade_total + $final }}</div> -->
                 </td>
                 <!-- <td></td> -->
               </tr>
               @endforeach
               <tr>
                 <th>Average</th>
-                <td>
-                  @if($g1_total != 0)
-                    {{ $g1_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td>
-                  @if($g2_total != 0)
-                    {{ $g2_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td></td>
+                <th colspan="5">
+                    <u>{{ $grade_total/count($subjects) }}</u>
+                </th>
               </tr>
             </tbody>
           </table>

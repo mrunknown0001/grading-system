@@ -60,6 +60,7 @@
               </tr>
             </thead>
             <tbody>
+              <?php $grade_total = 0; ?>
               @foreach($subjects as $sub)
               <?php
               $g1 = 0;
@@ -70,6 +71,7 @@
               $g2_total = 0;
               $g3_total = 0;
               $g4_total = 0;
+
               ?>
               <tr>
                 <td><strong>{{ $sub->title }}</strong></td>
@@ -133,33 +135,14 @@
                 </td>
                 <td>
                   {{ $final = ($g1 + $g2 + $g3 + $g4)/4 }}
+                  <!-- <div>{{ $grade_total = $grade_total + $final }}</div> -->
                 </td>
                 <!-- <td></td> -->
               </tr>
               @endforeach
               <tr>
                 <th>Average</th>
-                <td>
-                  @if($g1_total != 0)
-                    {{ $g1_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td>
-                  @if($g2_total != 0)
-                    {{ $g2_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td>
-                  @if($g3_total != 0)
-                    {{ $g3_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td>
-                  @if($g4_total != 0)
-                    {{ $g4_total/$subjects->count() }}
-                  @endif
-                </td>
-                <td></td>
+                <th colspan="4"><u>{{ $grade_total/count($subjects) }}</u></th>
               </tr>
             </tbody>
           </table>

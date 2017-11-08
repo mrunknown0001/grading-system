@@ -31,6 +31,14 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+	<style type="text/css">
+		.btn-huge{
+		    padding-top:20px;
+		    padding-bottom:20px;
+		    width: 80%;
+		}
+	</style>
 </head>
 <body class="">
 	<header class="main-header">
@@ -45,15 +53,15 @@
 				<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
 			</div>
 			<div class="col-md-4">
-				<p class="text-center">Login Options</p>
+				<!-- <p class="text-center">Login Options</p> -->
 				<p class="text-center">
-					<a href="{{ route('admin_login') }}">Admin Login</a>
+					<a href="{{ route('admin_login') }}" class="btn btn-primary btn-lg btn-huge">Admin Login</a>
 				</p>
 				<p class="text-center">
-					<a href="{{ route('teacher_login') }}">Teacher Login</a>
+					<a href="{{ route('teacher_login') }}" class="btn btn-primary btn-lg btn-huge">Teacher Login</a>
 				</p>
 				<p class="text-center">
-					<a href="{{ route('student_login') }}">Student Login</a>
+					<a href="{{ route('student_login') }}"  class="btn btn-primary btn-lg btn-huge">Student Login</a>
 				</p>
 			</div>
 			<div class="col-md-4">
