@@ -346,7 +346,7 @@ class DatabaseSeeder extends Seeder
                     'exam' => 20
                 ],
                 [
-                    'level' => '1',
+                    'level' => '3',
                     'title' => 'Science',
                     'type' => '1',
                     'description' => 'Grade 9 - Science',
