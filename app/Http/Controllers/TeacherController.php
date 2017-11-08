@@ -1032,7 +1032,7 @@ class TeacherController extends Controller
 
 
             // for second quarter
-            if($second_quarter->status == 1 || $first_quarter->finish == 1) {
+            if($second_quarter->status == 1 || $second_quarter->finish == 1) {
                 
                 // compute grade here
                 // get all raw scores and compute
@@ -1131,7 +1131,7 @@ class TeacherController extends Controller
 
 
             // for third quarter
-            if($third_quarter->status == 1 || $first_quarter->finish == 1) {
+            if($third_quarter->status == 1 || $third_quarter->finish == 1) {
                 
                 // compute grade here
                 // get all raw scores and compute
@@ -1231,7 +1231,7 @@ class TeacherController extends Controller
 
 
             // for fourth quarter
-            if($fourth_quarter->status == 1 || $first_quarter->finish == 1) {
+            if($fourth_quarter->status == 1 || $fourth_quarter->finish == 1) {
                 
                 // compute grade here
                 // get all raw scores and compute
@@ -1337,7 +1337,7 @@ class TeacherController extends Controller
 
 
             // for first sem
-            if($first_sem->status == 1) {
+            if($first_sem->status == 1  || $first_sem->finish == 1) {
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
@@ -1434,7 +1434,7 @@ class TeacherController extends Controller
             } // end of first sem
 
             // for first sem
-            if($second_sem->status == 1) {
+            if($second_sem->status == 1 || $second_sem->finish == 1) {
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
