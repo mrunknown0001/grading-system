@@ -8,6 +8,9 @@ use App\Http\Requests;
 
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PasswordReset;
+
 use App\UserLog;
 use App\User;
 use App\SchoolYear;
@@ -358,6 +361,9 @@ class UserController extends Controller
 
     	// message reset code to email here
     	// 
+    	// Mail::to($email)->send(new PasswordReset());
+ 
+
     	
 
     	return redirect()->route('password_reset')->with('success', 'Reset Code Sent to your email');

@@ -1817,6 +1817,7 @@ class AdminController extends Controller
 
                         $first_quarter_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -1933,6 +1934,7 @@ class AdminController extends Controller
 
                         $second_quarter_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -2050,6 +2052,7 @@ class AdminController extends Controller
 
                         $third_quarter_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -2167,6 +2170,7 @@ class AdminController extends Controller
 
                         $fourth_quarter_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -2289,6 +2293,7 @@ class AdminController extends Controller
 
                         $first_sem_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -2403,6 +2408,7 @@ class AdminController extends Controller
 
                         $second_sem_grades[] = [
                             'student_id' => $std->user_id,
+                            'subject_id' => $subject->id,
                             'grade' => $this->getGrade($grade)
                             ];
 
@@ -2414,11 +2420,6 @@ class AdminController extends Controller
 
 
         $students_grades = [];
-
-
-        foreach($section->students as $std) {
-
-        }
 
 
 

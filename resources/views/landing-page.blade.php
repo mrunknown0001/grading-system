@@ -46,15 +46,15 @@
 </head>
 <body class="full">
 	<header class="main-header">
-		<h3 class="text-center">Welcome to Concepcion Catholic School - Student Grading System</h3>
+		<h1 class="text-center">Welcome to Concepcion Catholic School - Student Grading System</h1>
 		
 	</header>
 	<hr>
 	<section class="content-header">
 		<div class="row">
 			<div class="col-md-4">
-				<p class="text-center">Vision</p>
-				<p>Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</p>
+				<h3 class="text-center">Vision</h3>
+				<h3>&nbsp;&nbsp;&nbsp;Concepcion Catholic School is a Filipino Catholic institution dedicated to quiality education, animated by the Spirit of the Gospel and inspired by the examples of the Blessed Virgin Mary and St. Dominic.</h3>
 			</div>
 			<div class="col-md-4">
 				<!-- <p class="text-center">Login Options</p> -->
@@ -71,11 +71,11 @@
 			<div class="col-md-4">
 				
 
-				<p class="text-center">Our Mission</p>
+				<h3 class="text-center">Our Mission</h3>
 				<ul class="disk">
-					<li>To develop Christian and moral values</li>
-					<li>To provide quality education to our pupils and students</li>
-					<li>To integrate the aspects of their human knowledge to their daily experiences</li>
+					<li><h3>To develop Christian and moral values</h3></li>
+					<li><h3>To provide quality education to our pupils and students</h3></li>
+					<li><h3>To integrate the aspects of their human knowledge to their daily experiences</h3></li>
 				</ul>
 				
 			</div>
