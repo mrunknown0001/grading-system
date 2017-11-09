@@ -511,7 +511,7 @@ class StudentController extends Controller
 
                     $fqg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => number_format($grade, 2)
+                        'grade' => number_format($grade, 0)
                         ];
 
                 }
@@ -1104,7 +1104,7 @@ class StudentController extends Controller
                 break;
 
             default:
-                return 'n/a';
+                return $i;
                 break;
         }
     }
