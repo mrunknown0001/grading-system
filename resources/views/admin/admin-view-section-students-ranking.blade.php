@@ -43,6 +43,7 @@
             <tbody>
               @foreach($students as $std)
               <tr>
+                <td>{{ $std->user_id }}</td>
                 <td>{{ ucwords($std->user->lastname . ', ' . $std->user->firstname) }}</td>
                 <td>
                   @foreach($average_grades as $grade)
