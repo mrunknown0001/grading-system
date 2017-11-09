@@ -1038,7 +1038,7 @@ class TeacherController extends Controller
 
                     $fqg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -1137,7 +1137,7 @@ class TeacherController extends Controller
 
                     $sqg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -1236,7 +1236,7 @@ class TeacherController extends Controller
 
                     $tqg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -1336,7 +1336,7 @@ class TeacherController extends Controller
 
                     $foqg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -1441,7 +1441,7 @@ class TeacherController extends Controller
 
                     $fsg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -1536,7 +1536,7 @@ class TeacherController extends Controller
 
                     $ssg[] = [
                         'student_id' => $std->user_id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 

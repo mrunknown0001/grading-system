@@ -310,7 +310,7 @@ class StudentController extends Controller
 
                     $fsg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -404,7 +404,7 @@ class StudentController extends Controller
 
                     $ssg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -511,7 +511,7 @@ class StudentController extends Controller
 
                     $fqg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
 
                 }
@@ -604,7 +604,7 @@ class StudentController extends Controller
 
                     $sqg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 
@@ -698,7 +698,7 @@ class StudentController extends Controller
 
                     $tqg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
             }
@@ -789,7 +789,7 @@ class StudentController extends Controller
 
                     $foqg[] = [
                         'subject_id' => $sub->id,
-                        'grade' => $grade
+                        'grade' => number_format($grade)
                         ];
                 }
 

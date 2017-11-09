@@ -2422,8 +2422,98 @@ class AdminController extends Controller
         $students_grades = [];
 
 
+        // get grades for grade 7 to 10 only
+        if($section->grade_level->id <= 4) {
+            foreach($section->students as $std) {
+                $ag = [];
+                foreach($section->grade_level->subjects as $subject) {
 
-        return view('admin.admin-view-section-students-ranking', ['section' => $section, 'students' => $section->students, 'subjects' => $section->grade_level->subjects, 'average_grades' => $students_grades]);
+                    // first quarter grade
+                    foreach($first_quarter_grades as $fqg) {
+                        if($fqg['student_id'] == $std->user_id && $fqg['subject_id'] == $subject->id) {
+                            $ag[] = $fqg['grade'];
+                        }
+                    }
+
+                    // second quarter grade
+                    foreach($second_quarter_grades as $sqg) {
+                        if($sqg['student_id'] == $std->user_id && $sqg['subject_id'] == $subject->id) {
+                            $ag[] = $sqg['grade'];
+                        }
+                    }
+
+
+                    // third quarter grade
+                    foreach($third_quarter_grades as $tqg) {
+                        if($tqg['student_id'] == $std->user_id && $tqg['subject_id'] == $subject->id) {
+                            $ag[] = $tqg['grade'];
+                        }
+                    }
+
+
+                    // fourht quarter grade
+                    foreach($fourth_quarter_grades as $foqg) {
+                        if($foqg['student_id'] == $std->user_id && $foqg['subject_id'] == $subject->id) {
+                            $ag[] = $foqg['grade'];
+                        }
+                    }
+
+
+                    // compute average per subject here
+                    $students_grades [] = ['student_id' => $std->user_id, 'grade' => array_sum($ag)/4];
+
+                    unset($ag);
+                }
+            }
+        }
+        else {
+            foreach($section->students as $std) {
+                $ag = [];
+                foreach($section->grade_level->subjects as $subject) {
+
+                    // first quarter grade
+                    foreach($first_sem_grades as $fsg) {
+                        if($fsg['student_id'] == $std->user_id && $fsg['subject_id'] == $subject->id) {
+                            $ag[] = $fsg['grade'];
+                        }
+                    }
+
+                    // second quarter grade
+                    foreach($second_sem_grades as $ssg) {
+                        if($ssg['student_id'] == $std->user_id && $ssg['subject_id'] == $subject->id) {
+                            $ag[] = $ssg['grade'];
+                        }
+                    }
+
+
+                    // compute average per subject here
+                    $students_grades [] = ['student_id' => $std->user_id, 'grade' => array_sum($ag)/4];
+
+                    unset($ag);
+                }
+            } 
+        }
+
+
+        // get final average for all grade levels
+        $average_grades = [];
+
+
+        foreach($section->students as $std) {
+            $all = [];
+            $count = 0;
+            foreach($students_grades as $grade) {
+                if($grade['student_id'] == $std->user_id) {
+                    $all[] = $grade['grade'];
+                    $count++;
+                }
+            }
+
+            $average_grades[] = ['student_id' => $std->user_id, 'grade' => array_sum($all)/$count];
+
+        }
+
+        return view('admin.admin-view-section-students-ranking', ['section' => $section, 'students' => $section->students, 'subjects' => $section->grade_level->subjects, 'average_grades' => $average_grades]);
     }
 
 

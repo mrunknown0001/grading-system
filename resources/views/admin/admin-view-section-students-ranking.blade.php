@@ -35,15 +35,14 @@
           <table class="table table-hover" id="studentsTable">
             <thead>
               <tr>
-                <th onclick="sortTable(2)" style="cursor: pointer;">Student Number</th>
-                <th onclick="sortTable(1)" style="cursor: pointer;">Name</th>
-                <th onclick="sortTable(0)">Average</th>
+                <!-- <th style="cursor: pointer;">Student Number</th> -->
+                <th style="cursor: pointer;">Name</th>
+                <th style="cursor: pointer;">Average</th>
               </tr>
             </thead>
             <tbody>
               @foreach($students as $std)
               <tr>
-                <td>{{ $std->user_id }}</td>
                 <td>{{ ucwords($std->user->lastname . ', ' . $std->user->firstname) }}</td>
                 <td>
                   @foreach($average_grades as $grade)
@@ -69,7 +68,7 @@
 </div>
 <!-- ./wrapper -->
 
-<script>
+<!-- <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("studentsTable");
@@ -127,6 +126,49 @@ function sortTable(n) {
 
 window.onload = function() {
   sortTable(0);
+};
+</script> -->
+<script type="text/javascript">
+  function sortTable(table, col, reverse) {
+    var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
+        tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
+        i;
+    reverse = -((+reverse) || -1);
+    
+    tr = tr.sort(function (a, b) { // sort rows
+        
+        
+        if(!isNaN(a.cells[col].textContent) && !isNaN(b.cells[col].textContent))
+        return reverse * ((+a.cells[col].textContent) - (+b.cells[col].textContent))
+       return reverse // `-1 *` if want opposite order
+            * (a.cells[col].textContent.trim() // using `.textContent.trim()` for test
+                .localeCompare(b.cells[col].textContent.trim())
+               );
+    });
+    for(i = 0; i < tr.length; ++i) tb.appendChild(tr[i]); // append each row in order
+}
+
+function makeSortable(table) {
+    var th = table.tHead, i;
+    th && (th = th.rows[0]) && (th = th.cells);
+    if (th) i = th.length;
+    else return; // if no `<thead>` then do nothing
+    while (--i >= 0) (function (i) {
+        var dir = 1;
+        th[i].addEventListener('click', function () {sortTable(table, i, (dir = 1 - dir))});
+    }(i));
+}
+
+function makeAllSortable(parent) {
+    parent = parent || document.body;
+    var t = parent.getElementsByTagName('table'), i = t.length;
+    while (--i >= 0) makeSortable(t[i]);
+}
+
+window.onload = function () {
+  makeAllSortable();
+  makeSortable();
+
 };
 </script>
 
