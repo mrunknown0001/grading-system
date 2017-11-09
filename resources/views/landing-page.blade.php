@@ -42,6 +42,10 @@
 			color: black;
 			font-weight: bold;
 		}
+		h3 {
+		    text-align: justify;
+		    text-justify: inter-word;
+		}
 	</style>
 </head>
 <body class="full">
