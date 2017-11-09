@@ -161,6 +161,10 @@ class TeacherController extends Controller
         // for menu in teacher
         $students = $this->getMyStudents();
 
+        if(count($quarter) == 0 || count($sem) == 0) {
+            return 'no selected semester or quarter';
+        }
+
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
         $assign = SubjectAssign::findorfail($assign_id);
@@ -214,6 +218,7 @@ class TeacherController extends Controller
 
         // subject
         $subject = Subject::findorfail($assign->subject_id);
+
 
 
         // get the last number of  the written work
@@ -429,6 +434,10 @@ class TeacherController extends Controller
 
         // for menu in teacher
         $students = $this->getMyStudents();
+
+        if(count($quarter) == 0 || count($sem) == 0) {
+            return 'no selected semester or quarter';
+        }
 
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
@@ -693,6 +702,11 @@ class TeacherController extends Controller
 
         // for menu in teacher
         $students = $this->getMyStudents();
+
+
+        if(count($quarter) == 0 || count($sem) == 0) {
+            return 'no selected semester or quarter';
+        }
 
         $section = Section::findorfail($section_id);
         $subject = Subject::findorfail($subject_id);
