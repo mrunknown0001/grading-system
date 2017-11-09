@@ -1590,6 +1590,8 @@ class AdminController extends Controller
         $second_sem = Semester::findorfail(2);
 
 
+
+
         // check if forth quarter and second sem is finished
         if($fourth_quarter->finish != 1 && $second_sem->finish != 1) {
             return redirect()->back()->with('notice', 'Forth Quarter and Second Semester Must be finished first before you can compute grades');
@@ -2267,7 +2269,7 @@ class AdminController extends Controller
                         $exam_percentage = 0;
                         $grade = 0;
 
-                        foreach ($ww_score_s1 as $ws) {
+                        foreach ($ww_scores_s1 as $ws) {
                             if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
                                 if($subject->id == $ws['subject_id']) {
                                     $ww_percentage = (($ws['score']/$ws['total']) * ($subject->written_work/100)) * 100;
