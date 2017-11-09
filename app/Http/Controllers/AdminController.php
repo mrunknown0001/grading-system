@@ -1706,7 +1706,6 @@ class AdminController extends Controller
 
 
 
-        $students_grades = [];
 
 
         if($section->level <= 4) {
@@ -1816,7 +1815,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $first_quarter_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -1932,7 +1931,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $second_quarter_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -2049,7 +2048,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $third_quarter_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -2166,7 +2165,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $fourth_quarter_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -2288,7 +2287,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $first_sem_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -2402,7 +2401,7 @@ class AdminController extends Controller
 
                         $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
 
-                        $students_grades[] = [
+                        $second_sem_grades[] = [
                             'student_id' => $std->user_id,
                             'grade' => $this->getGrade($grade)
                             ];
@@ -2414,37 +2413,16 @@ class AdminController extends Controller
         }
 
 
+        $students_grades = [];
 
-        $average_grades = [];
 
-        foreach($section->students as $std) { 
-            
-            $g = 0;
-            // $count = 0;
-            foreach($students_grades as $grades) {
+        foreach($section->students as $std) {
 
-                if($std->user_id == $grades['student_id']) {
-
-                    $g = $g + $grades['grade'];
-                }
-                
-                // $count++;
-                // if($count == count($section->grade_level->subjects)) {
-                //     break;
-                // }
-
-            }
-
-            
-            $average_grades[] = [
-                    'student_id' => $std->user_id,
-                    'grade' => $g / count($section->grade_level->subjects)
-            ]; 
         }
 
 
 
-        return view('admin.admin-view-section-students-ranking', ['section' => $section, 'students' => $section->students, 'subjects' => $section->grade_level->subjects, 'average_grades' => $average_grades]);
+        return view('admin.admin-view-section-students-ranking', ['section' => $section, 'students' => $section->students, 'subjects' => $section->grade_level->subjects, 'average_grades' => $students_grades]);
     }
 
 

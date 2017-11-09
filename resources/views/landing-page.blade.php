@@ -38,9 +38,13 @@
 		    padding-bottom:20px;
 		    width: 80%;
 		}
+		body {
+			color: black;
+			font-weight: bold;
+		}
 	</style>
 </head>
-<body class="">
+<body class="full">
 	<header class="main-header">
 		<h3 class="text-center">Welcome to Concepcion Catholic School - Student Grading System</h3>
 		
