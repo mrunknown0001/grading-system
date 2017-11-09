@@ -50,7 +50,7 @@
                     @foreach($fqg as $f)
                       @if($f['student_id'] == $std->user_id)
                         @if($f['grade'] != 0)
-                        {{ \App\Http\Controllers\StudentController::getGrade($f['grade']) }}
+                        {{ floor(\App\Http\Controllers\StudentController::getGrade($f['grade'])) }}
                         @endif
                       @endif
                     @endforeach
