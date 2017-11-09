@@ -1104,7 +1104,7 @@ class StudentController extends Controller
                 break;
 
             default:
-                return 'N/A';
+                return i;
                 break;
         }
     }

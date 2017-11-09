@@ -12,7 +12,7 @@
     <section class="content-header">
       <h1> 
         <!-- Dashboard -  -->
-         | {{ ucwords($section->grade_level->name . ' - ' . $section->name) }} - {{ ucwords($subject->title) }} Grades  
+          {{ ucwords($section->grade_level->name . ' - ' . $section->name) }} - {{ ucwords($subject->title) }} Grades  
        
       </h1>
 <!--       <ol class="breadcrumb">
