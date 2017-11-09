@@ -1704,7 +1704,13 @@ class AdminController extends Controller
         $first_sem = Semester::findorfail(1);
         $second_sem = Semester::findorfail(2);
 
+        $first_quarter_grades = [];
+        $second_quarter_grades = [];
+        $third_quarter_grades = [];
+        $fourth_quarter_grades = [];
 
+        $first_sem_grades = [];
+        $second_sem_grades = [];
 
 
 
