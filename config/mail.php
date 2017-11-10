@@ -58,8 +58,8 @@ return [
     'from' => [
         // 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         // 'name' => env('MAIL_FROM_NAME', 'Example'),
-        'address' => env('MAIL_FROM_ADDRESS', 'concswebmail@wbdvlpr.cf'),
-        'name' => env('MAIL_FROM_NAME', 'CLLR Trading'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@concepcioncatholicschool.com'),
+        'name' => env('MAIL_FROM_NAME', 'Concepcion Catholic School'),
     ],
 
     /*
