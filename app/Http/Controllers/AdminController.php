@@ -585,6 +585,22 @@ class AdminController extends Controller
             return abort(404);
         }
 
+        // check if the section has no students in it
+        $check_section_import = StudentImport::where('section_id', $section->id)->first();
+
+        // check if section is assigned
+        $check_section_assigned = SubjectAssign::where('section_id', $section->id)->first();
+
+
+        if($check_section_import->count() > 0) {
+            return redirect()->route('get_all_sections')->with('error_msg', 'Section has students. You cant delete it!');
+        }
+
+        if($check_section_assigned->count() > 0) {
+            return redirect()->route('get_all_sections')->with('error_msg', 'Section already assigned to Teacher. You cant delete it!');
+        }
+
+
         if($section->delete()) {
 
             $log = new UserLog();
