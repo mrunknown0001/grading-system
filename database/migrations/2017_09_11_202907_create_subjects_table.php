@@ -24,6 +24,7 @@ class CreateSubjectsTable extends Migration
             $table->integer('performance_task')->unsigned()->default(0);
             $table->integer('exam')->unsigned()->default(0);
             $table->integer('others')->unsigned()->default(0);
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }

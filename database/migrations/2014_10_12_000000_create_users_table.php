@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('privilege');
             $table->tinyInteger('status')->default(1); // for students: make is 0 if the school year is finished
             $table->integer('school_year')->unsigned()->nullable(); // for students: what school year was added
+            $table->tinyInteger('visible')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

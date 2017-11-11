@@ -17,6 +17,7 @@ class CreateSectionsTable extends Migration
             $table->increments('id');
             $table->integer('level')->unsigned();
             $table->string('name', 100);
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }

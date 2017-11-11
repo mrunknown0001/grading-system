@@ -17,6 +17,7 @@ class CreateGradeLevelsTable extends Migration
             $table->increments('id');
             $table->string('name', 30);
             $table->string('description', 200)->nullable();
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }

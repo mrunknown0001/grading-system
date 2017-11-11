@@ -19,6 +19,7 @@ class CreateSubjectAssignsTable extends Migration
             $table->integer('subject_id')->unsigned(); // id of the subject
             $table->integer('school_year_id')->unsigned(); // id of the active school year
             $table->integer('section_id')->unsigned(); // id of the section
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }

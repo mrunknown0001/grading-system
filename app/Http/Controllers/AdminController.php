@@ -992,6 +992,7 @@ class AdminController extends Controller
                             return redirect()->route('import_students')->with('notice', 'Duplicate email found: ' . $row->email .' Emails can be used only once. Please Check your sheet for any duplicate record.');
                         }
 
+                        
 
                         // for users table
                         $insert[] = [
@@ -1016,6 +1017,8 @@ class AdminController extends Controller
                                 'school_year' => $active_school_year->id
 
                             ];
+
+                        
 
 
                     }
@@ -1505,6 +1508,8 @@ class AdminController extends Controller
         // reset the semester to 0
         // set no activet school year
         // 
+        // delete/hide section
+        // delete/hide subject assign
         
         
     }

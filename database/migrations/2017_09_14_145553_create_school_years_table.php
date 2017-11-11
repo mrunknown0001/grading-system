@@ -19,6 +19,7 @@ class CreateSchoolYearsTable extends Migration
             $table->integer('to')->unsigned();
             $table->tinyInteger('status')->default(1); // 1: active , 0: inactive
             $table->tinyInteger('finish')->default(0);
+            $table->tinyInteger('visible')->default(1);
             $table->timestamps();
         });
     }
