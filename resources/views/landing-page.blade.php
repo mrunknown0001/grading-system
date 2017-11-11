@@ -35,6 +35,60 @@
               <p>This is a description for the third slide.</p> -->
             </div>
           </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/1.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/2.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/3.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/4.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/5.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/6.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/7.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/8.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
+          <div class="carousel-item" style="background-image: url({{  asset('uploads/logo/imgs/9.jpg') }})">
+            <div class="carousel-caption d-none d-md-block">
+              <!-- <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p> -->
+            </div>
+          </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -505,7 +505,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     });
 
 
-
+    // route to remove students in the database
+    Route::post('student/remove', [
+        'uses' => 'AdminController@adminRemoveStudent',
+        'as' => 'post_admin_remove_student'
+    ]);
 
 });
 /*********************************************

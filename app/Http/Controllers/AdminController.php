@@ -787,6 +787,21 @@ class AdminController extends Controller
 
 
 
+    public function adminRemoveStudent(Request $request)
+    {
+        $student = User::find($request['id']);
+
+        $student_info = StudentInfo::where('user_id', $student->user_id)->first();
+
+
+        if($student->delete() && $student_info->delete()) {
+            return redirect()->route('get_view_all_students')->with('success', 'Successfully Drop Student!');
+        }
+
+        return 'Error in Dropping Students';
+    }
+
+
     /*
      * getViewAllStudents view students
      */
