@@ -361,7 +361,7 @@ class UserController extends Controller
 
     	// message reset code to email here
     	// 
-    	// Mail::to($email)->send(new PasswordReset());
+    	Mail::to($email)->send(new PasswordReset($code));
  
 
     	

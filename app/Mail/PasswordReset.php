@@ -16,9 +16,11 @@ class PasswordReset extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $code;
+
+    public function __construct($code)
     {
-        //
+        $this->code = $code;
     }
 
     /**

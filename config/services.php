@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => env('concepcioncatholicschool.info'),
+        'secret' => env('key-6ffb62402430e989443760f90ea3ffee'),
     ],
 
     'ses' => [
