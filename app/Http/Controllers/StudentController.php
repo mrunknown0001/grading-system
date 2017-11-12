@@ -35,6 +35,11 @@ class StudentController extends Controller
     // student dashboard
     public function getStudentDashboard()
     {
+                // check if sections are visible
+        $find_sections = Section::where('visible', 1)->get();
+        if(count($find_sections) < 1) {
+            return 'System is initializing by administrator.';
+        }
     	return view('student.student-dashboard');
     }
 
@@ -210,8 +215,15 @@ class StudentController extends Controller
         $first_sem = Semester::findorfail(1);
         $second_sem = Semester::findorfail(2);
 
+        // check if sections are visible
+        $find_sections = Section::where('visible', 1)->get();
+        if(count($find_sections) > 0) {
+            $section_id = Auth::user()->info->section1->id;
+        }
+        else {
+            return 'System is Initializing by administrator.';
+        }
 
-        $section_id = Auth::user()->info->section1->id;
         $level_id = Auth::user()->info->section1->grade_level->id;
         $subjects = Auth::user()->info->section1->grade_level->subjects;
 

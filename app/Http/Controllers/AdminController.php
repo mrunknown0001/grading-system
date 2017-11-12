@@ -566,6 +566,7 @@ class AdminController extends Controller
 
         $sections = Section::orderBy('level', 'desc')
                             ->orderBy('name', 'desc')
+                            ->where('visible', 1)
                             ->paginate(10);
 
         return view('admin.view-all-sections', ['sections' => $sections]);
@@ -711,6 +712,7 @@ class AdminController extends Controller
 
         $sections = Section::orderBy('level', 'desc')
                             ->orderBy('name', 'desc')
+                            ->where('visible', 1)
                             ->get();
 
         return view('admin.add-student', ['sections' => $sections]);
@@ -966,6 +968,7 @@ class AdminController extends Controller
         // grade level and sections
         $sections = Section::orderBy('level', 'desc')
                     ->orderBy('name', 'desc')
+                    ->where('visible', 1)
                     ->get();
         
 
@@ -1429,7 +1432,7 @@ class AdminController extends Controller
 
         $subjects = Subject::where('level', $id)->get();
         $teachers = User::where('privilege', 2)->where('status', 1)->get();
-        $sections = Section::where('level', $id)->get();
+        $sections = Section::where('level', $id)->where('visible', 1)->get();
 
 
         $level = GradeLevel::findorfail($id);
@@ -1557,7 +1560,7 @@ class AdminController extends Controller
     // method use to view sections of all grade level
     public function viewSectionsGradeLevel($id = null) // id of the grade level
     {
-        $sections = Section::whereLevel($id)->get();
+        $sections = Section::whereLevel($id)->where('visible', 1)->get();
         $grade_level = GradeLevel::findorfail($id);
 
 
@@ -1601,6 +1604,8 @@ class AdminController extends Controller
         Quarter::whereStatus(1)->update(['status' => 0]);
         Semester::whereFinish(1)->update(['finish' => 0]);
         Semester::whereStatus(1)->update(['status' => 0]);
+
+        DB::table('sections')->update(['visible' => 0]);
 
 
 

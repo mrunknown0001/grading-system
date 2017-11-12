@@ -111,9 +111,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            @foreach($info->section1->grade_level->subjects as $sub)
-            <li><a href="{{ route('student_subject_view', $sub->id) }}"> {{ $sub->title }}</a></li>
-            @endforeach
+  
           </ul>
         </li> -->
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->

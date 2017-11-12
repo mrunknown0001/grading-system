@@ -9,7 +9,13 @@
             </div>
             <div class="modal-body">
                 <strong>
-                <p class="text-capitalize">Grade &amp; Section: {{ $s->info->section1->grade_level->name }} - {{ $s->info->section1->name }}</p>
+                <p class="text-capitalize">Grade &amp; Section: 
+                    @if($s->section != null)
+                    {{ $s->info->section1->grade_level->name }} - {{ $s->info->section1->name }}
+                    @else
+                    Not Available
+                    @endif
+                </p>
                 <p>Student Number: {{ $s->user_id }}</p>
                 <p class="text-capitalize">Name: {{ $s->firstname }} {{ $s->lastname }}</p>
                 <p>Birthday: {{ date('F j, Y', strtotime($s->birthday)) }}</p>
