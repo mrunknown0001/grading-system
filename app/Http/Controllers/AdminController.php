@@ -1596,6 +1596,13 @@ class AdminController extends Controller
     {
         // make school year finish 1
         $sy = SchoolYear::whereStatus(1)->first();
+
+        // if status is finish
+        if(count($sy) < 1) {
+
+            return redirect()->route('add_school_year')->with('notice', 'School Year is Already Finished');
+        }
+
         $sy->finish = 1;
         $sy->status = 0;
         $sy->save();
@@ -1606,8 +1613,7 @@ class AdminController extends Controller
         Semester::whereStatus(1)->update(['status' => 0]);
 
         DB::table('sections')->update(['visible' => 0]);
-
-
+        DB::table('student_info')->update(['section' => 0, 'school_year' => 0]);
 
         return redirect()->route('add_school_year')->with('success', 'You Can Now Start New School Year');
 
