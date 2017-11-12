@@ -15,6 +15,8 @@
     <link href="{{  asset('css/full-slider.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    {{-- custome css --}}
+    <link rel="stylesheet" href="{{ URL::asset('css/custom.css') }}">
 
 
     {{-- FontAwesome 4.7.0.3--}}

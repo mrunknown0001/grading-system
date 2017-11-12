@@ -72,6 +72,11 @@ Route::get('logout', [
 
 
 
+Route::get('mission-vision', function () {
+    return view('mission-vision');
+})->name('mission_vision');
+
+
 /********************************************
 *********************************************
 ************ ADMIN ROUTE GROUP **************

@@ -60,6 +60,8 @@
 						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
 					</div>
 				</form>
+				
+				<p><a href="{{ route('password_reset') }}">Forgot Password?</a></p>
 			</div>
 		</div>
 	</div>

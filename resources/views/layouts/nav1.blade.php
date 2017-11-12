@@ -20,7 +20,14 @@
               <a class="nav-link" href="{{ route('student_login') }}">Student Login</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About Us</a>
+              <!-- <a class="nav-link" href="#">About Us</a> -->
+              <div class="dropdown">
+                <a class="nav-link">About Us</a>
+                <div class="dropdown-content">
+                  <p><a href="{{ route('mission_vision') }}">Mission &amp; Vision</a></p>
+                  <!-- <p><a href="">Objectives</a></p> -->
+                </div>
+              </div>
             </li>
           </ul>
         </div>
