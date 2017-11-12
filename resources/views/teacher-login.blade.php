@@ -32,9 +32,9 @@
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body>
+<body class="full-login">
 <header class="main-header">
-	<h3 class="text-center">Concepcion Catholic School - Student Grading System</h3>
+	<h3 class="text-center" style="color: #eef;">Concepcion Catholic School - Student Grading System</h3>
 </header>
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
