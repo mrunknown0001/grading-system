@@ -34,7 +34,7 @@
 
           <form action="{{ route('post_add_exam_score') }}" method="POST" autocomplete="off">
             <div class="form-group">
-              <input type="number" name="total" max=999 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" />
+              <input type="number" name="total" id="total" max=999 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" />
             </div>
             <div class="form-group">
             <table class="table" id="studentsTable">
@@ -48,7 +48,7 @@
             @foreach($section->students as $std)
               <tr>
               <td>{{ ucwords($std->user->lastname) }} {{ ucwords($std->user->firstname) }}</td>
-               <td><input type="number" name="{{ $std->user->user_id }}" value=0 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Score" /></td>
+               <td><input type="number" name="{{ $std->user->user_id }}" class="score" value=0 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Score" /></td>
               </tr>
             @endforeach
             </tbody>
@@ -77,6 +77,26 @@
 
 </div>
 <script>
+
+function getMaxValueForRequest() {
+  var x = document.getElementsByClassName('score');
+  var currentItemAmount = parseInt(document.getElementById("total").value);
+  var i;
+  for(i = 0; i < x.length; i++) {
+    x[i].setAttribute('max', currentItemAmount);
+  }
+  
+}
+
+
+
+document.getElementById("total").addEventListener('change', function(event) {
+  getMaxValueForRequest()
+})
+
+
+
+
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("studentsTable");

@@ -40,7 +40,7 @@
             </div>
 
             <div class="form-group">
-              <input type="text" name="score" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="{{ $score->score }}" max="{{ $score->total }}" required="" />
+              <input type="number" name="score" class="form-control" onkeypress='return event.charCode >= 48 && event.charCode <= 57' value="{{ $score->score }}" max="{{ $score->total }}" required="" />
             </div>
             <div class="form-group">
               <input type="hidden" name="assignid" value="{{ $assignid }}" />
