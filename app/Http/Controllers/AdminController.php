@@ -314,6 +314,30 @@ class AdminController extends Controller
 
 
 
+    // admin email 
+    public function adminEmail()
+    {
+        return view('admin.admin-email');
+    }
+
+
+
+    public function postAdminEmail(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email'
+        ]);
+
+        $email = $request['email'];
+
+        $admin = User::find(Auth::user()->id);
+        $admin->email = $email;
+        $admin->save();
+
+
+        return redirect()->route('admin_email')->with('success', 'Email Updated!');
+    }
+
     /*
      * method use to add subject
      */

@@ -94,6 +94,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
 		]);
 
 
+
+    // route to add/update view email of the admin
+    Route::get('email/update', [
+        'uses' => 'AdminController@adminEmail',
+        'as' => 'admin_email'
+    ]);
+
+
+    // rout to update email of the admin
+    Route::post('email/update', [
+        'uses' => 'AdminController@postAdminEmail',
+        'as' => 'post_admin_email'
+    ]);
+
 	/*
 	 * Route to go to Add Teacher Page
 	 */

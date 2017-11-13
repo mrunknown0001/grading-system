@@ -35,7 +35,7 @@
           <h4>
             Name: {{ ucwords($admin->firstname) }} {{ ucwords($admin->lastname) }}
             <hr>
-
+            Email: {{$admin->email}}
           </h4>
 
         </div>

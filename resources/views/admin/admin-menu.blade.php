@@ -31,6 +31,12 @@
         </a>
         <ul class="dropdown-menu">
           <!-- Menu Body -->
+
+          <li class="text-center">
+            <div>
+              <a href="{{ route('admin_email') }}">Update Email</a>
+            </div>
+          </li>
           <li class="text-center">
             <div>
               <a href="{{ route('admin_profile_picture_change') }}">Change Profile Picture</a>
