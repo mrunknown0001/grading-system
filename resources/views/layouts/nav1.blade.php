@@ -11,13 +11,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('admin_login') }}" >Admin Login</a>
+              <a class="nav-link" href="{{ route('admin_login') }}" >Admin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('teacher_login') }}">Teacher Login</a>
+              <a class="nav-link" href="{{ route('teacher_login') }}">Teacher</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('student_login') }}">Student Login</a>
+              <a class="nav-link" href="{{ route('student_login') }}">Student</a>
             </li>
             <li class="nav-item">
               <!-- <a class="nav-link" href="#">About Us</a> -->
