@@ -234,7 +234,6 @@ class StudentController extends Controller
         $subjects = $section->grade_level->subjects;
 
 
-        $section = Section::find($section_id);
 
         // get all raw grades per subject per quarter or semester
         // for senior high
