@@ -1046,44 +1046,53 @@ class AdminController extends Controller
 
                         // check each student number if it is already in database
                         $check_student_number = User::where('user_id', $row->student_number)->first();
-                        if(!empty($check_student_number)) {
-                            return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in record. Please double check your sheet before uploading. Remove any recorded students in sheet.');
-                        }
-
 
                         // check email
                         $check_email = User::where('email', $row->email)->first();
-                        if(!empty($check_email)) {
-                            return redirect()->route('import_students')->with('notice', 'Duplicate email found: ' . $row->email .' Emails can be used only once. Please Check your sheet for any duplicate record.');
+
+
+
+                        if(!empty($check_student_number)) {
+                            // return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in record. Please double check your sheet before uploading. Remove any recorded students in sheet.');
+                            // 
+                            // update only the student info
+                            $std_info = StudentInfo::where('user_id', $row->student_number)->first();
+                            $std_info->section = $section;
+                            $std_info->school_year = $active_school_year->id;
+                            $std_info->save();
                         }
 
-                        
+                        else if(!empty($check_email)) {
+                            // return redirect()->route('import_students')->with('notice', 'Duplicate email found: ' . $row->email .' Emails can be used only once. Please Check your sheet for any duplicate record.');
+                        }
 
-                        // for users table
-                        $insert[] = [
-                                'user_id' => $row->student_number,
-                                'lastname' => $row->lastname,
-                                'firstname' => $row->firstname,
-                                'gender' => $row->sex,
-                                'birthday' => date('Y-m-d', strtotime($row->birthday)),
-                                'address' => $row->address,
-                                'email' => $row->email,
-                                'mobile' => $row->number,
-                                'privilege' => 3,
-                                'password' => bcrypt('concs2017'), // this is the default password for students
-                                'school_year' => $active_school_year->id
-                            ];
+                        else {
+
+                            // for users table
+                            $insert[] = [
+                                    'user_id' => $row->student_number,
+                                    'lastname' => $row->lastname,
+                                    'firstname' => $row->firstname,
+                                    'gender' => $row->sex,
+                                    'birthday' => date('Y-m-d', strtotime($row->birthday)),
+                                    'address' => $row->address,
+                                    'email' => $row->email,
+                                    'mobile' => $row->number,
+                                    'privilege' => 3,
+                                    'password' => bcrypt('concs2017'), // this is the default password for students
+                                    'school_year' => $active_school_year->id
+                                ];
 
 
-                        // for student info table
-                        $info[] = [
-                                'user_id' => $row->student_number,
-                                'section' => $section,
-                                'school_year' => $active_school_year->id
+                            // for student info table
+                            $info[] = [
+                                    'user_id' => $row->student_number,
+                                    'section' => $section,
+                                    'school_year' => $active_school_year->id
 
-                            ];
+                                ];
 
-                        
+                        }
 
 
                     }
