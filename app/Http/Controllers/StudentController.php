@@ -218,14 +218,20 @@ class StudentController extends Controller
         // check if sections are visible
         $find_sections = Section::where('visible', 1)->get();
         if(count($find_sections) > 0) {
-            $section_id = StudentInfo::where('user_id', Auth::user()->user_id)->where('visible', 1)->first();
+            $section_id_find = StudentInfo::where('user_id', Auth::user()->user_id)->where('visible', 1)->first();
         }
         else {
             return 'System is Initializing by administrator.';
         }
 
-        $level_id = Auth::user()->info->section1->grade_level->id;
-        $subjects = Auth::user()->info->section1->grade_level->subjects;
+
+        $section = Section::find($section_id_find->section);
+        $section_id = $section->id;
+
+        // $level_id = Auth::user()->info->section1->grade_level->id;
+        // $subjects = Auth::user()->info->section1->grade_level->subjects;
+        $level_id = $section->grade_level->id;
+        $subjects = $section->grade_level->subjects;
 
 
         $section = Section::find($section_id->section);
