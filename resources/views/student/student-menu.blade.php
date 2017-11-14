@@ -142,7 +142,7 @@
             <!-- <li><a href="{{ route('student_view_old_grades', ['id' => 1]) }}">2017 - 2018</a></li> -->
             @if(count($old_sy) > 0)
             @foreach($old_sy as $sy)
-            <li><a href="{{ route('student_view_old_grades', ['id' => $sy->id]) }}">{{ $sy->id }}</a></li>
+            <li><a href="{{ route('student_view_old_grades', ['id' => $sy->id]) }}">{{ $sy->year->from }} - {{ $sy->year->to }}</a></li>
             @endforeach
             @endif
           </ul>

@@ -10,8 +10,9 @@
             <div class="modal-body">
                 <strong>
                 <p class="text-capitalize">Grade &amp; Section: 
-                    @if($s->info->section != null)
-                    {{ $s->info->section1->grade_level->name }} - {{ $s->info->section1->name }}
+                    @if($s->section != null)
+                    {{-- $s->info->section1->grade_level->name }} - {{ $s->info->section1->name --}}
+                    {{ \App\Http\Controllers\AdminController::getSectionInfo($s->section) }}
                     @else
                     Not Available
                     @endif

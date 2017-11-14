@@ -857,9 +857,16 @@ class AdminController extends Controller
     public function getViewAllStudents()
     {
 
-        $students = User::where('privilege', 3)
-                        ->where('status', 1)
-                        ->orderBy('lastname', 'asc')
+        // $students = User::where('privilege', 3)
+        //                 ->where('status', 1)
+        //                 ->orderBy('lastname', 'asc')
+        //                 ->paginate(15);
+        
+        $students = DB::table('users')
+                        ->join('student_infos', function ($join) {
+                            $join->on('users.user_id', '=', 'student_infos.user_id')
+                                ->where('student_infos.visible', '=', 1);
+                        })
                         ->paginate(15);
 
         return view('admin.view-all-students', ['students' => $students]);
@@ -1056,13 +1063,34 @@ class AdminController extends Controller
 
 
                         if(!empty($check_student_number)) {
+
+                            // check if the student already belong to a section
+                            $check_visibility = StudentInfo::where('user_id', $check_student_number->user_id)->where('visible', 1)->first();
+
+
+
+                            if(count($check_visibility) > 0) {
+                                 return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in other section.');
+                            }
+
+
                             // return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in record. Please double check your sheet before uploading. Remove any recorded students in sheet.');
                             // 
                             // update only the student info
-                            $std_info = StudentInfo::where('user_id', $row->student_number)->first();
-                            $std_info->section = $section;
-                            $std_info->school_year = $active_school_year->id;
-                            $std_info->save();
+                            // $std_info = StudentInfo::where('user_id', $row->student_number)->first();
+                            // $std_info->section = $section;
+                            // $std_info->school_year = $active_school_year->id;
+                            // $std_info->save();
+                            // 
+                            // 
+                            // save a new section with new record
+                            // for student info table
+                            $info[] = [
+                                    'user_id' => $row->student_number,
+                                    'section' => $section,
+                                    'school_year' => $active_school_year->id
+
+                                ];
                         }
 
                         // elseif(!empty($check_email)) {
@@ -1675,7 +1703,7 @@ class AdminController extends Controller
         Semester::whereStatus(1)->update(['status' => 0]);
 
         DB::table('sections')->update(['visible' => 0]);
-        DB::table('student_info')->update(['section' => 0, 'school_year' => 0]);
+        DB::table('student_infos')->update(['visible' => 0]);
 
         return redirect()->route('add_school_year')->with('success', 'You Can Now Start New School Year');
 
@@ -2641,7 +2669,7 @@ class AdminController extends Controller
     }
 
 
-   private function getGrade($i)
+    private function getGrade($i)
     {
         switch ($i) {
             case $i >= 0 && $i <= 3.99:
@@ -2812,6 +2840,15 @@ class AdminController extends Controller
                 return 'N/A';
                 break;
         }
+    }
+
+
+    // get section grade level
+    static function getSectionInfo($id = null)
+    {
+        $section = Section::find($id);
+
+        return $section->grade_level->name . ' - ' . $section->name;
     }
 
 }
