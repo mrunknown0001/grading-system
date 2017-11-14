@@ -129,6 +129,17 @@
         <li><a href="{{ route('student_view_grades') }}"><i class="fa fa-circle"></i> <span>My Grades</span></a></li>
 
         <!-- <li><a href="{{ route('student_view_previews_grades') }}"><i class="fa fa-files-o"></i> <span>View Old Grades</span></a></li> -->
+        <li class="treeview">
+          <a href="#"><i class="fa fa-circle"></i> <span>View Old Grades</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            {{-- old grades here --}}
+            <li><a href="#">2017 - 2018</a></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

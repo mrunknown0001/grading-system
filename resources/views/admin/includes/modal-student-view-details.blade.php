@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <strong>
                 <p class="text-capitalize">Grade &amp; Section: 
-                    @if($s->section != null)
+                    @if($s->info->section != null)
                     {{ $s->info->section1->grade_level->name }} - {{ $s->info->section1->name }}
                     @else
                     Not Available

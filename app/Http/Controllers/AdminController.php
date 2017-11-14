@@ -1038,6 +1038,9 @@ class AdminController extends Controller
 
         }
 
+        $insert = [];
+        $info = [];
+
         if(!empty($data)){
             foreach ($data as $value) {
                 
@@ -1062,9 +1065,9 @@ class AdminController extends Controller
                             $std_info->save();
                         }
 
-                        else if(!empty($check_email)) {
+                        // elseif(!empty($check_email)) {
                             // return redirect()->route('import_students')->with('notice', 'Duplicate email found: ' . $row->email .' Emails can be used only once. Please Check your sheet for any duplicate record.');
-                        }
+                        // }
 
                         else {
 
@@ -1101,13 +1104,16 @@ class AdminController extends Controller
             }
         }
 
-        // insert data to users
-        DB::table('users')->insert($insert);
 
+        if(!empty($insert)) {
+            // insert data to users
+            DB::table('users')->insert($insert);
+        }   
 
-        // insert import data to studentimport
-        DB::table('student_infos')->insert($info);
-
+        if(!empty($info)) {
+            // insert import data to studentimport
+            DB::table('student_infos')->insert($info);
+        }
 
         // student import log
         $import = new StudentImport();
