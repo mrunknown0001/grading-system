@@ -25,7 +25,7 @@
                 <a class="nav-link">About Us</a>
                 <div class="dropdown-content">
                   <p><a href="{{ route('mission_vision') }}">Mission &amp; Vision</a></p>
-                  <!-- <p><a href="">Objectives</a></p> -->
+                  <p><a href="{{ route('about_developers') }}">Developer</a></p>
                 </div>
               </div>
             </li>

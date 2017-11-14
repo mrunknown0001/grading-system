@@ -77,6 +77,11 @@ Route::get('mission-vision', function () {
 })->name('mission_vision');
 
 
+Route::get('developers', function () {
+    return view('developers');
+})->name('about_developers');
+
+
 /********************************************
 *********************************************
 ************ ADMIN ROUTE GROUP **************
