@@ -218,7 +218,7 @@ class StudentController extends Controller
         // check if sections are visible
         $find_sections = Section::where('visible', 1)->get();
         if(count($find_sections) > 0) {
-            $section_id = Auth::user()->info->section1->id;
+            $section_id = StudentInfo::where('user_id', Auth::user()->user_id)->where('visible', 1)->first();
         }
         else {
             return 'System is Initializing by administrator.';
@@ -228,7 +228,7 @@ class StudentController extends Controller
         $subjects = Auth::user()->info->section1->grade_level->subjects;
 
 
-        $section = Section::find($section_id);
+        $section = Section::find($section_id->section);
 
         // get all raw grades per subject per quarter or semester
         // for senior high
