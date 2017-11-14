@@ -34,7 +34,7 @@
 
           <form action="{{ route('post_add_performance_task') }}" method="POST" autocomplete="off">
             <div class="form-group">
-              <input type="number" name="total" id="total" max=999 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" />
+              <input type="number" name="total" id="total" max=100 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" />
             </div>
             <div class="form-group">
             <table class="table" id="studentsTable">

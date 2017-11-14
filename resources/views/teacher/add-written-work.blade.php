@@ -34,7 +34,7 @@
 
           <form action="{{ route('post_add_written_work_score') }}" method="POST" autocomplete="off">
             <div class="form-group">
-              <input type="number" name="total" max=999 min=1 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" id="total" />
+              <input type="number" name="total" max=100 min=1 onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Total" id="total" />
             </div>
             <div class="form-group">
             <table class="table" id="studentsTable">
