@@ -1568,6 +1568,11 @@ class AdminController extends Controller
         $quarter = Quarter::whereName('forth')->whereStatus(1)->first();
         $semester = Semester::whereName('second')->whereStatus(1)->first();
 
+        // get active school year
+        $asy = SchoolYear::where('status', 1)->first();
+
+
+
         if(count($quarter) == 0 || count($semester) == 0) {
             return redirect()->route('add_school_year')->with('notice', 'It must be on 4th Quarter and 2nd Semester to close the school year.');
         }
@@ -1576,6 +1581,24 @@ class AdminController extends Controller
 
         $semester->finish = 1;
 
+
+        // get all student info with subject in curernt year to close
+        $students = StudentInfo::get();
+
+        $insert_sy = [];
+
+        foreach($students as $std) {
+            if($std->section != null) {
+                $insert_sy[] = [
+                    'student_id' => $std->user_id,
+                    'school_year_id' => $asy->id
+                ];
+            }
+        }
+
+
+        // insert in old school years table
+        DB::table('old_school_years')->insert($insert_sy);
 
         
         if($quarter->save() && $semester->save()) {

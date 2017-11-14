@@ -827,6 +827,15 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth', 'checkstudent']], 
     ]);
 
 
+
+    // route to view old student grades
+    Route::get('old-grades/{id}/view', [
+        'uses' => 'StudentController@studentViewOldGrades',
+        'as' => 'student_view_old_grades'
+    ]);
+
+
+
     // route to view old grades
     Route::get('previews-grades/view', [
         'uses' => 'StudentController@viewPreviewsGrades',

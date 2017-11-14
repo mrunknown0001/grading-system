@@ -8,6 +8,8 @@
                 ->whereSender(2)
                 ->whereStatus(0)
                 ->get();
+
+  $old_sy = \App\OldSchoolYear::where('student_id', Auth::user()->user_id)->get();
 ?>
 
 
@@ -137,7 +139,12 @@
           </a>
           <ul class="treeview-menu">
             {{-- old grades here --}}
-            <li><a href="#">2017 - 2018</a></li>
+            <!-- <li><a href="{{ route('student_view_old_grades', ['id' => 1]) }}">2017 - 2018</a></li> -->
+            @if(count($old_sy) > 0)
+            @foreach($old_sy as $sy)
+            <li><a href="{{ route('student_view_old_grades', ['id' => $sy->id]) }}">{{ $sy->id }}</a></li>
+            @endforeach
+            @endif
           </ul>
         </li>
       </ul>
