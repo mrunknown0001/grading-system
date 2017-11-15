@@ -318,11 +318,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
     /*
      * update student details
      */
-    Route::get('update-student-details/{id}', [
+    Route::get('update-student-details/{student_id}', [
     	'uses' => 'AdminController@getUpdateStudentDetails',
     	'as' => 'get_update_student_details'
     	]);
- 	//This route redirected to 404 if url is no id
+ 	This route redirected to 404 if url is no id
 	Route::get('update-student-details', function () {
 		abort(404);
 	});

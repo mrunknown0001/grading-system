@@ -510,6 +510,14 @@ class AdminController extends Controller
             return abort(404);
         }
 
+
+        // check if subject is already assign to a teacher
+        $check_subject_assign = SubjectAssign::where('subject_id', $subject->id)->get();
+
+        if(count($check_subject_assign) > 0) {
+            return redirect()->route('get_view_all_subjects')->with('notice', 'Subject Assigned to a Teacher.');
+        }
+
         if($subject->delete()) {
 
             $log = new UserLog();
@@ -901,11 +909,13 @@ class AdminController extends Controller
         $email = $request['email'];
         $mobile = $request['mobile'];
 
+        $asy = SchoolYear::whereStatus('1')->first();
+
         $id = $request['id'];
         $original_user_id = $request['original_user_id'];
 
-        $student = User::findorfail($id);
-        $student_info = StudentInfo::where('user_id', $original_user_id)->first();
+        $student = User::where('user_id', $original_user_id)->first();
+        $student_info = StudentInfo::where('user_id', $original_user_id)->where('school_year', $asy->id)->first();
 
 
         // check if the the student number is already belong to others, if inputed new student number
@@ -945,8 +955,9 @@ class AdminController extends Controller
         // save the update on students
         if($student->save()) {
             // update user_id in studentinfo if nessesary
-            $info = StudentInfo::findorfail($student_info->id);
+            $info = StudentInfo::where('user_id', $original_user_id)->where('school_year', $asy->id)->first();
             $info->user_id = $student_number;
+            $info->section = $section;
             $info->save();
 
 
@@ -956,7 +967,7 @@ class AdminController extends Controller
             $log->action = 'Updated Student Details';
             $log->save();
 
-            return redirect()->route('get_update_student_details', $student->id)->with('success', 'Student Detail Updated Successfully');
+            return redirect()->route('get_update_student_details', $student->user_id)->with('success', 'Student Detail Updated Successfully');
         }
 
         return "Error in Saving Updates. Please reload this page";
@@ -968,12 +979,16 @@ class AdminController extends Controller
     /* 
      * update student details
      */
-    public function getUpdateStudentDetails($id = null)
+    public function getUpdateStudentDetails($student_id = null)
     {
         // get all grade levels and section
-        $sections = Section::get();
+        $sections = Section::where('visible', 1)->get();
 
-        $student = User::findorfail($id);
+        $student = User::where('user_id', $student_id)->first();
+
+        if(count($student) < 1) {
+            abort(404);
+        }
 
         return view('admin.update-student-details', ['sections' => $sections, 'student' => $student]);
     }

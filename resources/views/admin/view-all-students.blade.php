@@ -61,7 +61,7 @@
                           <td>
                               <div class="btn-group btn-group-xs">
                               <button class="btn btn-info" data-toggle="modal" data-target="#{{ $s->id }}-view"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                              <a href="{{ route('get_update_student_details', $s->id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                              <a href="{{ route('get_update_student_details', $s->user_id) }}" class="btn btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                               <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#{{ $s->id }}-remove"><i class="fa fa-times"></i></button>
                               </div>
 
