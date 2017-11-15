@@ -1604,6 +1604,42 @@ class AdminController extends Controller
 
 
 
+
+    // method use to modify the teacher of a subject assignement
+    public function updateSubjectAssignment($id = null)
+    {
+        $sa = SubjectAssign::findorfail($id);
+        $teachers = User::where('privilege', 2)->whereStatus(1)->get();
+
+        return view('admin.update-subject-assign', ['teachers' => $teachers, 'subjectassign' => $sa]);
+    }
+
+
+
+    // method to update subject assignment
+    public function postUpdateSubjectAssign(Request $request)
+    {
+
+        $this->validate($request, [
+            'teacher' => 'required'
+        ]);
+
+        $teacher = $request['teacher'];
+
+        $sa = SubjectAssign::findorfail($request['id']);
+        $sa->teacher_id = $teacher;
+        $sa->save();
+
+
+        $log = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->action = "Admin updated subject assignment";
+        $log->save();
+
+        return redirect()->route('view_subject_assignments')->with('success', 'Subject Assignment Updated!');
+    }
+
+
     // method use to close school year and compute all grades and get the average and ranking of the students
     public function postAdminCloseSchoolYear()
     {

@@ -32,12 +32,14 @@
             @include('includes.success')
             @include('includes.notice')
             <div class="form-group">
-              <select name="grade_level" class="form-control">
+              <!-- <select name="grade_level" class="form-control">
               <option value="">Subject For...</option>
               @foreach($levels as $l)
               <option @if($subject->level == $l->id) selected @endif value="{{ $l->id }}">{{ $l->name }}</option>
               @endforeach
-              </select>
+              </select> -->
+              <input type="text" name="" class="form-control" value="{{ ucwords($subject->grade_level->name) }}" placeholder="" readonly="" />
+              <input type="hidden" name="grade_level" value="{{ $subject->grade_level->id }}">
             </div>
             <div class="form-group">
               <input type="text" name="title" class="form-control text-capitalize" value="{{ $subject->title }}" placeholder="Subject Title" />

@@ -471,6 +471,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','checkadmin']], funct
         ]);
 
 
+    // route to update view subject assign
+    Route::get('update/subject/assignment/{id}', [
+        'uses' => 'AdminController@updateSubjectAssignment',
+        'as' => 'update_subject_assigment'
+    ]);
+
+    Route::post('update/subject/assignment', [
+        'uses' => 'AdminController@postUpdateSubjectAssign',
+        'as' => 'post_update_subject_assignment'
+    ]);
+
 
     // route to view all sections in grade level
     Route::get('view/grade-level/{id}/sections', [

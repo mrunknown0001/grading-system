@@ -46,9 +46,9 @@
               @foreach($assignments as $as)
               <tr>
                 <td>{{ $as->subject->grade_level->name }} - {{ ucwords($as->section->name) }}</td>
-                <td>{{ $as->subject->title }}</td>
+                <td>{{ ucwords($as->subject->title) }}</td>
                 <td>{{ ucwords($as->teacher->firstname) }} {{ ucwords($as->teacher->lastname) }}</td>
-                <td><button class="btn btn-danger btn-xs">Remove</button></td>
+                <td><a href="{{ route('update_subject_assigment', ['id' => $as->id]) }}" class="btn btn-primary btn-xs">Change</a></td>
               </tr>
               @endforeach
             </tbody>
