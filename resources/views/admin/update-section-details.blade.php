@@ -33,12 +33,15 @@
             <form action="{{ route('post_update_section_details') }}" method="POST" autocomplete="off">
               <div class="form-group">
                 <!-- <input type="text" name="title" class="form-control text-capitalize" placeholder="Grade Level Title" /> -->
-                <select name="grade_level" class="form-control">
+                <!-- <select name="grade_level" class="form-control">
                   <option value="">Select Grade Level</option>
                   @foreach($levels as $l)
-                  <option @if($l->id == $section->level) selected @endif value="{{ $l->id }}">{{ ucwords($l->name) }}</option>
+                  <option @if($l->id == $section->level) {{ $level = $l }} selected @endif value="{{ $l->id }}">{{ ucwords($l->name) }}</option>
+                  
                   @endforeach
-                </select>
+                </select> -->
+                <input type="text" value="{{ ucwords($level->name) }}" class="form-control" readonly="" />
+                <input type="hidden" name="grade_level" value="{{ $level->id }}">
               </div>
               <div class="form-group">
                 <input type="text" name="name" class="form-control text-capitalize" value="{{ $section->name }}" placeholder="Section Name" />

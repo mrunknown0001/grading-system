@@ -864,7 +864,7 @@ class TeacherController extends Controller
         $log->action = 'Added Exam on ' . $section->grade_level->name . ' - ' . $section->name;
         $log->save();
 
-        return redirect()->back()->with('success', 'Exam Sucessfully Saved!');
+        return redirect()->back()->with('success', 'Exam # ' . $exam->number . ' Sucessfully Saved!');
         
         return 'error in post add exam ';
 
