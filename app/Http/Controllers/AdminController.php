@@ -154,12 +154,24 @@ class AdminController extends Controller
         // check user is valid and active
         $user = User::findorfail($id);
 
+        // find active school year
+        $asy = SchoolYear::where('status', 1)->first();
+
         $user_id = $user->user_id;
 
         if($user->privilege != 2 || $user->status != 1) {
             // Abort to 404 page if the user is not co-admin or inactive
             return abort(404);
         }
+
+        // prevent delete when teacher is assigned in a subject on the current school year
+        $assign = SubjectAssign::where('teacher_id', $id)->where('school_year_id', $asy->id)->where('visible', 1)->get();
+
+        if(count($assign) > 0) {
+            return redirect()->route('get_all_teachers')->with('error_msg', 'Teache Already Assigned.');
+
+        }
+
 
         if($user->delete()) {
 
@@ -1824,7 +1836,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
-  
+
         return view('admin.admin-student-search-result', ['students' => $students]);
     }
 
