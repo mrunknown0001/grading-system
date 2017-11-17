@@ -5,8 +5,22 @@
 @section('content')
 
     @include('layouts.nav1')
+    <div style="margin-top: 80px;"></div>
+    <div class="slider" style="margin: 0 auto;">
+      <div><img src="{{ asset('uploads/logo/bg2.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/1.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/2.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/3.jpg') }}" class="img-responsive"></div>
+      <!-- <div><img src="{{ asset('uploads/logo/imgs/4.jpg') }}" class="img-responsive"></div> -->
+      <div><img src="{{ asset('uploads/logo/imgs/5.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/6.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/7.jpg') }}" class="img-responsive"></div>
+      <div><img src="{{ asset('uploads/logo/imgs/8.jpg') }}" class="img-responsive"></div>
+    </div>
 
-    <header>
+
+
+    {{--<header>
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -157,7 +171,7 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-    </header>
+    </header>--}}
 @include('layouts.footer1')
 
 @endsection
