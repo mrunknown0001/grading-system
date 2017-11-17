@@ -28,7 +28,13 @@
 
     <script>
       $(document).ready(function(){
-        $('.slider').bxSlider();
+        $('.slider').bxSlider({
+          auto: true,
+          autoControls: true,
+          stopAutoOnClick: true,
+          pager: true,
+          slideWidth: 800
+        });
       });
     </script>
     <style type="text/css">
