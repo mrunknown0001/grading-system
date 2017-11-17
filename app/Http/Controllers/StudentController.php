@@ -40,6 +40,16 @@ class StudentController extends Controller
         if(count($find_sections) < 1) {
             return 'System is initializing by administrator.';
         }
+
+
+        
+        // chekc if the student has info
+        $check_student_info = StudentInfo::where('user_id', Auth::user()->user_id)->where('visible', 1)->first();
+
+        if(count($check_student_info) < 1) {
+            return 'System is Initializing by admin.';
+        }
+
     	return view('student.student-dashboard');
     }
 
