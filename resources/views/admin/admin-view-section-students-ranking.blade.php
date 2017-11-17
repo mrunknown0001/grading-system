@@ -35,8 +35,8 @@
           <table class="table table-hover" id="studentsTable">
             <thead>
               <tr>
-                <th style="cursor: pointer;">Student Number</th>
-                <th style="cursor: pointer;">Name</th>
+                <th>Student Number</th>
+                <th>Name</th>
                 <th style="cursor: pointer;">Average</th>
               </tr>
             </thead>

@@ -1824,6 +1824,7 @@ class AdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(5);
 
+  
         return view('admin.admin-student-search-result', ['students' => $students]);
     }
 

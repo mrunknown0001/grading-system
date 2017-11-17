@@ -67,7 +67,7 @@
 
                           </td>
                       </tr>
-                      @include('admin.includes.modal-student-view-details')
+                      @include('admin.includes.modal-student-details-search')
                       @include('admin.includes.modal-remove-student')
                   @endforeach
               </tbody>
