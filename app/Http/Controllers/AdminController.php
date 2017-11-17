@@ -796,56 +796,100 @@ class AdminController extends Controller
         // Check User ID Availability
         $user_id_check = User::where('user_id', $student_number)->where('status', 1)->first();
 
-        if(!empty($user_id_check)) {
-            return redirect()->route('add_teacher')->with('error_msg', 'This ID Number: ' . $student_number . ' is already assigned to a Student.');
-        }
 
         // Check email availability
         $email_check = User::where('email', $email)->where('status', 1)->first();
 
         if(!empty($email_check)) {
-            return redirect()->route('add_teacher')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
+            return redirect()->route('get_add_student')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
         }
 
+
+
+        $check_student_number = User::where('user_id', $student_number)->first();
+
+
+        if(!empty($check_student_number)) {
+
+            // check if the student already belong to a section
+            $check_visibility = StudentInfo::where('user_id', $check_student_number->user_id)->where('visible', 1)->first();
+
+
+
+            if(count($check_visibility) > 0) {
+                 return redirect()->route('import_students')->with('notice', 'Student Number: ' . $check_student_number->user_id . ' is already in other section.');
+            }
+
+
+
+            // save a new section with new record
+            // for student info table
+            $info[] = [
+                    'user_id' => $student_number,
+                    'section' => $section,
+                    'school_year' => $active_school_year->id
+
+                ];
+
+            // insert import data to studentimport
+            DB::table('student_infos')->insert($info);
+        
+            return redirect()->route('get_add_student')->with('success', 'Student Added: ' . ucwords($firstname) . ' ' . ucwords($lastname)); 
+        }
+
+        // if(!empty($user_id_check)) {
+        //     return redirect()->route('get_add_student')->with('error_msg', 'This ID Number: ' . $student_number . ' is already assigned to a Student.');
+        // }
+
+        // Check email availability
+        // $email_check = User::where('email', $email)->where('status', 1)->first();
+
+        // if(!empty($email_check)) {
+        //     return redirect()->route('get_add_student')->with('error_msg', 'This email: ' . $email . ' is registered with different account, please ask to Teacher to privide different active email address.');
+        // }
+
         // query to add new student
-        $add = new User();
+        else {
+            $add = new User();
 
-        $add->user_id = $student_number;
-        $add->firstname = $firstname;
-        $add->lastname = $lastname;
-        $add->birthday = $birthday;
-        $add->gender = $gender;
-        $add->address = $address;
-        $add->email = $email;
-        $add->mobile = $mobile;
-        $add->password = bcrypt('concs2017'); 
-        $add->privilege = 3;
-        $add->status = 1;
-        $add->school_year = $active_school_year->id;
-
-
-        if($add->save()) {
+            $add->user_id = $student_number;
+            $add->firstname = $firstname;
+            $add->lastname = $lastname;
+            $add->birthday = $birthday;
+            $add->gender = $gender;
+            $add->address = $address;
+            $add->email = $email;
+            $add->mobile = $mobile;
+            $add->password = bcrypt('concs2017'); 
+            $add->privilege = 3;
+            $add->status = 1;
+            $add->school_year = $active_school_year->id;
 
 
-            $new =  $add->id;
+            if($add->save()) {
 
-            $info = new StudentInfo();
 
-            $info->user_id = $student_number;
-            $info->section = $section;
-            $info->school_year = $active_school_year->id;
+                $new =  $add->id;
 
-            $info->save();
+                $info = new StudentInfo();
 
-            // Add log to admin
-            $log = new UserLog();
+                $info->user_id = $student_number;
+                $info->section = $section;
+                $info->school_year = $active_school_year->id;
 
-            $log->user_id = Auth::user()->id;
-            $log->action = 'Added Student with User ID Number: ' . $student_number;
+                $info->save();
 
-            $log->save();
+                // Add log to admin
+                $log = new UserLog();
 
-            return redirect()->route('get_add_student')->with('success', 'Student Added: ' . ucwords($firstname) . ' ' . ucwords($lastname));
+                $log->user_id = Auth::user()->id;
+                $log->action = 'Added Student with User ID Number: ' . $student_number;
+
+                $log->save();
+
+                return redirect()->route('get_add_student')->with('success', 'Student Added: ' . ucwords($firstname) . ' ' . ucwords($lastname));
+
+            }
 
         }
 
