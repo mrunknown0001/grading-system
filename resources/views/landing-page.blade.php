@@ -6,21 +6,21 @@
 
     @include('layouts.nav1')
     <div style="margin-top: 80px;"></div>
-      <div class="slider">
-        <div><img src="{{ asset('uploads/logo/bg2.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/1.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/2.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/3.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/5.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/6.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/7.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/8.jpg') }}" class="img-responsive"></div>
+      <div class="slider" style="margin: 0 auto;">
+        <div><img src="{{ asset('uploads/logo/bg2.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/1.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/2.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/3.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/5.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/6.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/7.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/8.jpg') }}" class="img-responsive img-thumbnail"></div>
         <!-- <div><img src="{{ asset('uploads/logo/imgs/img1.jpg') }}" class="img-responsive"></div> -->
-        <div><img src="{{ asset('uploads/logo/imgs/img2.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/img3.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/img4.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/img5.jpg') }}" class="img-responsive"></div>
-        <div><img src="{{ asset('uploads/logo/imgs/img6.jpg') }}" class="img-responsive"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img2.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img3.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img4.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img5.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img6.jpg') }}" class="img-responsive img-thumbnail"></div>
       </div>
 
 

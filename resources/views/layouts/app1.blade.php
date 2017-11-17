@@ -30,16 +30,14 @@
       $(document).ready(function(){
         $('.slider').bxSlider({
           auto: true,
-          autoControls: true,
-          stopAutoOnClick: true,
-          pager: true,
-          slideWidth: 800
         });
       });
     </script>
     <style type="text/css">
       .img-responsive {
+          width: 800px;
           margin: 0 auto;
+          
       }
     </style>
 
