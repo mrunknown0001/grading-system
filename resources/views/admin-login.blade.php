@@ -55,7 +55,7 @@
 					</div>
 					<div class="form-group">
 						<input type="hidden" name="code" value="1" />
-						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+						<!-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> -->
 						<button class="btn btn-primary">Login</button>
 						<a href="{{ route('landing_page') }}" class="btn btn-danger">Cancel</a>
 					</div>

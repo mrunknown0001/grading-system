@@ -15,7 +15,7 @@
         <div><img src="{{ asset('uploads/logo/imgs/6.jpg') }}" class="img-responsive img-thumbnail"></div>
         <div><img src="{{ asset('uploads/logo/imgs/7.jpg') }}" class="img-responsive img-thumbnail"></div>
         <div><img src="{{ asset('uploads/logo/imgs/8.jpg') }}" class="img-responsive img-thumbnail"></div> -->
-        <div><img src="{{ asset('uploads/logo/imgs/img1.jpg') }}" class="img-responsive img-thumbnail"></div>
+        <div><img src="{{ asset('uploads/logo/imgs/img4.jpg') }}" class="img-responsive img-thumbnail"></div>
         <div><img src="{{ asset('uploads/logo/imgs/img2.jpg') }}" class="img-responsive img-thumbnail"></div>
         <div><img src="{{ asset('uploads/logo/imgs/img3.jpg') }}" class="img-responsive img-thumbnail"></div>
         <div><img src="{{ asset('uploads/logo/imgs/img4.jpg') }}" class="img-responsive img-thumbnail"></div>

@@ -37,7 +37,7 @@
               <tr>
                 <th>Student Number</th>
                 <th>Name</th>
-                <th style="cursor: pointer;">Average</th>
+                <th style="cursor: pointer;"><button class="btn btn-primary btn-xs">Average</button></th>
               </tr>
             </thead>
             <tbody>
