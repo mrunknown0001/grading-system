@@ -82,6 +82,11 @@ Route::get('developers', function () {
 })->name('about_developers');
 
 
+Route::get('contact-us', function () {
+    return view('contact-us');
+})->name('contact_us');
+
+
 /********************************************
 *********************************************
 ************ ADMIN ROUTE GROUP **************

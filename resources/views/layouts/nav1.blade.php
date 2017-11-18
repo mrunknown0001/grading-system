@@ -26,6 +26,7 @@
                 <div class="dropdown-content">
                   <p><a href="{{ route('mission_vision') }}">Mission &amp; Vision</a></p>
                   <p><a href="{{ route('about_developers') }}">Developer</a></p>
+                  <p><a href="{{ route('contact_us') }}">Contact Us</a></p>
                 </div>
               </div>
             </li>

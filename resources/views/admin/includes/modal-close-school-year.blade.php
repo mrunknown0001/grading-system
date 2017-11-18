@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <p>Close School Year.</p>
-                <h2><i>Make you all records are finalized. It can't be undone.</i></h2>
+                <h2><i>Make sure all records are finalized. It can't be undone.</i></h2>
             </div>
             <div class="modal-footer">
                 <form action="{{ route('post_admin_close_school_year') }}" method="POST">
