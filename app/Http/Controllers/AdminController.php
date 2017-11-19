@@ -902,7 +902,10 @@ class AdminController extends Controller
 
     public function adminRemoveStudent(Request $request)
     {
-        $student = User::find($request['id']);
+        $id = $request['id'];
+
+        $student = User::where('user_id',$id)->first();
+
 
         $student_info = StudentInfo::where('user_id', $student->user_id)->first();
 
@@ -2747,7 +2750,7 @@ class AdminController extends Controller
 
 
                     // compute average per subject here
-                    $students_grades [] = ['student_id' => $std->user_id, 'grade' => array_sum($ag)/4];
+                    $students_grades [] = ['student_id' => $std->user_id, 'grade' => array_sum($ag)/2];
 
                     unset($ag);
                 }

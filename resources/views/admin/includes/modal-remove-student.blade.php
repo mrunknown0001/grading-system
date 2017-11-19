@@ -15,7 +15,7 @@
                  {{-- Form Deletion --}}
                 <form action="{{ route('post_admin_remove_student') }}" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="hidden" name="id" value="{{ $s->id }}" />
+                    <input type="hidden" name="id" value="{{ $s->user_id }}" />
                     <button type="submit" class="btn btn-danger">Drop Student</button>
                 </form>
             </div>
