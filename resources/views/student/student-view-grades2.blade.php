@@ -110,7 +110,69 @@
           <div id="info">
           </div>
           @else 
-<!--  -->
+<!--  --><table class="table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>First Semester</th>
+                <th>Second Semester</th>
+                <th>Final</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php $grade_total = 0; ?>
+              @foreach($subjects as $sub)
+              <?php
+              $g1 = 0;
+              $g2 = 0;
+              $g1_total = 0;
+              $g2_total = 0;
+              ?>
+              <tr>
+                <td><strong>{{ ucwords($sub->title) }}</strong></td>
+                <td>
+                  @if(count($fsg) != 0)
+                    @foreach($fsg as $f)
+                      @if($f['subject_id'] == $sub->id)
+                        @if($f['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ $g1 = \App\Http\Controllers\StudentController::getGrade($f['grade']) }}</strong>
+                        <!-- <div>{{ $g1_total = $g1_total + $g1 }}</div> -->
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  @if(count($ssg) != 0)
+                    @foreach($ssg as $s)
+                      @if($s['subject_id'] == $sub->id)
+                        @if($s['grade'] == 0)
+                        N/A
+                        @else
+                        <strong>{{ $g2 = \App\Http\Controllers\StudentController::getGrade($s['grade']) }}</strong>
+                        <!-- <div>{{ $g2_total = $g2_total + $g2 }}</div> -->
+                        @endif
+                      @endif
+                    @endforeach
+                  @endif
+                </td>
+                <td>
+                  {{ $final = ($g1 + $g2)/2 }}
+                  <!-- <div>{{ $grade_total = $grade_total + $final }}</div> -->
+                </td>
+                <!-- <td></td> -->
+              </tr>
+              @endforeach
+              <tr>
+                <th>Average</th>
+                <th colspan="5">
+                    <u>{{ $grade_total/count($subjects) }}</u>
+                </th>
+              </tr>
+            </tbody>
+          </table>
           @endif
         </div>
       </div>
