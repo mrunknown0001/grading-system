@@ -42,6 +42,8 @@
             <a href="{{ route('view_performance_task_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Performance Task Scores</a>
             <a href="{{ route('view_exam_score', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id] )}}" class="btn btn-success btn-xs">View Exam Scores</a>
             
+            <a href="{{ route('teacher_view_percentange_scores', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id]) }}" class="btn btn-success btn-xs">Percentage Scores</a>
+
             <a href="{{ route('teacher_view_subject_grades', ['section' => $assign->section->id, 'subject' => $assign->subject->id, 'assign' => $assign->id]) }}" class="btn btn-success btn-xs">View Grades</a>
           </div>
           <table class="table table-hover" id="studentsTable">

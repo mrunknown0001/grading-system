@@ -174,6 +174,9 @@
             </tbody>
           </table>
           @endif
+          <div id="info">
+            <p class="text-center">Unofficial</p>
+          </div>
         </div>
       </div>
 

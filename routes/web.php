@@ -713,6 +713,13 @@ Route::group(['prefix' => 'teacher', 'middleware' => ['auth', 'checkteacher']], 
     ]);
 
 
+    // route to view raw score percentage
+    Route::get('percentage/{sectionid}/{subjectid}/{assignid}/score/view', [
+        'uses' => 'TeacherController@viewPercentageScores',
+        'as' => 'teacher_view_percentange_scores'
+    ]);
+
+
     // route to edit exam score
     Route::get('update/exam/score/{id}/{user_id}/{assignid}', [
         'uses' => 'TeacherController@updateExamScore',
