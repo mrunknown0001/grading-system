@@ -34,6 +34,8 @@
             <p>ID Number: {{ Auth::user()->user_id }}</p>
             <h5>Grade &amp; Section: {{ ucwords($section->grade_level->name) }} - {{ ucwords($section->name) }}</h5>
             <h5>School Year: {{ $asy->from }} - {{ $asy->to }}</h5>
+            <br>
+            <p class="text-center"><strong>Unofficial</strong></p>
           </div>
           {{-- Includes errors and session flash message display container --}}
           @include('includes.errors')
@@ -175,7 +177,7 @@
           </table>
           @endif
           <div id="info">
-            <p class="text-center">Unofficial</p>
+            <p>Date Printed: {{ date('F d, Y') }}</p>
           </div>
         </div>
       </div>

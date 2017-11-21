@@ -1577,11 +1577,10 @@ class TeacherController extends Controller
        $ssg = [];
 
         if($section->level <= 4) {
-            return '4';
 
             // for first quarter
             if($first_quarter->status == 1) {
-                return '1';
+                
                 // compute grade here
                 // get all raw scores and compute
                 // get all written work in first quarter
