@@ -1661,7 +1661,7 @@ class TeacherController extends Controller
 
                     foreach ($exam_scores_q1 as $es) {
                         if($std->user_id == $es['student_id'] && $es['score'] != 0) {
-                            $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
+                            $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
                         }
                     }
 
@@ -2089,7 +2089,7 @@ class TeacherController extends Controller
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
 
 
                     $pg[] = [
