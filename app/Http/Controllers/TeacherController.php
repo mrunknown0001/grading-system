@@ -1691,7 +1691,7 @@ class TeacherController extends Controller
                 // get all written work in first quarter
                 foreach($section->students as $std) {
                     // total subject total in first quarter\
-                    $ww_scores_q1[] = [
+                    $ww_scores_q2[] = [
                                     'student_id' => $std->user_id,
                                     'score' => WrittenWorkScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 2)
@@ -1708,7 +1708,7 @@ class TeacherController extends Controller
                                     ];
 
 
-                    $pt_scores_q1[] = [
+                    $pt_scores_q2[] = [
                                     'student_id' => $std->user_id,
                                     'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 2)
@@ -1724,7 +1724,7 @@ class TeacherController extends Controller
                                             ->sum('total')
                                 ];
 
-                    $exam_scores_q1[] = [
+                    $exam_scores_q2[] = [
                                     'student_id' => $std->user_id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 2)
@@ -1750,21 +1750,21 @@ class TeacherController extends Controller
                     $exam_percentage = 0;
                     $grade = 0;
 
-                    foreach ($ww_scores_q1 as $ws) {
+                    foreach ($ww_scores_q2 as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
                             $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
 
-                    foreach ($pt_scores_q1 as $pt) {
+                    foreach ($pt_scores_q2 as $pt) {
                         if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
 
-                    foreach ($exam_scores_q1 as $es) {
+                    foreach ($exam_scores_q2 as $es) {
                         if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
@@ -1798,7 +1798,7 @@ class TeacherController extends Controller
                 // get all written work in first quarter
                 foreach($section->students as $std) {
                     // total subject total in first quarter\
-                    $ww_scores_q1[] = [
+                    $ww_scores_q3[] = [
                                     'student_id' => $std->user_id,
                                     'score' => WrittenWorkScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 3)
@@ -1815,7 +1815,7 @@ class TeacherController extends Controller
                                     ];
 
 
-                    $pt_scores_q1[] = [
+                    $pt_scores_q3[] = [
                                     'student_id' => $std->user_id,
                                     'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 3)
@@ -1831,7 +1831,7 @@ class TeacherController extends Controller
                                             ->sum('total')
                                 ];
 
-                    $exam_scores_q1[] = [
+                    $exam_scores_q3[] = [
                                     'student_id' => $std->user_id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 3)
@@ -1857,21 +1857,21 @@ class TeacherController extends Controller
                     $exam_percentage = 0;
                     $grade = 0;
 
-                    foreach ($ww_scores_q1 as $ws) {
+                    foreach ($ww_scores_q3 as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
                             $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
 
-                    foreach ($pt_scores_q1 as $pt) {
+                    foreach ($pt_scores_q3 as $pt) {
                         if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
 
-                    foreach ($exam_scores_q1 as $es) {
+                    foreach ($exam_scores_q3 as $es) {
                         if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
@@ -1904,7 +1904,7 @@ class TeacherController extends Controller
                 // get all written work in first quarter
                 foreach($section->students as $std) {
                     // total subject total in first quarter\
-                    $ww_scores_q1[] = [
+                    $ww_scores_q4[] = [
                                     'student_id' => $std->user_id,
                                     'score' => WrittenWorkScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 4)
@@ -1921,7 +1921,7 @@ class TeacherController extends Controller
                                     ];
 
 
-                    $pt_scores_q1[] = [
+                    $pt_scores_q4[] = [
                                     'student_id' => $std->user_id,
                                     'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 4)
@@ -1937,7 +1937,7 @@ class TeacherController extends Controller
                                             ->sum('total')
                                 ];
 
-                    $exam_scores_q1[] = [
+                    $exam_scores_q4[] = [
                                     'student_id' => $std->user_id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
                                             ->where('quarter_id', 4)
@@ -1963,21 +1963,21 @@ class TeacherController extends Controller
                     $exam_percentage = 0;
                     $grade = 0;
 
-                    foreach ($ww_scores_q1 as $ws) {
+                    foreach ($ww_scores_q4 as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
                             $ww_percentage = (($ws['score']/$ws['total']) * ($sub->written_work/100)) * 100;
                         }
                     }
 
 
-                    foreach ($pt_scores_q1 as $pt) {
+                    foreach ($pt_scores_q4 as $pt) {
                         if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = (($pt['score']/$pt['total']) * ($sub->performance_task/100)) * 100;
                         }
                     }
 
 
-                    foreach ($exam_scores_q1 as $es) {
+                    foreach ($exam_scores_q4 as $es) {
                         if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = (($es['score']/$es['total']) * ($sub->exam/100)) * 100;
                         }
@@ -2011,7 +2011,7 @@ class TeacherController extends Controller
                 // get all written work in first quarter
                 foreach($section->students as $std) {
                     // total subject total in first quarter\
-                    $ww_scores_s2[] = [
+                    $ww_scores_s1[] = [
                                     'student_id' => $std->user_id,
                                     'score' => WrittenWorkScore::where('school_year_id', $asy->id)
                                             ->where('semester_id', 1)
@@ -2028,7 +2028,7 @@ class TeacherController extends Controller
                                     ];
 
 
-                    $pt_scores_s2[] = [
+                    $pt_scores_s1[] = [
                                     'student_id' => $std->user_id,
                                     'score' => PerformanceTaskScore::where('school_year_id', $asy->id)
                                             ->where('semester_id', 1)
@@ -2037,14 +2037,14 @@ class TeacherController extends Controller
                                             ->where('student_number', $std->user_id)
                                             ->sum('score'),
                                     'total' => PerformanceTaskScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 2)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section->id)
                                             ->where('subject_id', $subjectid)
                                             ->where('student_number', $std->user_id)
                                             ->sum('total')
                                 ];
 
-                    $exam_scores_s2[] = [
+                    $exam_scores_s1[] = [
                                     'student_id' => $std->user_id,
                                     'score' => ExamScore::where('school_year_id', $asy->id)
                                             ->where('semester_id', 1)
@@ -2053,7 +2053,7 @@ class TeacherController extends Controller
                                             ->where('student_number', $std->user_id)
                                             ->sum('score'),
                                     'total' => ExamScore::where('school_year_id', $asy->id)
-                                            ->where('semester_id', 2)
+                                            ->where('semester_id', 1)
                                             ->where('section_id', $section->id)
                                             ->where('subject_id', $subjectid)
                                             ->where('student_number', $std->user_id)
@@ -2069,7 +2069,7 @@ class TeacherController extends Controller
                     $exam_percentage = 0;
                     $grade = 0;
 
-                    foreach ($ww_scores_s2 as $ws) {
+                    foreach ($ww_scores_s1 as $ws) {
                         if($std->user_id == $ws['student_id'] && $ws['score'] != 0) {
                             $ww_percentage = ($ws['score']/$ws['total']) * ($sub->written_work/100);
                         }
@@ -2077,13 +2077,13 @@ class TeacherController extends Controller
 
 
 
-                    foreach ($pt_scores_s2 as $pt) {
+                    foreach ($pt_scores_s1 as $pt) {
                         if($std->user_id == $pt['student_id'] && $pt['score'] != 0) {
                             $pt_percentage = ($pt['score']/$pt['total']) * ($sub->performance_task/100);
                         }
                     }
 
-                    foreach ($exam_scores_s2 as $es) {
+                    foreach ($exam_scores_s1 as $es) {
                         if($std->user_id == $es['student_id'] && $es['score'] != 0) {
                             $exam_percentage = ($es['score']/$es['total']) * ($sub->exam/100);
                         }
