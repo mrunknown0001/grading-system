@@ -11,7 +11,7 @@
                 <strong>
                 <p>ID Number: {{ $t->user_id }}</p>
                 <p class="text-capitalize">Name: {{ $t->firstname }} {{ $t->lastname }}</p>
-                <p>Birthday: {{ date('F j, Y', strtotime($t->birthday)) }}</p>
+                <!-- <p>Birthday: {{ date('F j, Y', strtotime($t->birthday)) }}</p> -->
                 <p>Gender: {{ $t->gender }}</p>
                 <p class="text-capitalize">Address: {{ $t->address }}</p>
                 <p>Email: {{ $t->email }}</p>

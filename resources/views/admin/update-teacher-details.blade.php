@@ -38,10 +38,10 @@
           </div>
           <div class="form-group">
           <input type="text" name="lastname" class="form-control text-capitalize" value="{{ $user->lastname }}" placeholder="Last Name" />
-          </div>
+          </div><!-- 
           <div class="form-group">
           <input type="text" name="birthday" class="form-control" value="{{ $user->birthday }}" placeholder="MM/DD/YYYY" />
-          </div>
+          </div> -->
           <div class="form-group">
           <select name="gender" id="gender" class="form-control">
           <option value="">Select Gender...</option>

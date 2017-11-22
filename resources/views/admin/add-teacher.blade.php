@@ -39,10 +39,10 @@
           </div>
           <div class="form-group">
           <input type="text" name="lastname" class="form-control text-capitalize" placeholder="Last Name" />
-          </div>
+          </div><!-- 
           <div class="form-group">
           <input type="date" name="birthday" class="form-control" placeholder="MM/DD/YYYY" />
-          </div>
+          </div> -->
           <div class="form-group">
           <select name="gender" id="gender" class="form-control">
           <option value="">Select Gender...</option>

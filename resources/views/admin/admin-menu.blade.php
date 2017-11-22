@@ -99,7 +99,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('add_teacher') }}"> Add Teacher</a></li>
             <li><a href="{{ route('get_all_teachers') }}"> View Teachers</a></li>
-            <li class="treeview">
+<!--             <li class="treeview">
               <a href="#"> <span>Assign Subjects</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -114,7 +114,7 @@
                 <li><a href="{{ route('assign_subject_level', 6) }}">Grade 12</a></li>
               </ul>
             </li>
-            <li><a href="{{ route('view_subject_assignments') }}"> View Subject Assignments</a></li>
+            <li><a href="{{ route('view_subject_assignments') }}"> View Subject Assignments</a></li> -->
           </ul>
         </li>
         <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
@@ -125,7 +125,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('import_students') }}"> Batch Import Students</a></li>
+            <li><a href="{{ route('import_students') }}"> Import Students</a></li>
             <li><a href="{{ route('get_add_student') }}"> Add Student</a></li>
             <li><a href="{{ route('get_view_all_students') }}"> View All Students</a></li>
             <li class="treeview">
@@ -154,6 +154,22 @@
           <ul class="treeview-menu">
             <li><a href="{{ route('get_add_subject') }}"> Add Subject</a></li>
             <li><a href="{{ route('get_view_all_subjects') }}"> View All Subjects</a></li>
+            <li class="treeview">
+              <a href="#"> <span>Assign Subjects</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="{{ route('assign_subject_level', 1) }}">Grade 7</a></li>
+                <li><a href="{{ route('assign_subject_level', 2) }}">Grade 8</a></li>
+                <li><a href="{{ route('assign_subject_level', 3) }}">Grade 9</a></li>
+                <li><a href="{{ route('assign_subject_level', 4) }}">Grade 10</a></li>
+                <li><a href="{{ route('assign_subject_level', 5) }}">Grade 11</a></li>
+                <li><a href="{{ route('assign_subject_level', 6) }}">Grade 12</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ route('view_subject_assignments') }}"> View Subject Assignments</a></li>
           </ul>
         </li>
         <li class="treeview">
