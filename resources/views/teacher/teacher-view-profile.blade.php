@@ -41,10 +41,10 @@
               <td>Gender:</td>
               <td>{{ Auth::user()->gender }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Birthday:</td>
               <td>{{ date('F d, Y', strtotime(Auth::user()->birthday)) }}</td>
-            </tr>
+            </tr> -->
             <tr>
               <td>Address:</td>
               <td>{{ Auth::user()->address }}</td>
