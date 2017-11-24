@@ -1667,7 +1667,7 @@ class TeacherController extends Controller
 
 
 
-                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
 
                     $pg[] = [
@@ -1772,7 +1772,7 @@ class TeacherController extends Controller
 
 
 
-                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
 
                     $pg[] = [
@@ -1879,7 +1879,7 @@ class TeacherController extends Controller
 
 
 
-                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
 
                     $pg[] = [
@@ -1985,7 +1985,7 @@ class TeacherController extends Controller
 
 
 
-                    $grade =  $ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
 
                     $pg[] = [
@@ -2089,7 +2089,7 @@ class TeacherController extends Controller
                         }
                     }
 
-                    $grade = $ww_percentage + $pt_percentage + $exam_percentage;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
 
                     $pg[] = [
@@ -2189,7 +2189,7 @@ class TeacherController extends Controller
                         }
                     }
 
-                    $grade = ($ww_percentage + $pt_percentage + $exam_percentage) * 100;
+                    $grade =  ($ww_percentage*100) + ($pt_percentage*100) + ($exam_percentage*100);
 
                     $pg[] = [
                         'student_id' => $std->user_id,

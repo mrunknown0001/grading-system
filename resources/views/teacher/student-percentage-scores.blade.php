@@ -41,6 +41,7 @@
                 <th>Written Work Score Percentage</th>
                 <th>Performance Task Score Percentage</th>
                 <th>Exam Score Percentage</th>
+                <th>Grade</th>
               </tr>
             </thead>
             <tbody>
@@ -52,6 +53,7 @@
                   <td>{{ $p['ww_percentage'] }}</td>
                   <td>{{ $p['pt_percentage'] }}</td>
                   <td>{{ $p['exam_percentage'] }}</td>
+                  <td>{{ \App\Http\Controllers\StudentController::getGrade($p['grade']) }}</td>
                 </tr>
                 @endif
                 @endforeach
